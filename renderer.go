@@ -93,7 +93,7 @@ func (r *Renderer) Render(scene Scene, camera PersepectiveCamera) {
 
 		colorLoc := gl.AttribLocation(1)
 		colorLoc.EnableArray()
-		element.material.Buffer().Bind(gl.ARRAY_BUFFER)
+		element.material.Buffer(element.geometry.vertexCount()).Bind(gl.ARRAY_BUFFER)
 		colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
 		gl.DrawArrays(gl.TRIANGLES, 0, element.geometry.vertexCount())

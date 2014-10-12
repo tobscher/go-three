@@ -29,8 +29,8 @@ func main() {
 		-3.0, -5.0, 0.0,
 		0.0, -3.0, 0.0,
 	})
-	material := three.NewMeshBasicMaterial(1.0, 0.0, 0.0)
-	material2 := three.NewMeshBasicMaterial(0.0, 1.0, 0.0)
+	material := three.NewMeshBasicMaterial(three.Color{1.0, 0.0, 0.0})
+	material2 := three.NewMeshBasicMaterial(three.Color{0.0, 1.0, 0.0})
 
 	mesh := three.NewMesh(geometry, material)
 	mesh2 := three.NewMesh(geometry2, material2)
