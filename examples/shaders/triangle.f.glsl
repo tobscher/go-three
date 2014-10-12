@@ -1,8 +1,12 @@
-#version 330
+#version 330 core
 
-out vec4 colourOut;
+// Ouput data
+out vec3 color;
 
 void main()
 {
-  colourOut = vec4(0, 1.0, 0, 1.0);
+
+  // Output color = red 
+  color = vec3(1,0,0);
+
 }

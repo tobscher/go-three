@@ -1,19 +1,23 @@
 package main
 
-import three "github.com/tobscher/go-three"
+import (
+	"github.com/go-gl/mathgl/mgl32"
+	three "github.com/tobscher/go-three"
+)
 
 const (
-	fov    = 75
+	fov    = 45.0
 	width  = 640
 	height = 480
-	near   = 1
-	far    = 10000
+	near   = 0.1
+	far    = 100
 )
 
 func main() {
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
-	camera.Position.SetZ(1000)
+	camera.Position = mgl32.Vec3{4.0, 3.0, 3.0}
+	camera.LookAt(mgl32.Vec3{0.0, 0.0, 0.0})
 
 	geometry := three.NewBoxGeometry(200, 200, 200)
 	material := three.NewMeshBasicMaterial(0xff0000)

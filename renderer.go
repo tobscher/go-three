@@ -7,6 +7,7 @@ import (
 
 	gl "github.com/go-gl/gl"
 	glfw "github.com/go-gl/glfw3"
+	"github.com/go-gl/mathgl/mgl32"
 	glh "github.com/tobscher/glh"
 )
 
@@ -18,6 +19,9 @@ type Renderer struct {
 
 var (
 	triangleVertices [9]float32
+	program          gl.Program
+	matrixID         gl.UniformLocation
+	buffer           gl.Buffer
 )
 
 func loadDataFile(filePath string) string {
@@ -65,8 +69,8 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	// Shaders
 	vShader := glh.Shader{gl.VERTEX_SHADER, loadDataFile("triangle.v.glsl")}
 	fShader := glh.Shader{gl.FRAGMENT_SHADER, loadDataFile("triangle.f.glsl")}
-	program := glh.NewProgram(vShader, fShader)
-	program.Use()
+	program = glh.NewProgram(vShader, fShader)
+	matrixID = program.GetUniformLocation("MVP")
 
 	// Triangle buffers
 	triangleVertices = [...]float32{
@@ -74,13 +78,9 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 		1.0, -1.0, 0.0,
 		0.0, 1.0, 0.0,
 	}
-	triangleBuffer := gl.GenBuffer()
-	triangleBuffer.Bind(gl.ARRAY_BUFFER)
+	buffer = gl.GenBuffer()
+	buffer.Bind(gl.ARRAY_BUFFER)
 	gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(triangleVertices), &triangleVertices, gl.STATIC_DRAW)
-
-	positionLocation := program.GetAttribLocation("position")
-	positionLocation.EnableArray()
-	positionLocation.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
 	renderer := Renderer{window: window, Width: width, Height: height}
 	return &renderer, nil
@@ -95,7 +95,24 @@ func (r *Renderer) Render(scene Scene, camera PersepectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+
+	program.Use()
+
+	Projection := camera.projectionMatrix
+	View := camera.viewMatrix
+	Model := mgl32.Ident4()
+	MVP := Projection.Mul4(View).Mul4(Model)
+
+	matrixID.UniformMatrix4fv(false, MVP)
+
+	attribLoc := gl.AttribLocation(0)
+	attribLoc.EnableArray()
+	buffer.Bind(gl.ARRAY_BUFFER)
+	attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+
 	gl.DrawArrays(gl.TRIANGLES, 0, 3)
+
+	attribLoc.DisableArray()
 
 	r.window.SwapBuffers()
 	glfw.PollEvents()

@@ -1,10 +1,12 @@
 package three
 
+import "github.com/go-gl/mathgl/mgl32"
+
 type VertexCollection struct {
-	items []Vector
+	items []mgl32.Vec3
 }
 
-func (vc *VertexCollection) Push(vector Vector) {
+func (vc *VertexCollection) Push(vector mgl32.Vec3) {
 	vc.items = append(vc.items, vector)
 }
 
@@ -14,7 +16,6 @@ type BoxGeometry struct {
 
 func NewBoxGeometry(width, height, depth float32) BoxGeometry {
 	geometry := BoxGeometry{}
-
 	// // Triangle 1
 	// // -1.0f,-1.0f,-1.0f
 	// // -1.0f,-1.0f, 1.0f
