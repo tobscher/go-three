@@ -1,22 +1,13 @@
 package three
 
-import "github.com/go-gl/gl"
-
-type SceneObject interface {
-	Program() gl.Program
-	MatrixID() gl.UniformLocation
-	Buffer() gl.Buffer
-	vertexCount() int
-}
-
 type Scene struct {
-	objects []*TriangleGeometry
+	objects []*Mesh
 }
 
 func NewScene() Scene {
 	return Scene{}
 }
 
-func (s *Scene) Add(sceneObject *TriangleGeometry) {
-	s.objects = append(s.objects, sceneObject)
+func (s *Scene) Add(mesh *Mesh) {
+	s.objects = append(s.objects, mesh)
 }

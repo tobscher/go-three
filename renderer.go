@@ -74,23 +74,29 @@ func (r *Renderer) Render(scene Scene, camera PersepectiveCamera) {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for _, element := range scene.objects {
-		element.Program().Use()
+		element.geometry.Program().Use()
 
 		projection := camera.projectionMatrix
 		view := camera.viewMatrix
 		model := mgl32.Ident4()
 		MVP := projection.Mul4(view).Mul4(model)
 
-		element.MatrixID().UniformMatrix4fv(false, MVP)
+		element.geometry.MatrixID().UniformMatrix4fv(false, MVP)
 
 		attribLoc := gl.AttribLocation(0)
 		attribLoc.EnableArray()
-		element.Buffer().Bind(gl.ARRAY_BUFFER)
+		element.geometry.Buffer().Bind(gl.ARRAY_BUFFER)
 		attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
-		gl.DrawArrays(gl.TRIANGLES, 0, element.vertexCount())
+		colorLoc := gl.AttribLocation(1)
+		colorLoc.EnableArray()
+		element.material.Buffer().Bind(gl.ARRAY_BUFFER)
+		colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+
+		gl.DrawArrays(gl.TRIANGLES, 0, element.geometry.vertexCount())
 
 		attribLoc.DisableArray()
+		colorLoc.DisableArray()
 	}
 	r.window.SwapBuffers()
 	glfw.PollEvents()

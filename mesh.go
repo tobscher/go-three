@@ -1,9 +1,10 @@
 package three
 
 type Mesh struct {
-	Rotation Euler
+	geometry TriangleGeometry
+	material MeshBasicMaterial
 }
 
 func NewMesh(geometry TriangleGeometry, material MeshBasicMaterial) Mesh {
-	return Mesh{}
+	return Mesh{geometry: geometry, material: material}
 }

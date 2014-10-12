@@ -14,8 +14,8 @@ type TriangleGeometry struct {
 	matrixID      gl.UniformLocation
 }
 
-func NewTriangleGeometry() TriangleGeometry {
-	return TriangleGeometry{programLoaded: false, bufferLoaded: false}
+func NewTriangleGeometry(bufferData [9]float32) TriangleGeometry {
+	return TriangleGeometry{bufferData: bufferData, programLoaded: false, bufferLoaded: false}
 }
 
 func (tg *TriangleGeometry) Program() gl.Program {
@@ -37,12 +37,6 @@ func (tg *TriangleGeometry) MatrixID() gl.UniformLocation {
 
 func (tg *TriangleGeometry) Buffer() gl.Buffer {
 	if !tg.bufferLoaded {
-		tg.bufferData = [...]float32{
-			-1.0, -1.0, 0.0,
-			1.0, -1.0, 0.0,
-			0.0, 1.0, 0.0,
-		}
-
 		tg.buffer = gl.GenBuffer()
 		tg.buffer.Bind(gl.ARRAY_BUFFER)
 		gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(tg.bufferData), &tg.bufferData, gl.STATIC_DRAW)
