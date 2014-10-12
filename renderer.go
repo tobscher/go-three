@@ -55,6 +55,9 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	}
 	gl.GetError()
 
+	gl.Enable(gl.DEPTH_TEST)
+	gl.DepthFunc(gl.LESS)
+
 	// Vertex buffers
 	vertexArray := gl.GenVertexArray()
 	vertexArray.Bind()
