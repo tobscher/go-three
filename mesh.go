@@ -4,6 +4,6 @@ type Mesh struct {
 	Rotation Euler
 }
 
-func NewMesh(geometry BoxGeometry, material MeshBasicMaterial) Mesh {
+func NewMesh(geometry TriangleGeometry, material MeshBasicMaterial) Mesh {
 	return Mesh{}
 }

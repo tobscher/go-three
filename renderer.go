@@ -17,13 +17,6 @@ type Renderer struct {
 	window *glfw.Window
 }
 
-var (
-	triangleVertices [9]float32
-	program          gl.Program
-	matrixID         gl.UniformLocation
-	buffer           gl.Buffer
-)
-
 func loadDataFile(filePath string) string {
 	content, err := ioutil.ReadFile("shaders/" + filePath)
 	if err != nil {
@@ -66,22 +59,6 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	vertexArray := gl.GenVertexArray()
 	vertexArray.Bind()
 
-	// Shaders
-	vShader := glh.Shader{gl.VERTEX_SHADER, loadDataFile("triangle.v.glsl")}
-	fShader := glh.Shader{gl.FRAGMENT_SHADER, loadDataFile("triangle.f.glsl")}
-	program = glh.NewProgram(vShader, fShader)
-	matrixID = program.GetUniformLocation("MVP")
-
-	// Triangle buffers
-	triangleVertices = [...]float32{
-		-1.0, -1.0, 0.0,
-		1.0, -1.0, 0.0,
-		0.0, 1.0, 0.0,
-	}
-	buffer = gl.GenBuffer()
-	buffer.Bind(gl.ARRAY_BUFFER)
-	gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(triangleVertices), &triangleVertices, gl.STATIC_DRAW)
-
 	renderer := Renderer{window: window, Width: width, Height: height}
 	return &renderer, nil
 }
@@ -96,24 +73,25 @@ func (r *Renderer) Render(scene Scene, camera PersepectiveCamera) {
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
-	program.Use()
+	for _, element := range scene.objects {
+		element.Program().Use()
 
-	Projection := camera.projectionMatrix
-	View := camera.viewMatrix
-	Model := mgl32.Ident4()
-	MVP := Projection.Mul4(View).Mul4(Model)
+		projection := camera.projectionMatrix
+		view := camera.viewMatrix
+		model := mgl32.Ident4()
+		MVP := projection.Mul4(view).Mul4(model)
 
-	matrixID.UniformMatrix4fv(false, MVP)
+		element.MatrixID().UniformMatrix4fv(false, MVP)
 
-	attribLoc := gl.AttribLocation(0)
-	attribLoc.EnableArray()
-	buffer.Bind(gl.ARRAY_BUFFER)
-	attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+		attribLoc := gl.AttribLocation(0)
+		attribLoc.EnableArray()
+		element.Buffer().Bind(gl.ARRAY_BUFFER)
+		attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
-	gl.DrawArrays(gl.TRIANGLES, 0, 3)
+		gl.DrawArrays(gl.TRIANGLES, 0, element.vertexCount())
 
-	attribLoc.DisableArray()
-
+		attribLoc.DisableArray()
+	}
 	r.window.SwapBuffers()
 	glfw.PollEvents()
 }

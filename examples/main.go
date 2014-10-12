@@ -19,11 +19,11 @@ func main() {
 	camera.Position = mgl32.Vec3{4.0, 3.0, 3.0}
 	camera.LookAt(mgl32.Vec3{0.0, 0.0, 0.0})
 
-	geometry := three.NewBoxGeometry(200, 200, 200)
+	geometry := three.NewTriangleGeometry()
 	material := three.NewMeshBasicMaterial(0xff0000)
 
 	mesh := three.NewMesh(geometry, material)
-	scene.Add(mesh)
+	scene.Add(&geometry)
 
 	renderer, err := three.NewRenderer(width, height, "Application Name")
 	if err != nil {
