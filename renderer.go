@@ -33,6 +33,8 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	if !glfw.Init() {
 		return nil, errors.New("Could not initialise GLFW.")
 	}
+
+	glfw.WindowHint(glfw.Samples, 4)
 	glfw.WindowHint(glfw.ContextVersionMajor, 3)
 	glfw.WindowHint(glfw.ContextVersionMinor, 3)
 	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
