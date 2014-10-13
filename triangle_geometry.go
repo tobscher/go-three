@@ -15,13 +15,13 @@ type triangleGeometry struct {
 	matrixID      gl.UniformLocation
 }
 
-func NewTriangleGeometry(p1, p2, p3 mgl32.Vec3) triangleGeometry {
+func NewTriangleGeometry(p1, p2, p3 mgl32.Vec3) *triangleGeometry {
 	bufferData := []float32{
 		p1.X(), p1.Y(), p1.Z(),
 		p2.X(), p2.Y(), p2.Z(),
 		p3.X(), p3.Y(), p3.Z(),
 	}
-	return triangleGeometry{bufferData: bufferData, programLoaded: false, bufferLoaded: false}
+	return &triangleGeometry{bufferData: bufferData, programLoaded: false, bufferLoaded: false}
 }
 
 func (tg *triangleGeometry) Program() gl.Program {
@@ -53,6 +53,6 @@ func (tg *triangleGeometry) Buffer() gl.Buffer {
 	return tg.buffer
 }
 
-func (tg *triangleGeometry) vertexCount() int {
+func (tg *triangleGeometry) VertexCount() int {
 	return 3
 }

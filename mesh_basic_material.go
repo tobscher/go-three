@@ -12,9 +12,9 @@ type meshBasicMaterial struct {
 	wireframe bool
 }
 
-func NewMeshBasicMaterial() meshBasicMaterial {
+func NewMeshBasicMaterial() *meshBasicMaterial {
 	material := meshBasicMaterial{bufferLoaded: false}
-	return material
+	return &material
 }
 
 func (m meshBasicMaterial) SetColor(color Color) meshBasicMaterial {
