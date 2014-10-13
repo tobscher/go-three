@@ -13,10 +13,31 @@ type boxGeometry struct {
 	program       gl.Program
 	programLoaded bool
 	matrixID      gl.UniformLocation
+
+	width  float32
+	height float32
+	depth  float32
 }
 
 func NewBoxGeometry(width, height, depth float32) *boxGeometry {
-	pos := mgl32.Vec3{0, 0, 0}
+	defaultPosition := mgl32.Vec3{0, 0, 0}
+
+	bufferData := generateBufferData(defaultPosition, width, height, depth)
+
+	return &boxGeometry{
+		bufferData:    bufferData,
+		programLoaded: false,
+		bufferLoaded:  false,
+		width:         width,
+		height:        height,
+		depth:         depth}
+}
+
+func NewCubeGeometry(size float32) *boxGeometry {
+	return NewBoxGeometry(size, size, size)
+}
+
+func generateBufferData(pos mgl32.Vec3, width, height, depth float32) []float32 {
 	bufferData := make([]float32, 0)
 
 	halfWidth := width / 2.0
@@ -70,11 +91,8 @@ func NewBoxGeometry(width, height, depth float32) *boxGeometry {
 		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
 		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
 	)...)
-	return &boxGeometry{bufferData: bufferData, programLoaded: false, bufferLoaded: false}
-}
 
-func NewCubeGeometry(size float32) *boxGeometry {
-	return NewBoxGeometry(size, size, size)
+	return bufferData
 }
 
 func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []float32 {
@@ -86,6 +104,11 @@ func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []float32 {
 		v2.X(), v2.Y(), v2.Z(),
 		v4.X(), v4.Y(), v4.Z(),
 	}
+}
+
+func (bg *boxGeometry) updateBuffer(newPosition mgl32.Vec3) {
+	bg.bufferData = generateBufferData(newPosition, bg.width, bg.height, bg.depth)
+	bg.bufferLoaded = false
 }
 
 func (bg *boxGeometry) Program() gl.Program {

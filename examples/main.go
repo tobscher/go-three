@@ -31,13 +31,13 @@ func main() {
 	// )
 
 	box := three.NewCubeGeometry(1)
+	plane := three.NewBoxGeometry(20, 0.1, 20)
 
 	// red := three.NewMeshBasicMaterial().
 	// 	SetColor(three.Color{1.0, 0.0, 0.0})
 
-	// green := three.NewMeshBasicMaterial().
-	// 	SetColor(three.Color{0.0, 1.0, 0.0}).
-	// 	SetWireframe(true)
+	green := three.NewMeshBasicMaterial().
+		SetColor(three.Color{0.0, 1.0, 0.0})
 
 	blue := three.NewMeshBasicMaterial().
 		SetColor(three.Color{0.0, 0.0, 1.0}).
@@ -46,9 +46,11 @@ func main() {
 	// mesh := three.NewMesh(geometry, red)
 	// mesh2 := three.NewMesh(geometry2, green)
 	mesh3 := three.NewMesh(box, blue)
+	meshPlane := three.NewMesh(plane, green)
 	// scene.Add(&mesh)
 	// scene.Add(&mesh2)
 	scene.Add(&mesh3)
+	scene.Add(&meshPlane)
 
 	renderer, err := three.NewRenderer(width, height, "Application Name")
 	if err != nil {
