@@ -4,23 +4,42 @@ import (
 	"github.com/go-gl/gl"
 )
 
-type MeshBasicMaterial struct {
+type meshBasicMaterial struct {
 	buffer       gl.Buffer
 	bufferLoaded bool
 
-	Color Color
+	color     Color
+	wireframe bool
 }
 
-func NewMeshBasicMaterial(color Color) MeshBasicMaterial {
-	material := MeshBasicMaterial{bufferLoaded: false, Color: color}
+func NewMeshBasicMaterial() meshBasicMaterial {
+	material := meshBasicMaterial{bufferLoaded: false}
 	return material
 }
 
-func (m *MeshBasicMaterial) Buffer(verticesCount int) gl.Buffer {
+func (m meshBasicMaterial) SetColor(color Color) meshBasicMaterial {
+	m.color = color
+	return m
+}
+
+func (m meshBasicMaterial) Color() Color {
+	return m.color
+}
+
+func (m meshBasicMaterial) SetWireframe(wireframe bool) meshBasicMaterial {
+	m.wireframe = wireframe
+	return m
+}
+
+func (m meshBasicMaterial) Wireframe() bool {
+	return m.wireframe
+}
+
+func (m *meshBasicMaterial) Buffer(verticesCount int) gl.Buffer {
 	if !m.bufferLoaded {
 		bufferData := make([]float32, 0, verticesCount*3)
 		for i := 0; i < verticesCount; i++ {
-			bufferData = append(bufferData, m.Color.R(), m.Color.G(), m.Color.B())
+			bufferData = append(bufferData, m.Color().R(), m.Color().G(), m.Color().B())
 		}
 
 		m.buffer = gl.GenBuffer()

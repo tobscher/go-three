@@ -1,13 +1,13 @@
 package three
 
-type Scene struct {
+type scene struct {
 	objects []*Mesh
 }
 
-func NewScene() Scene {
-	return Scene{}
+func NewScene() scene {
+	return scene{}
 }
 
-func (s *Scene) Add(mesh *Mesh) {
+func (s *scene) Add(mesh *Mesh) {
 	s.objects = append(s.objects, mesh)
 }

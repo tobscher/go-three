@@ -1,10 +1,10 @@
 package three
 
 type Mesh struct {
-	geometry TriangleGeometry
-	material MeshBasicMaterial
+	geometry triangleGeometry
+	material meshBasicMaterial
 }
 
-func NewMesh(geometry TriangleGeometry, material MeshBasicMaterial) Mesh {
+func NewMesh(geometry triangleGeometry, material meshBasicMaterial) Mesh {
 	return Mesh{geometry: geometry, material: material}
 }

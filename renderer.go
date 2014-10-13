@@ -71,7 +71,7 @@ func (r *Renderer) SetSize(width, height int) {
 	r.Height = height
 }
 
-func (r *Renderer) Render(scene Scene, camera PersepectiveCamera) {
+func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
@@ -95,6 +95,12 @@ func (r *Renderer) Render(scene Scene, camera PersepectiveCamera) {
 		colorLoc.EnableArray()
 		element.material.Buffer(element.geometry.vertexCount()).Bind(gl.ARRAY_BUFFER)
 		colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+
+		if element.material.wireframe {
+			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
+		} else {
+			gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
+		}
 
 		gl.DrawArrays(gl.TRIANGLES, 0, element.geometry.vertexCount())
 
