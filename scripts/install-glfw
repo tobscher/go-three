@@ -6,7 +6,7 @@ sudo apt-get install xorg-dev libglu1-mesa-dev
 
 echo "Installing GLFW3"
 wget http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
-tar xzvf glfw-3.0.4.zip
+tar -xzvf glfw-3.0.4.zip
 pushd glfw-3.0.4
   cmake -G "Unix Makefiles"
   make
@@ -16,7 +16,7 @@ popd
 
 echo "Installing GLEW"
 wget http://downloads.sourceforge.net/project/glew/glew/1.11.0/glew-1.11.0.tgz
-tar xvf glew-1.11.0.tgz
+tar -xvf glew-1.11.0.tgz
 pushd glew-1.11.0
   make
   sudo -s
