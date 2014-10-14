@@ -20,9 +20,7 @@ type boxGeometry struct {
 }
 
 func NewBoxGeometry(width, height, depth float32) *boxGeometry {
-	defaultPosition := mgl32.Vec3{0, 0, 0}
-
-	bufferData := generateBufferData(defaultPosition, width, height, depth)
+	bufferData := generateBufferData(width, height, depth)
 
 	return &boxGeometry{
 		bufferData:    bufferData,
@@ -37,7 +35,7 @@ func NewCubeGeometry(size float32) *boxGeometry {
 	return NewBoxGeometry(size, size, size)
 }
 
-func generateBufferData(pos mgl32.Vec3, width, height, depth float32) []float32 {
+func generateBufferData(width, height, depth float32) []float32 {
 	bufferData := make([]float32, 0)
 
 	halfWidth := width / 2.0
@@ -46,50 +44,50 @@ func generateBufferData(pos mgl32.Vec3, width, height, depth float32) []float32 
 
 	// Bottom plane
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() - halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() - halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() - halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() - halfHeight, pos.Z() + halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
 	)...)
 
 	// Side 1
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() - halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() - halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
 	)...)
 
 	// Side 2
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() - halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() - halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
 	)...)
 
 	// // Side 3
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() - halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() - halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
 	)...)
 
 	// // Side 4
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() - halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() - halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
 	)...)
 
 	// Top plane
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() - halfDepth},
-		mgl32.Vec3{pos.X() - halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
-		mgl32.Vec3{pos.X() + halfWidth, pos.Y() + halfHeight, pos.Z() + halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
 	)...)
 
 	return bufferData
@@ -106,8 +104,8 @@ func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []float32 {
 	}
 }
 
-func (bg *boxGeometry) updateBuffer(newPosition mgl32.Vec3) {
-	bg.bufferData = generateBufferData(newPosition, bg.width, bg.height, bg.depth)
+func (bg *boxGeometry) updateBuffer() {
+	bg.bufferData = generateBufferData(bg.width, bg.height, bg.depth)
 	bg.bufferLoaded = false
 }
 

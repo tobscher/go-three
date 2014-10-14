@@ -7,7 +7,6 @@ import (
 
 	gl "github.com/go-gl/gl"
 	glfw "github.com/go-gl/glfw3"
-	"github.com/go-gl/mathgl/mgl32"
 	glh "github.com/tobscher/glh"
 )
 
@@ -83,8 +82,7 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 
 		projection := camera.projectionMatrix
 		view := camera.viewMatrix
-		model := mgl32.Ident4()
-		MVP := projection.Mul4(view).Mul4(model)
+		MVP := projection.Mul4(view).Mul4(element.ModelMatrix())
 
 		element.geometry.MatrixID().UniformMatrix4fv(false, MVP)
 

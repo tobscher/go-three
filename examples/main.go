@@ -57,9 +57,12 @@ func main() {
 		panic(err)
 	}
 
+	var i float32 = 0
 	for !renderer.ShouldClose() {
+		i += 0.01
 		// mesh.Rotation.X += 0.01
 		// mesh.Rotation.Y += 0.02
+		mesh3.SetPosition(0, i, 0)
 
 		renderer.Render(scene, camera)
 	}
