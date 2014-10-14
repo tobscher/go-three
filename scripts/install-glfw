@@ -8,7 +8,7 @@ echo "*** Installing GLFW3 ***"
 wget http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
 unzip glfw-3.0.4.zip
 pushd glfw-3.0.4
-  cmake -G "Unix Makefiles"
+  cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON
   make
   sudo make install
 popd
