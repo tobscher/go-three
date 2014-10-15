@@ -1,20 +1,52 @@
-#!/bin/bash -e
+#! /usr/bin/env bash
 
-echo "*** Installing dependencies ***"
+# Error log
+erl() {
+  at "  ""$@"
+  "$@" &>> error.log
+  return $?
+}
+
+at() {
+  echo "--" "$@" | tee -a error.log
+  date +%H:%M:%S.%N &>> error.log
+}
+
+failure() {
+  at "Failure - error log contents:"
+  cat error.log
+  exit 1
+}
+
+die() {
+  at "Failure: $@"
+  exit 1
+}
+
 sudo apt-get update -qq
-sudo apt-get install -qq \
+
+at "Installing eatmydata and pcregrep"
+erl sudo apt-get install eatmydata pcregrep || die "Failed to install"
+
+at "apt-get update -qq"
+erl sudo eatmydata apt-get update -qq \
+  || die "'apt-get update -qq' failed"
+
+at "Installing dependencies"
+erl sudo eatmydata apt-get install -qq \
   libglfw-dev libglew-dev mesa-utils inotify-tools xserver-xorg \
   libsdl1.2-dev libsdl-image1.2-dev \
   || die "Failed to install dependencies"
 
-echo "*** Starting X ***"
-sudo mkdir -p /tmp/.X11-unix
+at "Starting X"
+erl sudo mkdir -p /tmp/.X11-unix
+(sleep 0.5 && sudo X) &>> error.log &
 
-echo "*** Waiting for X to come up ***"
+at "Waiting for X to come up"
 inotifywait -t 4 -r /tmp/.X11-unix
 
 export DISPLAY=:0
 
-echo "*** Fetching dependencies ***"
+at "Fetching dependencies"
 go get -d -v \
   || die "go get failed"
