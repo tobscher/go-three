@@ -3,6 +3,9 @@ language: go
 install:
   - ./scripts/install-dependencies
 
+before_script:
+ - go get -v
+
 script:
  - go test -v
 
