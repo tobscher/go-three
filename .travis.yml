@@ -4,10 +4,11 @@ install:
   - ./scripts/install-dependencies
 
 before_script:
- - go get -v
+  - go get -v
 
 script:
- - go test -v
+  - "export LD_LIBRARY_PATH=/usr/lib64:/usr/lib:$LD_LIBRARY_PATH"
+  - go test -v
 
 after_failure:
   - ./scripts/after-failure
