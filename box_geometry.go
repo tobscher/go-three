@@ -111,9 +111,7 @@ func (bg *boxGeometry) updateBuffer() {
 
 func (bg *boxGeometry) Program() gl.Program {
 	if !bg.programLoaded {
-		vShader := glh.Shader{gl.VERTEX_SHADER, loadDataFile("triangle.v.glsl")}
-		fShader := glh.Shader{gl.FRAGMENT_SHADER, loadDataFile("triangle.f.glsl")}
-		bg.program = glh.NewProgram(vShader, fShader)
+		bg.program = MakeProgram("triangle.v.glsl", "triangle.f.glsl")
 		bg.matrixID = bg.program.GetUniformLocation("MVP")
 
 		bg.programLoaded = true

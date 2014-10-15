@@ -3,7 +3,6 @@ package three
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 
 	gl "github.com/go-gl/gl"
 	glfw "github.com/go-gl/glfw3"
@@ -14,14 +13,6 @@ type Renderer struct {
 	Width  int
 	Height int
 	window *glfw.Window
-}
-
-func loadDataFile(filePath string) string {
-	content, err := ioutil.ReadFile("shaders/" + filePath)
-	if err != nil {
-		panic(err)
-	}
-	return string(content)
 }
 
 func NewRenderer(width, height int, title string) (*Renderer, error) {

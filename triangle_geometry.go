@@ -26,9 +26,7 @@ func NewTriangleGeometry(p1, p2, p3 mgl32.Vec3) *triangleGeometry {
 
 func (tg *triangleGeometry) Program() gl.Program {
 	if !tg.programLoaded {
-		vShader := glh.Shader{gl.VERTEX_SHADER, loadDataFile("triangle.v.glsl")}
-		fShader := glh.Shader{gl.FRAGMENT_SHADER, loadDataFile("triangle.f.glsl")}
-		tg.program = glh.NewProgram(vShader, fShader)
+		tg.program = MakeProgram("triangle.v.glsl", "triangle.f.glsl")
 		tg.matrixID = tg.program.GetUniformLocation("MVP")
 
 		tg.programLoaded = true
