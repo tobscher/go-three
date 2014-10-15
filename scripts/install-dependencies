@@ -30,6 +30,8 @@ at "Installing dependencies"
 erl sudo eatmydata apt-get install -qq \
   libglfw-dev libglew-dev mesa-utils inotify-tools xserver-xorg \
   libsdl1.2-dev libsdl-image1.2-dev \
+  unzip build-essential cmake \
+  xorg-dev libglu1-mesa-dev \
   || die "Failed to install dependencies"
 
 at "Starting X"
@@ -45,9 +47,9 @@ at "Install GLFW3"
 erl wget http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
 erl unzip glfw-3.0.4.zip
 pushd glfw-3.0.4
-  cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON
-  make
-  sudo make install
+  erl cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON
+  erl make
+  erl sudo make install
 popd
 
 at "Fetching dependencies"
