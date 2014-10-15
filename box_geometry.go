@@ -139,6 +139,5 @@ func (bg *boxGeometry) Buffer() gl.Buffer {
 }
 
 func (bg *boxGeometry) VertexCount() int {
-	// 6 sides * 2 (for each triangle)
-	return 6 * 2 * 3
+	return 36
 }
