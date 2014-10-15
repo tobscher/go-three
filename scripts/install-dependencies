@@ -60,10 +60,3 @@ pushd glew-1.11.0
   sudo make install
   make clean
 popd
-
-at "Refreshing shared library cache"
-sudo ldconfig
-
-at "Fetching dependencies"
-go get -d -v \
-  || die "go get failed"
