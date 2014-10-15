@@ -3,12 +3,6 @@ language: go
 install:
   - ./scripts/install-dependencies
 
-script:
-  - go build -v
-
-after_script:
-  - go test -v
-
 after_failure:
   - ./scripts/after-failure
 after_error:
