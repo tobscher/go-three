@@ -44,12 +44,12 @@ inotifywait -t 4 -r /tmp/.X11-unix
 export DISPLAY=:0
 
 at "Install GLFW3"
-erl wget http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
-erl unzip glfw-3.0.4.zip
+wget http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
+unzip glfw-3.0.4.zip
 pushd glfw-3.0.4
-  erl cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON
-  erl make
-  erl sudo make install
+  cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON
+  make
+  sudo make install
 popd
 
 at "Fetching dependencies"
