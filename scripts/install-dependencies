@@ -52,6 +52,15 @@ pushd glfw-3.0.4
   sudo make install
 popd
 
+at "Installing GLEW"
+wget http://downloads.sourceforge.net/project/glew/glew/1.11.0/glew-1.11.0.tgz
+tar -xvf glew-1.11.0.tgz
+pushd glew-1.11.0
+  make
+  sudo make install
+  make clean
+popd
+
 at "Fetching dependencies"
 go get -d -v \
   || die "go get failed"
