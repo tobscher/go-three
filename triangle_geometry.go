@@ -2,7 +2,6 @@ package three
 
 import (
 	"github.com/go-gl/gl"
-	"github.com/go-gl/glh"
 	"github.com/go-gl/mathgl/mgl32"
 )
 
@@ -41,9 +40,7 @@ func (tg *triangleGeometry) MatrixID() gl.UniformLocation {
 
 func (tg *triangleGeometry) Buffer() gl.Buffer {
 	if !tg.bufferLoaded {
-		tg.buffer = gl.GenBuffer()
-		tg.buffer.Bind(gl.ARRAY_BUFFER)
-		gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(tg.bufferData), tg.bufferData, gl.STATIC_DRAW)
+		tg.buffer = GenerateBuffer(tg.bufferData)
 
 		tg.bufferLoaded = true
 	}

@@ -2,7 +2,6 @@ package three
 
 import (
 	"github.com/go-gl/gl"
-	"github.com/go-gl/glh"
 	"github.com/go-gl/mathgl/mgl32"
 )
 
@@ -126,9 +125,7 @@ func (bg *boxGeometry) MatrixID() gl.UniformLocation {
 
 func (bg *boxGeometry) Buffer() gl.Buffer {
 	if !bg.bufferLoaded {
-		bg.buffer = gl.GenBuffer()
-		bg.buffer.Bind(gl.ARRAY_BUFFER)
-		gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(bg.bufferData), bg.bufferData, gl.STATIC_DRAW)
+		bg.buffer = GenerateBuffer(bg.bufferData)
 
 		bg.bufferLoaded = true
 	}
