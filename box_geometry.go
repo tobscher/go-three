@@ -12,6 +12,7 @@ type boxGeometry struct {
 	program       gl.Program
 	programLoaded bool
 	matrixID      gl.UniformLocation
+	textureID     gl.UniformLocation
 
 	width  float32
 	height float32
@@ -110,7 +111,7 @@ func (bg *boxGeometry) updateBuffer() {
 
 func (bg *boxGeometry) Program() gl.Program {
 	if !bg.programLoaded {
-		bg.program = MakeProgram("triangle.v.glsl", "triangle.f.glsl")
+		bg.program = MakeProgram(COLOR)
 		bg.matrixID = bg.program.GetUniformLocation("MVP")
 
 		bg.programLoaded = true

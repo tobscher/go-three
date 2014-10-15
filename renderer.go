@@ -83,9 +83,11 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 		attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
 		colorLoc := gl.AttribLocation(1)
-		colorLoc.EnableArray()
-		element.material.Buffer(element.geometry.VertexCount()).Bind(gl.ARRAY_BUFFER)
-		colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+		if element.material.Color != nil {
+			colorLoc.EnableArray()
+			element.material.Buffer(element.geometry.VertexCount()).Bind(gl.ARRAY_BUFFER)
+			colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+		}
 
 		if element.material.wireframe {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)

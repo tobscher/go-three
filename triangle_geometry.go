@@ -25,7 +25,7 @@ func NewTriangleGeometry(p1, p2, p3 mgl32.Vec3) *triangleGeometry {
 
 func (tg *triangleGeometry) Program() gl.Program {
 	if !tg.programLoaded {
-		tg.program = MakeProgram("triangle.v.glsl", "triangle.f.glsl")
+		tg.program = MakeProgram(COLOR)
 		tg.matrixID = tg.program.GetUniformLocation("MVP")
 
 		tg.programLoaded = true

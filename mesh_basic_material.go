@@ -9,6 +9,7 @@ type meshBasicMaterial struct {
 	bufferLoaded bool
 
 	color     Color
+	texture   Texture
 	wireframe bool
 }
 
@@ -24,6 +25,15 @@ func (m meshBasicMaterial) SetColor(color Color) meshBasicMaterial {
 
 func (m meshBasicMaterial) Color() Color {
 	return m.color
+}
+
+func (m meshBasicMaterial) SetTexture(texture Texture) meshBasicMaterial {
+	m.texture = texture
+	return m
+}
+
+func (m meshBasicMaterial) Texture() Texture {
+	return m.texture
 }
 
 func (m meshBasicMaterial) SetWireframe(wireframe bool) meshBasicMaterial {
