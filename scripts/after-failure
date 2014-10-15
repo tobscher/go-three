@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+
+"Failure - error log contents:"
+cat error.log
+exit 1

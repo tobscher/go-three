@@ -12,12 +12,6 @@ at() {
   date +%H:%M:%S.%N &>> error.log
 }
 
-failure() {
-  at "Failure - error log contents:"
-  cat error.log
-  exit 1
-}
-
 die() {
   at "Failure: $@"
   exit 1
@@ -34,7 +28,7 @@ erl sudo eatmydata apt-get update -qq \
 
 at "Installing dependencies"
 erl sudo eatmydata apt-get install -qq \
-  libglfw-dev libglew-dev mesa-utils inotify-tools xserver-xorg \
+  libglfw-dev libglfw3-dev libglew-dev mesa-utils inotify-tools xserver-xorg \
   libsdl1.2-dev libsdl-image1.2-dev \
   || die "Failed to install dependencies"
 
