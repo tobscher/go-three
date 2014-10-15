@@ -1,0 +1,7 @@
+language: go
+
+before_install:
+  ./scripts/install-glfw
+
+go:
+  - 1.3
