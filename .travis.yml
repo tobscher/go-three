@@ -8,7 +8,7 @@ before_script:
 
 script:
   - sudo ldconfig
-  - "export LD_LIBRARY_PATH=/usr/lib64:/usr/lib:$LD_LIBRARY_PATH"
+  - "export LD_LIBRARY_PATH=/usr/lib64:/usr/lib:/usr/local/lib:/usr/local/lib64:$LD_LIBRARY_PATH"
   - go test -v
 
 after_failure:
