@@ -9,8 +9,10 @@ script:
 after_script:
   - go test -v
 
-after_failure: ./scripts/after-failure
-after_error: ./scripts/after-failure
+after_failure:
+  - ./scripts/after-failure
+after_error:
+  - ./scripts/after-failure
 
 go:
   - 1.3
