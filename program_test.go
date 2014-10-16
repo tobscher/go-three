@@ -3,9 +3,6 @@ package three
 import (
 	"os"
 	"testing"
-
-	gl "github.com/go-gl/gl"
-	glfw "github.com/go-gl/glfw3"
 )
 
 func TestFragmentShaderWithSolidColor(t *testing.T) {
@@ -91,32 +88,9 @@ func TestColorShaderCompiles(t *testing.T) {
 		t.Skip()
 	}
 
-	if !glfw.Init() {
-		t.Errorf("Can't open GLFW")
-		return
-	}
-	defer glfw.Terminate()
-
-	glfw.WindowHint(glfw.ContextVersionMajor, 3)
-	glfw.WindowHint(glfw.ContextVersionMinor, 3)
-	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
-	glfw.WindowHint(glfw.OpenglProfile, glfw.OpenglCoreProfile)
-
-	window, err := glfw.CreateWindow(100, 100, "Test", nil, nil)
-	if err != nil {
-		t.Error(err)
-	}
-	window.MakeContextCurrent()
-
-	if gl.Init() != 0 {
-		t.Errorf("Could not initialise glew.")
-	}
-	gl.GetError()
-
-	vertexArray := gl.GenVertexArray()
-	vertexArray.Bind()
-
-	MakeProgram(COLOR)
+	RunIn3DContext(func() {
+		MakeProgram(COLOR)
+	})
 }
 
 func TestTextureShaderCompiles(t *testing.T) {
@@ -124,30 +98,7 @@ func TestTextureShaderCompiles(t *testing.T) {
 		t.Skip()
 	}
 
-	if !glfw.Init() {
-		t.Errorf("Can't open GLFW")
-		return
-	}
-	defer glfw.Terminate()
-
-	glfw.WindowHint(glfw.ContextVersionMajor, 3)
-	glfw.WindowHint(glfw.ContextVersionMinor, 3)
-	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
-	glfw.WindowHint(glfw.OpenglProfile, glfw.OpenglCoreProfile)
-
-	window, err := glfw.CreateWindow(100, 100, "Test", nil, nil)
-	if err != nil {
-		t.Error(err)
-	}
-	window.MakeContextCurrent()
-
-	if gl.Init() != 0 {
-		t.Errorf("Could not initialise glew.")
-	}
-	gl.GetError()
-
-	vertexArray := gl.GenVertexArray()
-	vertexArray.Bind()
-
-	MakeProgram(TEXTURE)
+	RunIn3DContext(func() {
+		MakeProgram(TEXTURE)
+	})
 }
