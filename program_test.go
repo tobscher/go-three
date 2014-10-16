@@ -1,9 +1,11 @@
 package three
 
 import (
+	"os"
+	"testing"
+
 	gl "github.com/go-gl/gl"
 	glfw "github.com/go-gl/glfw3"
-	"testing"
 )
 
 func TestFragmentShaderWithSolidColor(t *testing.T) {
@@ -85,6 +87,10 @@ void main() {
 }
 
 func TestColorShaderCompiles(t *testing.T) {
+	if os.Getenv("SKIP_GLFW") != "" {
+		t.Skip()
+	}
+
 	if !glfw.Init() {
 		t.Errorf("Can't open GLFW")
 		return
@@ -114,6 +120,10 @@ func TestColorShaderCompiles(t *testing.T) {
 }
 
 func TestTextureShaderCompiles(t *testing.T) {
+	if os.Getenv("SKIP_GLFW") != "" {
+		t.Skip()
+	}
+
 	if !glfw.Init() {
 		t.Errorf("Can't open GLFW")
 		return

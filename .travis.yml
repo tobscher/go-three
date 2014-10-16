@@ -12,7 +12,8 @@ before_script:
 script:
   - sudo ldconfig
   - "export LD_LIBRARY_PATH=/usr/lib64:/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH"
-  - xvfb-run -s "-screen 0 1024x768x16 +extension GLX +render -noreset" go test -v
+  - "export SKIP_GLFW=true"
+  - go test -v
 
 after_failure:
   - ./scripts/after-failure
