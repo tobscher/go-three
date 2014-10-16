@@ -9,9 +9,10 @@ import (
 )
 
 type Program struct {
-	glProgram gl.Program
-	loaded    bool
-	matrixID  gl.UniformLocation
+	attributes map[string]Attribute
+	glProgram  gl.Program
+	loaded     bool
+	matrixID   gl.UniformLocation
 }
 
 type ProgramFeature int
@@ -27,6 +28,8 @@ const (
 
 func (p *Program) load(program gl.Program) {
 	log.Println("*** Program loaded ***")
+
+	p.attributes = make(map[string]Attribute)
 	p.glProgram = program
 	p.matrixID = p.glProgram.GetUniformLocation("MVP")
 	p.loaded = true

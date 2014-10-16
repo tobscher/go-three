@@ -71,7 +71,7 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for _, element := range scene.objects {
-		program := element.material.Program()
+		program := element.material.Program(element)
 		program.use()
 
 		projection := camera.projectionMatrix
@@ -87,16 +87,11 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 		element.vertexBuffer.bind(gl.ARRAY_BUFFER)
 		vertexAttrib.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
-		colorAttrib := gl.AttribLocation(1)
-		colorAttrib.EnableArray()
-		element.ColorBuffer().bind(gl.ARRAY_BUFFER)
-		colorAttrib.AttribPointer(3, gl.FLOAT, false, 0, nil)
+		var toDisable []gl.AttribLocation
 
-		// var toDisable []gl.AttribLocation
-
-		// for _, attribute := range element.material.Attributes() {
-		// 	toDisable = append(toDisable, attribute.enableFor(element))
-		// }
+		for _, attribute := range program.attributes {
+			toDisable = append(toDisable, attribute.enableFor(element))
+		}
 
 		if element.material.Wireframe() {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
@@ -106,13 +101,12 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 
 		gl.DrawArrays(gl.TRIANGLES, 0, element.vertexBuffer.vertexCount())
 
-		// // Mandatory attribute
+		// Mandatory attribute
 		vertexAttrib.DisableArray()
-		colorAttrib.DisableArray()
 
-		// for _, location := range toDisable {
-		// 	location.DisableArray()
-		// }
+		for _, location := range toDisable {
+			location.DisableArray()
+		}
 	}
 
 	r.window.SwapBuffers()
@@ -132,7 +126,7 @@ func (r *Renderer) Unload(s *scene) {
 
 		element.vertexBuffer.unload()
 
-		program := element.material.Program()
+		program := element.material.Program(element)
 		program.unload()
 	}
 

@@ -6,7 +6,6 @@ type Material interface {
 	ColorsDirty() bool
 	SetColorsDirty(bool)
 
-	Program() Program
+	Program(*Mesh) Program
 	Wireframe() bool
-	Attributes() []Attribute
 }

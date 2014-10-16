@@ -1,8 +1,7 @@
 package three
 
 type meshBasicMaterial struct {
-	attributes []Attribute
-	program    Program
+	program Program
 
 	colorsDirty bool
 	color       Color
@@ -15,16 +14,13 @@ func NewMeshBasicMaterial() *meshBasicMaterial {
 	return &material
 }
 
-func (m *meshBasicMaterial) Program() Program {
+func (m *meshBasicMaterial) Program(mesh *Mesh) Program {
 	if !m.program.loaded {
 		m.program.load(MakeProgram(COLOR))
+		m.program.attributes["color"] = NewAttribute(1, &mesh.colorBuffer)
 	}
 
 	return m.program
-}
-
-func (m meshBasicMaterial) Attributes() []Attribute {
-	return m.attributes
 }
 
 func (m *meshBasicMaterial) SetColor(color Color) *meshBasicMaterial {

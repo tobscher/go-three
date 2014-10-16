@@ -2,30 +2,21 @@ package three
 
 import (
 	gl "github.com/go-gl/gl"
-	"log"
 )
 
 type Attribute struct {
-	index   int
-	feature ProgramFeature
-	buffer  buffer
+	index  int
+	buffer *buffer
 }
 
-func NewAttribute(index int, feature ProgramFeature) Attribute {
-	return Attribute{index: index, feature: feature}
+func NewAttribute(index int, buffer *buffer) Attribute {
+	return Attribute{index: index, buffer: buffer}
 }
 
 // Bug(tobscher) Buffer data per feature should probably be cached
 // and not computed every frame as it doesn't change unless
 // the material changes
 func (a *Attribute) enableFor(m *Mesh) gl.AttribLocation {
-	log.Println("*** Attribute buffer loaded ***")
-
-	// bufferData := m.material.BufferDataFor(a.feature, m.geometry)
-
-	// a.buffer = NewBuffer(bufferData)
-	// a.buffer.load()
-
 	location := gl.AttribLocation(a.index)
 	location.EnableArray()
 	a.buffer.bind(gl.ARRAY_BUFFER)
