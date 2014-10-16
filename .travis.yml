@@ -2,7 +2,6 @@ language: go
 
 before_install:
   - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
 
 install:
   - ./scripts/install-dependencies
@@ -13,7 +12,7 @@ before_script:
 script:
   - sudo ldconfig
   - "export LD_LIBRARY_PATH=/usr/lib64:/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH"
-  - go test -v
+  - xvfb-run -s "-screen 0 1024x768x16 +extension GLX +render -noreset" go test -v
 
 after_failure:
   - ./scripts/after-failure
