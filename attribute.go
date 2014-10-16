@@ -5,18 +5,22 @@ import (
 )
 
 type Attribute struct {
-	index  int
-	buffer buffer
+	index   int
+	feature ProgramFeature
+	buffer  buffer
 }
 
-func NewAttribute(index int, buffer buffer) Attribute {
-	return Attribute{index: index, buffer: buffer}
+func NewAttribute(index int, feature ProgramFeature) Attribute {
+	return Attribute{index: index, feature: feature}
 }
 
-func (a Attribute) enableFor(geometry Geometry) gl.AttribLocation {
-	if !a.buffer.loaded {
-		a.buffer.load()
-	}
+// Bug(tobscher) Buffer data per feature should probably be cached
+// and not computed every frame as it doesn't change unless
+// the material changes
+func (a Attribute) enableFor(m *Mesh) gl.AttribLocation {
+	bufferData := m.material.BufferDataFor(a.feature, m.geometry)
+	a.buffer = NewBuffer(bufferData)
+	a.buffer.load()
 
 	location := gl.AttribLocation(a.index)
 	location.EnableArray()

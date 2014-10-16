@@ -30,7 +30,7 @@ func (m meshBasicMaterial) Attributes() []Attribute {
 
 func (m meshBasicMaterial) SetColor(color Color) meshBasicMaterial {
 	m.color = color
-	m.attributes = append(m.attributes, NewAttribute(1, getColorBuffer(36, color)))
+	m.attributes = append(m.attributes, NewAttribute(1, COLOR))
 	return m
 }
 
@@ -56,13 +56,15 @@ func (m meshBasicMaterial) Wireframe() bool {
 	return m.wireframe
 }
 
-func getColorBuffer(verticesCount int, color Color) buffer {
+func (m meshBasicMaterial) BufferDataFor(feature ProgramFeature, geometry Geometry) []float32 {
+	return getColorBuffer(geometry.Buffer().vertexCount(), m.color)
+}
+
+func getColorBuffer(verticesCount int, color Color) []float32 {
 	bufferData := make([]float32, 0, verticesCount*3)
 	for i := 0; i < verticesCount; i++ {
 		bufferData = append(bufferData, color.R(), color.G(), color.B())
 	}
 
-	buffer := NewBuffer(bufferData)
-
-	return buffer
+	return bufferData
 }

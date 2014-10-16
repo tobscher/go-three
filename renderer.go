@@ -88,7 +88,7 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 
 		// Ask material to set attributes
 		for _, attribute := range element.material.Attributes() {
-			toDisable = append(toDisable, attribute.enableFor(element.geometry))
+			toDisable = append(toDisable, attribute.enableFor(element))
 		}
 
 		if element.material.Wireframe() {
