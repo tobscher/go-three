@@ -69,24 +69,26 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for _, element := range scene.objects {
-		element.geometry.Program().Use()
+		element.material.Program().use()
 
 		projection := camera.projectionMatrix
 		view := camera.viewMatrix
 		MVP := projection.Mul4(view).Mul4(element.ModelMatrix())
 
-		element.geometry.MatrixID().UniformMatrix4fv(false, MVP)
+		// Set model view projection matrix
+		element.material.Program().MatrixID().UniformMatrix4fv(false, MVP)
 
+		// Set position attribute
 		attribLoc := gl.AttribLocation(0)
 		attribLoc.EnableArray()
-		element.geometry.Buffer().Bind(gl.ARRAY_BUFFER)
+		element.geometry.Buffer().bind(gl.ARRAY_BUFFER)
 		attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
-		colorLoc := gl.AttribLocation(1)
-		if element.material.Color != nil {
-			colorLoc.EnableArray()
-			element.material.Buffer(element.geometry.VertexCount()).Bind(gl.ARRAY_BUFFER)
-			colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+		var toDisable []gl.AttribLocation
+
+		// Ask material to set attributes
+		for _, attribute := range element.material.Attributes() {
+			toDisable = append(toDisable, attribute.enableFor(element.geometry))
 		}
 
 		if element.material.Wireframe() {
@@ -95,10 +97,15 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
 		}
 
-		gl.DrawArrays(gl.TRIANGLES, 0, element.geometry.VertexCount())
+		gl.DrawArrays(gl.TRIANGLES, 0, element.geometry.Buffer().vertexCount())
 
+		// Mandatory attribute
 		attribLoc.DisableArray()
-		colorLoc.DisableArray()
+
+		// Ask material to disable arrays
+		for _, location := range toDisable {
+			location.DisableArray()
+		}
 	}
 	r.window.SwapBuffers()
 	glfw.PollEvents()

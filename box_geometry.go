@@ -7,13 +7,10 @@ import (
 
 // Use struct composition
 type boxGeometry struct {
-	bufferData    []float32
-	buffer        gl.Buffer
-	bufferLoaded  bool
-	program       gl.Program
-	programLoaded bool
-	matrixID      gl.UniformLocation
-	textureID     gl.UniformLocation
+	buffer    buffer
+	program   Program
+	matrixID  gl.UniformLocation
+	textureID gl.UniformLocation
 
 	width  float32
 	height float32
@@ -24,12 +21,11 @@ func NewBoxGeometry(width, height, depth float32) *boxGeometry {
 	bufferData := generateBufferData(width, height, depth)
 
 	return &boxGeometry{
-		bufferData:    bufferData,
-		programLoaded: false,
-		bufferLoaded:  false,
-		width:         width,
-		height:        height,
-		depth:         depth}
+		buffer:  NewBuffer(bufferData),
+		program: Program{loaded: false},
+		width:   width,
+		height:  height,
+		depth:   depth}
 }
 
 func NewCubeGeometry(size float32) *boxGeometry {
@@ -105,36 +101,14 @@ func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []float32 {
 	}
 }
 
-func (bg *boxGeometry) updateBuffer() {
-	bg.bufferData = generateBufferData(bg.width, bg.height, bg.depth)
-	bg.bufferLoaded = false
-}
-
-func (bg *boxGeometry) Program() gl.Program {
-	if !bg.programLoaded {
-		bg.program = MakeProgram(COLOR)
-		bg.matrixID = bg.program.GetUniformLocation("MVP")
-
-		bg.programLoaded = true
-	}
-
-	return bg.program
-}
-
 func (bg *boxGeometry) MatrixID() gl.UniformLocation {
 	return bg.matrixID
 }
 
-func (bg *boxGeometry) Buffer() gl.Buffer {
-	if !bg.bufferLoaded {
-		bg.buffer = GenerateBuffer(bg.bufferData)
-
-		bg.bufferLoaded = true
+func (bg *boxGeometry) Buffer() buffer {
+	if !bg.buffer.loaded {
+		bg.buffer.load()
 	}
 
 	return bg.buffer
-}
-
-func (bg *boxGeometry) VertexCount() int {
-	return 36
 }

@@ -7,6 +7,12 @@ import (
 	"strings"
 )
 
+type Program struct {
+	glProgram gl.Program
+	loaded    bool
+	matrixID  gl.UniformLocation
+}
+
 type ProgramFeature int
 
 const (
@@ -17,6 +23,20 @@ const (
 const (
 	SHADER_VERSION = "#version 330 core"
 )
+
+func (p *Program) load(program gl.Program) {
+	p.glProgram = program
+	p.matrixID = p.glProgram.GetUniformLocation("MVP")
+	p.loaded = true
+}
+
+func (p Program) use() {
+	p.glProgram.Use()
+}
+
+func (p Program) MatrixID() gl.UniformLocation {
+	return p.matrixID
+}
 
 func MakeProgram(features ProgramFeature) gl.Program {
 	vertSource := loadVertexShader(features)

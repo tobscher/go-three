@@ -1,12 +1,10 @@
 package three
 
-import (
-	"github.com/go-gl/gl"
-)
+import ()
 
 type meshBasicMaterial struct {
-	buffer       gl.Buffer
-	bufferLoaded bool
+	attributes []Attribute
+	program    Program
 
 	color     Color
 	texture   Texture
@@ -14,12 +12,25 @@ type meshBasicMaterial struct {
 }
 
 func NewMeshBasicMaterial() *meshBasicMaterial {
-	material := meshBasicMaterial{bufferLoaded: false}
+	material := meshBasicMaterial{}
 	return &material
+}
+
+func (m meshBasicMaterial) Program() Program {
+	if !m.program.loaded {
+		m.program.load(MakeProgram(COLOR))
+	}
+
+	return m.program
+}
+
+func (m meshBasicMaterial) Attributes() []Attribute {
+	return m.attributes
 }
 
 func (m meshBasicMaterial) SetColor(color Color) meshBasicMaterial {
 	m.color = color
+	m.attributes = append(m.attributes, NewAttribute(1, getColorBuffer(36, color)))
 	return m
 }
 
@@ -45,18 +56,13 @@ func (m meshBasicMaterial) Wireframe() bool {
 	return m.wireframe
 }
 
-func (m meshBasicMaterial) Buffer(verticesCount int) gl.Buffer {
-	if !m.bufferLoaded {
-		bufferData := make([]float32, 0, verticesCount*3)
-		for i := 0; i < verticesCount; i++ {
-			bufferData = append(bufferData, m.Color().R(), m.Color().G(), m.Color().B())
-		}
-
-		m.buffer = gl.GenBuffer()
-		m.buffer.Bind(gl.ARRAY_BUFFER)
-		gl.BufferData(gl.ARRAY_BUFFER, len(bufferData)*4, bufferData, gl.STATIC_DRAW)
-		m.bufferLoaded = true
+func getColorBuffer(verticesCount int, color Color) buffer {
+	bufferData := make([]float32, 0, verticesCount*3)
+	for i := 0; i < verticesCount; i++ {
+		bufferData = append(bufferData, color.R(), color.G(), color.B())
 	}
 
-	return m.buffer
+	buffer := NewBuffer(bufferData)
+
+	return buffer
 }
