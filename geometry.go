@@ -1,5 +1,5 @@
 package three
 
 type Geometry interface {
-	Buffer() buffer
+	generateVertexBuffer() []float32
 }

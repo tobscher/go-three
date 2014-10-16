@@ -3,23 +3,37 @@ package three
 import (
 	"github.com/go-gl/gl"
 	"github.com/go-gl/glh"
+	"log"
 )
 
 type buffer struct {
 	data     []float32
 	glBuffer gl.Buffer
-	loaded   bool
 }
 
-func NewBuffer(bufferData []float32) buffer {
-	return buffer{data: bufferData, loaded: false}
+func NewBuffer(data []float32) buffer {
+	log.Println("*** New Buffer generated ***")
+
+	glBuffer := gl.GenBuffer()
+	glBuffer.Bind(gl.ARRAY_BUFFER)
+	gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(data), data, gl.STATIC_DRAW)
+
+	buffer := buffer{glBuffer: glBuffer, data: data}
+
+	return buffer
 }
 
-func (b *buffer) load() {
-	b.glBuffer = gl.GenBuffer()
-	b.glBuffer.Bind(gl.ARRAY_BUFFER)
-	gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(b.data), b.data, gl.STATIC_DRAW)
-	b.loaded = true
+func (b *buffer) unload() {
+	b.glBuffer.Delete()
+}
+
+func (b *buffer) update(data []float32) {
+	log.Println("*** Buffer updated ***")
+
+	b.data = data
+
+	b.bind(gl.ARRAY_BUFFER)
+	gl.BufferData(gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT))*len(data), data, gl.STATIC_DRAW)
 }
 
 func (b buffer) bind(enum gl.GLenum) {

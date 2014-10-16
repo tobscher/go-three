@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-gl/gl"
 	"github.com/go-gl/glh"
+	"log"
 	"strings"
 )
 
@@ -25,9 +26,14 @@ const (
 )
 
 func (p *Program) load(program gl.Program) {
+	log.Println("*** Program loaded ***")
 	p.glProgram = program
 	p.matrixID = p.glProgram.GetUniformLocation("MVP")
 	p.loaded = true
+}
+
+func (p *Program) unload() {
+	p.glProgram.Delete()
 }
 
 func (p Program) use() {

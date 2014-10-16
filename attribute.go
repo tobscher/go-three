@@ -2,6 +2,7 @@ package three
 
 import (
 	gl "github.com/go-gl/gl"
+	"log"
 )
 
 type Attribute struct {
@@ -17,10 +18,13 @@ func NewAttribute(index int, feature ProgramFeature) Attribute {
 // Bug(tobscher) Buffer data per feature should probably be cached
 // and not computed every frame as it doesn't change unless
 // the material changes
-func (a Attribute) enableFor(m *Mesh) gl.AttribLocation {
-	bufferData := m.material.BufferDataFor(a.feature, m.geometry)
-	a.buffer = NewBuffer(bufferData)
-	a.buffer.load()
+func (a *Attribute) enableFor(m *Mesh) gl.AttribLocation {
+	log.Println("*** Attribute buffer loaded ***")
+
+	// bufferData := m.material.BufferDataFor(a.feature, m.geometry)
+
+	// a.buffer = NewBuffer(bufferData)
+	// a.buffer.load()
 
 	location := gl.AttribLocation(a.index)
 	location.EnableArray()

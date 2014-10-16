@@ -5,21 +5,31 @@ import (
 )
 
 type Mesh struct {
-	geometry          Geometry
-	material          Material
-	position          mgl32.Vec3
-	scale             mgl32.Vec3
+	vertexBuffer buffer
+	colorBuffer  buffer
+
+	geometry Geometry
+	material Material
+
+	position mgl32.Vec3
+	scale    mgl32.Vec3
+
 	translationMatrix mgl32.Mat4
 	rotationMatrix    mgl32.Mat4
 	scaleMatrix       mgl32.Mat4
 }
 
 func NewMesh(geometry Geometry, material Material) Mesh {
+	vertexBuffer := NewBuffer(geometry.generateVertexBuffer())
 	return Mesh{
-		geometry:          geometry,
-		material:          material,
-		position:          mgl32.Vec3{0, 0, 0},
-		scale:             mgl32.Vec3{1, 1, 1},
+		vertexBuffer: vertexBuffer,
+		colorBuffer:  NewBuffer(material.generateColorBuffer(vertexBuffer.vertexCount())),
+		geometry:     geometry,
+		material:     material,
+
+		position: mgl32.Vec3{0, 0, 0},
+		scale:    mgl32.Vec3{1, 1, 1},
+
 		translationMatrix: mgl32.Ident4(),
 		rotationMatrix:    mgl32.Ident4(),
 		scaleMatrix:       mgl32.Ident4(),
@@ -44,4 +54,13 @@ func (m *Mesh) Scale(x, y, z float32) {
 
 func (m *Mesh) ModelMatrix() mgl32.Mat4 {
 	return m.translationMatrix.Mul4(m.rotationMatrix).Mul4(m.scaleMatrix)
+}
+
+func (m *Mesh) ColorBuffer() buffer {
+	if m.material.ColorsDirty() {
+		m.colorBuffer.update(m.material.generateColorBuffer(m.vertexBuffer.vertexCount()))
+		m.material.SetColorsDirty(false)
+	}
+
+	return m.colorBuffer
 }

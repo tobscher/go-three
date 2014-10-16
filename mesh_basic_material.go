@@ -1,14 +1,13 @@
 package three
 
-import ()
-
 type meshBasicMaterial struct {
 	attributes []Attribute
 	program    Program
 
-	color     Color
-	texture   Texture
-	wireframe bool
+	colorsDirty bool
+	color       Color
+	texture     Texture
+	wireframe   bool
 }
 
 func NewMeshBasicMaterial() *meshBasicMaterial {
@@ -16,7 +15,7 @@ func NewMeshBasicMaterial() *meshBasicMaterial {
 	return &material
 }
 
-func (m meshBasicMaterial) Program() Program {
+func (m *meshBasicMaterial) Program() Program {
 	if !m.program.loaded {
 		m.program.load(MakeProgram(COLOR))
 	}
@@ -28,14 +27,22 @@ func (m meshBasicMaterial) Attributes() []Attribute {
 	return m.attributes
 }
 
-func (m meshBasicMaterial) SetColor(color Color) meshBasicMaterial {
+func (m *meshBasicMaterial) SetColor(color Color) *meshBasicMaterial {
 	m.color = color
-	m.attributes = append(m.attributes, NewAttribute(1, COLOR))
+	m.colorsDirty = true
 	return m
 }
 
 func (m meshBasicMaterial) Color() Color {
 	return m.color
+}
+
+func (m meshBasicMaterial) ColorsDirty() bool {
+	return m.colorsDirty
+}
+
+func (m *meshBasicMaterial) SetColorsDirty(dirty bool) {
+	m.colorsDirty = dirty
 }
 
 func (m meshBasicMaterial) SetTexture(texture Texture) meshBasicMaterial {
@@ -56,14 +63,10 @@ func (m meshBasicMaterial) Wireframe() bool {
 	return m.wireframe
 }
 
-func (m meshBasicMaterial) BufferDataFor(feature ProgramFeature, geometry Geometry) []float32 {
-	return getColorBuffer(geometry.Buffer().vertexCount(), m.color)
-}
-
-func getColorBuffer(verticesCount int, color Color) []float32 {
-	bufferData := make([]float32, 0, verticesCount*3)
-	for i := 0; i < verticesCount; i++ {
-		bufferData = append(bufferData, color.R(), color.G(), color.B())
+func (m *meshBasicMaterial) generateColorBuffer(vertexCount int) []float32 {
+	bufferData := make([]float32, 0, vertexCount*3)
+	for i := 0; i < vertexCount; i++ {
+		bufferData = append(bufferData, m.color.R(), m.color.G(), m.color.B())
 	}
 
 	return bufferData

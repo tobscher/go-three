@@ -3,6 +3,7 @@ package three
 import (
 	"errors"
 	"fmt"
+	"log"
 
 	gl "github.com/go-gl/gl"
 	glfw "github.com/go-gl/glfw3"
@@ -10,9 +11,10 @@ import (
 )
 
 type Renderer struct {
-	Width  int
-	Height int
-	window *glfw.Window
+	Width       int
+	Height      int
+	vertexArray gl.VertexArray
+	window      *glfw.Window
 }
 
 func NewRenderer(width, height int, title string) (*Renderer, error) {
@@ -54,7 +56,7 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	vertexArray := gl.GenVertexArray()
 	vertexArray.Bind()
 
-	renderer := Renderer{window: window, Width: width, Height: height}
+	renderer := Renderer{vertexArray: vertexArray, window: window, Width: width, Height: height}
 	return &renderer, nil
 }
 
@@ -69,27 +71,32 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for _, element := range scene.objects {
-		element.material.Program().use()
+		program := element.material.Program()
+		program.use()
 
 		projection := camera.projectionMatrix
 		view := camera.viewMatrix
 		MVP := projection.Mul4(view).Mul4(element.ModelMatrix())
 
 		// Set model view projection matrix
-		element.material.Program().MatrixID().UniformMatrix4fv(false, MVP)
+		program.MatrixID().UniformMatrix4fv(false, MVP)
 
 		// Set position attribute
-		attribLoc := gl.AttribLocation(0)
-		attribLoc.EnableArray()
-		element.geometry.Buffer().bind(gl.ARRAY_BUFFER)
-		attribLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
+		vertexAttrib := gl.AttribLocation(0)
+		vertexAttrib.EnableArray()
+		element.vertexBuffer.bind(gl.ARRAY_BUFFER)
+		vertexAttrib.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
-		var toDisable []gl.AttribLocation
+		colorAttrib := gl.AttribLocation(1)
+		colorAttrib.EnableArray()
+		element.ColorBuffer().bind(gl.ARRAY_BUFFER)
+		colorAttrib.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
-		// Ask material to set attributes
-		for _, attribute := range element.material.Attributes() {
-			toDisable = append(toDisable, attribute.enableFor(element))
-		}
+		// var toDisable []gl.AttribLocation
+
+		// for _, attribute := range element.material.Attributes() {
+		// 	toDisable = append(toDisable, attribute.enableFor(element))
+		// }
 
 		if element.material.Wireframe() {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
@@ -97,22 +104,40 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
 		}
 
-		gl.DrawArrays(gl.TRIANGLES, 0, element.geometry.Buffer().vertexCount())
+		gl.DrawArrays(gl.TRIANGLES, 0, element.vertexBuffer.vertexCount())
 
-		// Mandatory attribute
-		attribLoc.DisableArray()
+		// // Mandatory attribute
+		vertexAttrib.DisableArray()
+		colorAttrib.DisableArray()
 
-		// Ask material to disable arrays
-		for _, location := range toDisable {
-			location.DisableArray()
-		}
+		// for _, location := range toDisable {
+		// 	location.DisableArray()
+		// }
 	}
+
 	r.window.SwapBuffers()
 	glfw.PollEvents()
 }
 
 func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
+}
+
+func (r *Renderer) Unload(s *scene) {
+	log.Println("Cleaning up...")
+
+	for _, element := range s.objects {
+		colorBuffer := element.ColorBuffer()
+		colorBuffer.unload()
+
+		element.vertexBuffer.unload()
+
+		program := element.material.Program()
+		program.unload()
+	}
+
+	r.vertexArray.Delete()
+	glfw.Terminate()
 }
 
 func (r *Renderer) OpenGLSentinel() {
