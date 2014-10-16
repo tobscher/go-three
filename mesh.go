@@ -6,7 +6,7 @@ import (
 
 type Mesh struct {
 	geometry          Geometry
-	material          meshBasicMaterial
+	material          Material
 	position          mgl32.Vec3
 	scale             mgl32.Vec3
 	translationMatrix mgl32.Mat4
@@ -14,7 +14,7 @@ type Mesh struct {
 	scaleMatrix       mgl32.Mat4
 }
 
-func NewMesh(geometry Geometry, material meshBasicMaterial) Mesh {
+func NewMesh(geometry Geometry, material Material) Mesh {
 	return Mesh{
 		geometry:          geometry,
 		material:          material,

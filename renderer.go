@@ -89,7 +89,7 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 			colorLoc.AttribPointer(3, gl.FLOAT, false, 0, nil)
 		}
 
-		if element.material.wireframe {
+		if element.material.Wireframe() {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
 		} else {
 			gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)

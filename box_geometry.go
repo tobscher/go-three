@@ -5,6 +5,7 @@ import (
 	"github.com/go-gl/mathgl/mgl32"
 )
 
+// Use struct composition
 type boxGeometry struct {
 	bufferData    []float32
 	buffer        gl.Buffer

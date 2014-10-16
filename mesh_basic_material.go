@@ -45,7 +45,7 @@ func (m meshBasicMaterial) Wireframe() bool {
 	return m.wireframe
 }
 
-func (m *meshBasicMaterial) Buffer(verticesCount int) gl.Buffer {
+func (m meshBasicMaterial) Buffer(verticesCount int) gl.Buffer {
 	if !m.bufferLoaded {
 		bufferData := make([]float32, 0, verticesCount*3)
 		for i := 0; i < verticesCount; i++ {
