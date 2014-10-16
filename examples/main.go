@@ -27,7 +27,8 @@ func main() {
 
 	box := three.NewCubeGeometry(1)
 	blue := three.NewMeshBasicMaterial().
-		SetColor(three.Color{0.0, 0.0, 1.0})
+		SetColor(three.Color{0.0, 0.0, 1.0}).
+		SetWireframe(true)
 
 	mesh := three.NewMesh(box, blue)
 

@@ -54,7 +54,7 @@ func (m meshBasicMaterial) Texture() Texture {
 	return m.texture
 }
 
-func (m meshBasicMaterial) SetWireframe(wireframe bool) meshBasicMaterial {
+func (m *meshBasicMaterial) SetWireframe(wireframe bool) *meshBasicMaterial {
 	m.wireframe = wireframe
 	return m
 }
