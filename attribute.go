@@ -6,11 +6,12 @@ import (
 
 type Attribute struct {
 	index  int
+	size   uint
 	buffer *buffer
 }
 
-func NewAttribute(index int, buffer *buffer) Attribute {
-	return Attribute{index: index, buffer: buffer}
+func NewAttribute(index int, size uint, buffer *buffer) Attribute {
+	return Attribute{index: index, size: size, buffer: buffer}
 }
 
 // Bug(tobscher) Buffer data per feature should probably be cached
@@ -20,7 +21,7 @@ func (a *Attribute) enableFor(m *Mesh) gl.AttribLocation {
 	location := gl.AttribLocation(a.index)
 	location.EnableArray()
 	a.buffer.bind(gl.ARRAY_BUFFER)
-	location.AttribPointer(3, gl.FLOAT, false, 0, nil)
+	location.AttribPointer(a.size, gl.FLOAT, false, 0, nil)
 
 	return location
 }

@@ -15,7 +15,7 @@ const (
 )
 
 func main() {
-	renderer, err := three.NewRenderer(width, height, "Application Name")
+	renderer, err := three.NewRenderer(width, height, "Wireframe Cube")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,26 +27,15 @@ func main() {
 
 	box := three.NewCubeGeometry(1)
 	blue := three.NewMeshBasicMaterial().
-		SetColor(three.Color{0.0, 0.0, 1.0}).
+		SetColor(&three.Color{0.0, 0.0, 1.0}).
 		SetWireframe(true)
 
 	mesh := three.NewMesh(box, blue)
 
 	scene.Add(&mesh)
 
-	var i float32 = 1.0
-	var counter int = 0
 	for !renderer.ShouldClose() {
-		i += 0.01
-
-		// if counter%100 == 0 {
-		// 	blue.SetColor(three.Color{rand.Float32(), rand.Float32(), rand.Float32()})
-		// }
-
-		// mesh.Scale(i, i, i)
-
 		renderer.Render(scene, camera)
-		counter++
 	}
 
 	renderer.Unload(&scene)

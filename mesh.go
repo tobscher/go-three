@@ -7,6 +7,7 @@ import (
 type Mesh struct {
 	vertexBuffer buffer
 	colorBuffer  buffer
+	uvBuffer     buffer
 
 	geometry Geometry
 	material Material
@@ -21,9 +22,9 @@ type Mesh struct {
 
 func NewMesh(geometry Geometry, material Material) Mesh {
 	vertexBuffer := NewBuffer(geometry.generateVertexBuffer())
-	return Mesh{
+
+	m := Mesh{
 		vertexBuffer: vertexBuffer,
-		colorBuffer:  NewBuffer(material.generateColorBuffer(vertexBuffer.vertexCount())),
 		geometry:     geometry,
 		material:     material,
 
@@ -34,6 +35,18 @@ func NewMesh(geometry Geometry, material Material) Mesh {
 		rotationMatrix:    mgl32.Ident4(),
 		scaleMatrix:       mgl32.Ident4(),
 	}
+
+	if material.Color() != nil {
+		colorBuffer := NewBuffer(material.generateColorBuffer(vertexBuffer.vertexCount()))
+		m.colorBuffer = colorBuffer
+	}
+
+	if material.Texture() != nil {
+		uvBuffer := NewBuffer(material.generateUvBuffer(vertexBuffer.vertexCount()))
+		m.uvBuffer = uvBuffer
+	}
+
+	return m
 }
 
 func (m *Mesh) SetPosition(x, y, z float32) {
@@ -63,4 +76,13 @@ func (m *Mesh) ColorBuffer() buffer {
 	}
 
 	return m.colorBuffer
+}
+
+func (m *Mesh) UvBuffer() buffer {
+	if m.material.TextureDirty() {
+		m.uvBuffer.update(m.material.generateUvBuffer(m.vertexBuffer.vertexCount()))
+		m.material.SetTextureDirty(false)
+	}
+
+	return m.uvBuffer
 }
