@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/go-gl/mathgl/mgl32"
 	three "github.com/tobscher/go-three"
 	"log"
 )
@@ -22,8 +21,7 @@ func main() {
 
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
-	camera.Position = mgl32.Vec3{4.0, 3.0, 4.0}
-	camera.LookAt(mgl32.Vec3{0.0, 0.0, 0.0})
+	camera.SetPosition(4.0, 3.0, 4.0)
 
 	box := three.NewCubeGeometry(1)
 	blue := three.NewMeshBasicMaterial().
