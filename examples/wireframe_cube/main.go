@@ -22,11 +22,12 @@ func main() {
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
 	camera.SetPosition(4.0, 3.0, 4.0)
+	camera.LookAt(0, 0, 0)
 
 	box := three.NewCubeGeometry(1)
-	blue := three.NewMeshBasicMaterial().
-		SetColor(&three.Color{0.0, 0.0, 1.0}).
-		SetWireframe(true)
+	blue := three.NewMeshBasicMaterial()
+	blue.SetColor(&three.Color{0.0, 0.0, 1.0})
+	blue.SetWireframe(true)
 
 	mesh := three.NewMesh(box, blue)
 

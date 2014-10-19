@@ -65,7 +65,7 @@ func (r *Renderer) SetSize(width, height int) {
 	r.Height = height
 }
 
-func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
+func (r *Renderer) Render(scene scene, camera perspectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
@@ -74,8 +74,8 @@ func (r *Renderer) Render(scene scene, camera persepectiveCamera) {
 		program := element.material.Program(element)
 		program.use()
 
-		projection := camera.projectionMatrix
 		view := camera.viewMatrix
+		projection := camera.projectionMatrix
 		MVP := projection.Mul4(view).Mul4(element.ModelMatrix())
 
 		// Set model view projection matrix
