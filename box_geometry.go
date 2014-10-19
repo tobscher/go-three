@@ -39,10 +39,10 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 
 	// Side 1
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
 	)...)
 
 	// Side 2
@@ -55,10 +55,10 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 
 	// // Side 3
 	bufferData = append(bufferData, buildPlane(
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
 	)...)
 
 	// // Side 4

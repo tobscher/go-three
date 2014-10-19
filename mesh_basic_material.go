@@ -89,26 +89,15 @@ func (m *meshBasicMaterial) generateUvBuffer(vertexCount int) []float32 {
 	bufferData := make([]float32, 0, vertexCount*2)
 	for i := 0; i < 6; i++ {
 		bufferData = append(bufferData,
-			1, 0,
-			0, 1,
 			1, 1,
-
-			1, 0,
 			0, 0,
+			1, 0,
+
+			1, 1,
 			0, 1,
+			0, 0,
 		)
 	}
-
-	// bufferData := []float32{
-	// 	// Visible
-	// 	1, 0, // bottom right
-	// 	0, 1, // top left
-	// 	1, 1, // top right
-
-	// 	1, 0, // bottom right
-	// 	0, 0, // bottom left
-	// 	0, 1, // top left
-	// }
 
 	// Invert V because we're using a compressed texture
 	for i := 1; i < len(bufferData); i += 2 {
