@@ -36,6 +36,8 @@ func main() {
 	scene.Add(&mesh)
 
 	for !renderer.ShouldClose() {
+		mesh.RotateX(0.01)
+		mesh.RotateY(0.02)
 		renderer.Render(scene, camera)
 	}
 
