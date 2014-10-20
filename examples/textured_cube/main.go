@@ -1,8 +1,9 @@
 package main
 
 import (
-	three "github.com/tobscher/go-three"
 	"log"
+
+	three "github.com/tobscher/go-three"
 )
 
 const (
@@ -36,8 +37,8 @@ func main() {
 	scene.Add(&mesh)
 
 	for !renderer.ShouldClose() {
-		mesh.RotateX(0.01)
-		mesh.RotateY(0.02)
+		mesh.Transform.RotateX(0.01)
+		mesh.Transform.RotateY(0.02)
 		renderer.Render(scene, camera)
 	}
 

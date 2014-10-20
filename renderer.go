@@ -76,7 +76,7 @@ func (r *Renderer) Render(scene scene, camera perspectiveCamera) {
 
 		view := camera.viewMatrix
 		projection := camera.projectionMatrix
-		MVP := projection.Mul4(view).Mul4(element.ModelMatrix())
+		MVP := projection.Mul4(view).Mul4(element.Transform.ModelMatrix())
 
 		// Set model view projection matrix
 		program.MatrixID().UniformMatrix4fv(false, MVP)

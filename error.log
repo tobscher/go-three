@@ -1,0 +1,1770 @@
+-- Installing eatmydata and pcregrep
+08:18:38.264205317
+--   sudo apt-get install eatmydata pcregrep
+08:18:38.267969404
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  eatmydata pcregrep
+0 upgraded, 2 newly installed, 0 to remove and 164 not upgraded.
+Need to get 32.2 kB of archives.
+After this operation, 147 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu/ precise/universe eatmydata i386 26-2 [7,782 B]
+Get:2 http://us.archive.ubuntu.com/ubuntu/ precise/universe pcregrep i386 8.12-4 [24.4 kB]
+Fetched 32.2 kB in 0s (34.4 kB/s)
+Selecting previously unselected package eatmydata.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 32796 files and directories currently installed.)
+Unpacking eatmydata (from .../eatmydata_26-2_i386.deb) ...
+Selecting previously unselected package pcregrep.
+Unpacking pcregrep (from .../pcregrep_8.12-4_i386.deb) ...
+Processing triggers for man-db ...
+Setting up eatmydata (26-2) ...
+Setting up pcregrep (8.12-4) ...
+-- apt-get update -qq
+08:18:41.273361761
+--   sudo eatmydata apt-get update -qq
+08:18:41.277234248
+-- Installing dependencies
+08:18:53.658275478
+--   sudo eatmydata apt-get install -qq xorg-dev libglu1-mesa-dev
+08:18:54.508388037
+Extracting templates from packages: 24%Extracting templates from packages: 48%Extracting templates from packages: 72%Extracting templates from packages: 96%Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 32810 files and directories currently installed.)
+Preparing to replace libdrm2 2.4.32-1ubuntu1 (using .../libdrm2_2.4.52-1~precise1_i386.deb) ...
+Unpacking replacement libdrm2 ...
+Preparing to replace libpciaccess0 0.12.902-1 (using .../libpciaccess0_0.12.902-1ubuntu0.2_i386.deb) ...
+Unpacking replacement libpciaccess0 ...
+Preparing to replace libdrm-intel1 2.4.32-1ubuntu1 (using .../libdrm-intel1_2.4.52-1~precise1_i386.deb) ...
+Unpacking replacement libdrm-intel1 ...
+Preparing to replace libdrm-nouveau1a 2.4.32-1ubuntu1 (using .../libdrm-nouveau1a_2.4.52-1~precise1_i386.deb) ...
+Unpacking replacement libdrm-nouveau1a ...
+Preparing to replace libdrm-radeon1 2.4.32-1ubuntu1 (using .../libdrm-radeon1_2.4.52-1~precise1_i386.deb) ...
+Unpacking replacement libdrm-radeon1 ...
+Preparing to replace libxcb1 1.8.1-1 (using .../libxcb1_1.8.1-1ubuntu0.2_i386.deb) ...
+Unpacking replacement libxcb1 ...
+Preparing to replace libx11-6 2:1.4.99.1-0ubuntu2 (using .../libx11-6_2%3a1.4.99.1-0ubuntu2.2_i386.deb) ...
+Unpacking replacement libx11-6 ...
+Preparing to replace libxext6 2:1.3.0-3build1 (using .../libxext6_2%3a1.3.0-3ubuntu0.1_i386.deb) ...
+Unpacking replacement libxext6 ...
+Selecting previously unselected package libdrm-nouveau2.
+Unpacking libdrm-nouveau2 (from .../libdrm-nouveau2_2.4.52-1~precise1_i386.deb) ...
+Preparing to replace libexpat1 2.0.1-7.2ubuntu1 (using .../libexpat1_2.0.1-7.2ubuntu1.1_i386.deb) ...
+Unpacking replacement libexpat1 ...
+Preparing to replace libfreetype6 2.4.8-1ubuntu2 (using .../libfreetype6_2.4.8-1ubuntu2.1_i386.deb) ...
+Unpacking replacement libfreetype6 ...
+Selecting previously unselected package ttf-dejavu-core.
+Unpacking ttf-dejavu-core (from .../ttf-dejavu-core_2.33-2ubuntu1_all.deb) ...
+Selecting previously unselected package fontconfig-config.
+Unpacking fontconfig-config (from .../fontconfig-config_2.8.0-3ubuntu9.1_all.deb) ...
+Selecting previously unselected package libfontconfig1.
+Unpacking libfontconfig1 (from .../libfontconfig1_2.8.0-3ubuntu9.1_i386.deb) ...
+Selecting previously unselected package libglapi-mesa.
+Unpacking libglapi-mesa (from .../libglapi-mesa_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package libx11-xcb1.
+Unpacking libx11-xcb1 (from .../libx11-xcb1_2%3a1.4.99.1-0ubuntu2.2_i386.deb) ...
+Selecting previously unselected package libxcb-glx0.
+Unpacking libxcb-glx0 (from .../libxcb-glx0_1.8.1-1ubuntu0.2_i386.deb) ...
+Selecting previously unselected package libxdamage1.
+Unpacking libxdamage1 (from .../libxdamage1_1%3a1.1.3-2build1_i386.deb) ...
+Selecting previously unselected package libxfixes3.
+Unpacking libxfixes3 (from .../libxfixes3_1%3a5.0-4ubuntu4.2_i386.deb) ...
+Selecting previously unselected package libxxf86vm1.
+Unpacking libxxf86vm1 (from .../libxxf86vm1_1%3a1.1.1-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libgl1-mesa-glx.
+Unpacking libgl1-mesa-glx (from .../libgl1-mesa-glx_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package x11-common.
+Unpacking x11-common (from .../x11-common_1%3a7.6+12ubuntu2_all.deb) ...
+Selecting previously unselected package libice6.
+Unpacking libice6 (from .../libice6_2%3a1.0.7-2build1_i386.deb) ...
+Selecting previously unselected package libllvm3.0.
+Unpacking libllvm3.0 (from .../libllvm3.0_3.0-4ubuntu1_i386.deb) ...
+Selecting previously unselected package libpixman-1-0.
+Unpacking libpixman-1-0 (from .../libpixman-1-0_0.30.2-1ubuntu0.0.0.0.1_i386.deb) ...
+Selecting previously unselected package libsm6.
+Unpacking libsm6 (from .../libsm6_2%3a1.2.0-2build1_i386.deb) ...
+Selecting previously unselected package libxt6.
+Unpacking libxt6 (from .../libxt6_1%3a1.1.1-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxmu6.
+Unpacking libxmu6 (from .../libxmu6_2%3a1.1.0-3_i386.deb) ...
+Selecting previously unselected package libxpm4.
+Unpacking libxpm4 (from .../libxpm4_1%3a3.5.9-4_i386.deb) ...
+Selecting previously unselected package libxaw7.
+Unpacking libxaw7 (from .../libxaw7_2%3a1.0.9-3ubuntu1_i386.deb) ...
+Selecting previously unselected package libxcomposite1.
+Unpacking libxcomposite1 (from .../libxcomposite1_1%3a0.4.3-2build1_i386.deb) ...
+Selecting previously unselected package libxrender1.
+Unpacking libxrender1 (from .../libxrender1_1%3a0.9.6-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxcursor1.
+Unpacking libxcursor1 (from .../libxcursor1_1%3a1.1.12-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxft2.
+Unpacking libxft2 (from .../libxft2_2.2.0-3ubuntu2_i386.deb) ...
+Selecting previously unselected package libxi6.
+Unpacking libxi6 (from .../libxi6_2%3a1.7.1.901-1ubuntu1~precise1_i386.deb) ...
+Selecting previously unselected package libxinerama1.
+Unpacking libxinerama1 (from .../libxinerama1_2%3a1.1.1-3ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxkbfile1.
+Unpacking libxkbfile1 (from .../libxkbfile1_1%3a1.0.7-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxrandr2.
+Unpacking libxrandr2 (from .../libxrandr2_2%3a1.3.2-2ubuntu0.2_i386.deb) ...
+Selecting previously unselected package libxres1.
+Unpacking libxres1 (from .../libxres1_2%3a1.0.5-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package xorg-sgml-doctools.
+Unpacking xorg-sgml-doctools (from .../xorg-sgml-doctools_1%3a1.10-1_all.deb) ...
+Selecting previously unselected package x11proto-core-dev.
+Unpacking x11proto-core-dev (from .../x11proto-core-dev_7.0.22-1ubuntu0.1_all.deb) ...
+Selecting previously unselected package libxau-dev.
+Unpacking libxau-dev (from .../libxau-dev_1%3a1.0.6-4_i386.deb) ...
+Selecting previously unselected package libxdmcp-dev.
+Unpacking libxdmcp-dev (from .../libxdmcp-dev_1%3a1.1.0-4_i386.deb) ...
+Selecting previously unselected package x11proto-input-dev.
+Unpacking x11proto-input-dev (from .../x11proto-input-dev_2.3-1~precise1_all.deb) ...
+Selecting previously unselected package x11proto-kb-dev.
+Unpacking x11proto-kb-dev (from .../x11proto-kb-dev_1.0.5-2_all.deb) ...
+Selecting previously unselected package xtrans-dev.
+Unpacking xtrans-dev (from .../xtrans-dev_1.2.6-2_all.deb) ...
+Selecting previously unselected package libpthread-stubs0.
+Unpacking libpthread-stubs0 (from .../libpthread-stubs0_0.3-3_i386.deb) ...
+Selecting previously unselected package libpthread-stubs0-dev.
+Unpacking libpthread-stubs0-dev (from .../libpthread-stubs0-dev_0.3-3_i386.deb) ...
+Selecting previously unselected package libxcb1-dev.
+Unpacking libxcb1-dev (from .../libxcb1-dev_1.8.1-1ubuntu0.2_i386.deb) ...
+Selecting previously unselected package libx11-dev.
+Unpacking libx11-dev (from .../libx11-dev_2%3a1.4.99.1-0ubuntu2.2_i386.deb) ...
+Selecting previously unselected package x11proto-xext-dev.
+Unpacking x11proto-xext-dev (from .../x11proto-xext-dev_7.3.0-1~precise1_all.deb) ...
+Selecting previously unselected package libxext-dev.
+Unpacking libxext-dev (from .../libxext-dev_2%3a1.3.0-3ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-resource-dev.
+Unpacking x11proto-resource-dev (from .../x11proto-resource-dev_1.2.0-3_all.deb) ...
+Processing triggers for man-db ...
+Processing triggers for ureadahead ...
+ureadahead will be reprofiled on next reboot
+Setting up x11-common (1:7.6+12ubuntu2) ...
+Selecting previously unselected package libxres-dev.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 33380 files and directories currently installed.)
+Unpacking libxres-dev (from .../libxres-dev_2%3a1.0.5-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxss1.
+Unpacking libxss1 (from .../libxss1_1%3a1.2.1-2_i386.deb) ...
+Selecting previously unselected package libxtst6.
+Unpacking libxtst6 (from .../libxtst6_2%3a1.2.0-4ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxv1.
+Unpacking libxv1 (from .../libxv1_2%3a1.0.6-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libglu1-mesa.
+Unpacking libglu1-mesa (from .../libglu1-mesa_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package libdmx1.
+Unpacking libdmx1 (from .../libdmx1_1%3a1.1.1-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-dmx-dev.
+Unpacking x11proto-dmx-dev (from .../x11proto-dmx-dev_1%3a2.3.1-2_all.deb) ...
+Selecting previously unselected package libdmx-dev.
+Unpacking libdmx-dev (from .../libdmx-dev_1%3a1.1.1-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libdrm-dev.
+Unpacking libdrm-dev (from .../libdrm-dev_2.4.52-1~precise1_i386.deb) ...
+Selecting previously unselected package libexpat1-dev.
+Unpacking libexpat1-dev (from .../libexpat1-dev_2.0.1-7.2ubuntu1.1_i386.deb) ...
+Selecting previously unselected package libfreetype6-dev.
+Unpacking libfreetype6-dev (from .../libfreetype6-dev_2.4.8-1ubuntu2.1_i386.deb) ...
+Selecting previously unselected package pkg-config.
+Unpacking pkg-config (from .../pkg-config_0.26-1ubuntu1_i386.deb) ...
+Selecting previously unselected package libfontconfig1-dev.
+Unpacking libfontconfig1-dev (from .../libfontconfig1-dev_2.8.0-3ubuntu9.1_i386.deb) ...
+Selecting previously unselected package libfontenc1.
+Unpacking libfontenc1 (from .../libfontenc1_1%3a1.1.0-1_i386.deb) ...
+Selecting previously unselected package libfontenc-dev.
+Unpacking libfontenc-dev (from .../libfontenc-dev_1%3a1.1.0-1_i386.deb) ...
+Selecting previously unselected package libfs6.
+Unpacking libfs6 (from .../libfs6_2%3a1.0.3-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-fonts-dev.
+Unpacking x11proto-fonts-dev (from .../x11proto-fonts-dev_2.1.1-3_all.deb) ...
+Selecting previously unselected package libfs-dev.
+Unpacking libfs-dev (from .../libfs-dev_2%3a1.0.3-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libgl1-mesa-dri.
+Unpacking libgl1-mesa-dri (from .../libgl1-mesa-dri_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package mesa-common-dev.
+Unpacking mesa-common-dev (from .../mesa-common-dev_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package libgl1-mesa-dev.
+Unpacking libgl1-mesa-dev (from .../libgl1-mesa-dev_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package libglu1-mesa-dev.
+Unpacking libglu1-mesa-dev (from .../libglu1-mesa-dev_8.0.4-0ubuntu0.7_i386.deb) ...
+Selecting previously unselected package libice-dev.
+Unpacking libice-dev (from .../libice-dev_2%3a1.0.7-2build1_i386.deb) ...
+Selecting previously unselected package libpixman-1-dev.
+Unpacking libpixman-1-dev (from .../libpixman-1-dev_0.30.2-1ubuntu0.0.0.0.1_i386.deb) ...
+Selecting previously unselected package libsm-dev.
+Unpacking libsm-dev (from .../libsm-dev_2%3a1.2.0-2build1_i386.deb) ...
+Selecting previously unselected package libx11-doc.
+Unpacking libx11-doc (from .../libx11-doc_2%3a1.4.99.1-0ubuntu2.2_all.deb) ...
+Selecting previously unselected package libxt-dev.
+Unpacking libxt-dev (from .../libxt-dev_1%3a1.1.1-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxmu-headers.
+Unpacking libxmu-headers (from .../libxmu-headers_2%3a1.1.0-3_all.deb) ...
+Selecting previously unselected package libxmu-dev.
+Unpacking libxmu-dev (from .../libxmu-dev_2%3a1.1.0-3_i386.deb) ...
+Selecting previously unselected package libxpm-dev.
+Unpacking libxpm-dev (from .../libxpm-dev_1%3a3.5.9-4_i386.deb) ...
+Selecting previously unselected package libxaw7-dev.
+Unpacking libxaw7-dev (from .../libxaw7-dev_2%3a1.0.9-3ubuntu1_i386.deb) ...
+Selecting previously unselected package x11proto-fixes-dev.
+Unpacking x11proto-fixes-dev (from .../x11proto-fixes-dev_1%3a5.0-2ubuntu1_all.deb) ...
+Selecting previously unselected package libxfixes-dev.
+Unpacking libxfixes-dev (from .../libxfixes-dev_1%3a5.0-4ubuntu4.2_i386.deb) ...
+Selecting previously unselected package x11proto-composite-dev.
+Unpacking x11proto-composite-dev (from .../x11proto-composite-dev_1%3a0.4.2-2_all.deb) ...
+Selecting previously unselected package libxcomposite-dev.
+Unpacking libxcomposite-dev (from .../libxcomposite-dev_1%3a0.4.3-2build1_i386.deb) ...
+Selecting previously unselected package x11proto-render-dev.
+Unpacking x11proto-render-dev (from .../x11proto-render-dev_2%3a0.11.1-2_all.deb) ...
+Selecting previously unselected package libxrender-dev.
+Unpacking libxrender-dev (from .../libxrender-dev_1%3a0.9.6-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxcursor-dev.
+Unpacking libxcursor-dev (from .../libxcursor-dev_1%3a1.1.12-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-damage-dev.
+Unpacking x11proto-damage-dev (from .../x11proto-damage-dev_1%3a1.2.1-2_all.deb) ...
+Selecting previously unselected package libxdamage-dev.
+Unpacking libxdamage-dev (from .../libxdamage-dev_1%3a1.1.3-2build1_i386.deb) ...
+Selecting previously unselected package libxfont1.
+Unpacking libxfont1 (from .../libxfont1_1%3a1.4.4-1ubuntu0.2_i386.deb) ...
+Selecting previously unselected package libxfont-dev.
+Unpacking libxfont-dev (from .../libxfont-dev_1%3a1.4.4-1ubuntu0.2_i386.deb) ...
+Selecting previously unselected package libxft-dev.
+Unpacking libxft-dev (from .../libxft-dev_2.2.0-3ubuntu2_i386.deb) ...
+Selecting previously unselected package libxi-dev.
+Unpacking libxi-dev (from .../libxi-dev_2%3a1.7.1.901-1ubuntu1~precise1_i386.deb) ...
+Selecting previously unselected package x11proto-xinerama-dev.
+Unpacking x11proto-xinerama-dev (from .../x11proto-xinerama-dev_1.2.1-2_all.deb) ...
+Selecting previously unselected package libxinerama-dev.
+Unpacking libxinerama-dev (from .../libxinerama-dev_2%3a1.1.1-3ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxkbfile-dev.
+Unpacking libxkbfile-dev (from .../libxkbfile-dev_1%3a1.0.7-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxmuu-dev.
+Unpacking libxmuu-dev (from .../libxmuu-dev_2%3a1.1.0-3_i386.deb) ...
+Selecting previously unselected package x11proto-randr-dev.
+Unpacking x11proto-randr-dev (from .../x11proto-randr-dev_1.4.0+git20120101.is.really.1.4.0-0ubuntu1~precise2_all.deb) ...
+Selecting previously unselected package libxrandr-dev.
+Unpacking libxrandr-dev (from .../libxrandr-dev_2%3a1.3.2-2ubuntu0.2_i386.deb) ...
+Selecting previously unselected package x11proto-scrnsaver-dev.
+Unpacking x11proto-scrnsaver-dev (from .../x11proto-scrnsaver-dev_1.2.1-2_all.deb) ...
+Selecting previously unselected package libxss-dev.
+Unpacking libxss-dev (from .../libxss-dev_1%3a1.2.1-2_i386.deb) ...
+Selecting previously unselected package x11proto-record-dev.
+Unpacking x11proto-record-dev (from .../x11proto-record-dev_1.14.1-2_all.deb) ...
+Selecting previously unselected package libxtst-dev.
+Unpacking libxtst-dev (from .../libxtst-dev_2%3a1.2.0-4ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-video-dev.
+Unpacking x11proto-video-dev (from .../x11proto-video-dev_2.3.1-2_all.deb) ...
+Selecting previously unselected package libxv-dev.
+Unpacking libxv-dev (from .../libxv-dev_2%3a1.0.6-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package libxvmc1.
+Unpacking libxvmc1 (from .../libxvmc1_2%3a1.0.6-1ubuntu2.1_i386.deb) ...
+Selecting previously unselected package libxvmc-dev.
+Unpacking libxvmc-dev (from .../libxvmc-dev_2%3a1.0.6-1ubuntu2.1_i386.deb) ...
+Selecting previously unselected package libxxf86dga1.
+Unpacking libxxf86dga1 (from .../libxxf86dga1_2%3a1.1.2-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-xf86dga-dev.
+Unpacking x11proto-xf86dga-dev (from .../x11proto-xf86dga-dev_2.1-3_all.deb) ...
+Selecting previously unselected package libxxf86dga-dev.
+Unpacking libxxf86dga-dev (from .../libxxf86dga-dev_2%3a1.1.2-1ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-xf86vidmode-dev.
+Unpacking x11proto-xf86vidmode-dev (from .../x11proto-xf86vidmode-dev_2.3.1-2_all.deb) ...
+Selecting previously unselected package libxxf86vm-dev.
+Unpacking libxxf86vm-dev (from .../libxxf86vm-dev_1%3a1.1.1-2ubuntu0.1_i386.deb) ...
+Selecting previously unselected package x11proto-bigreqs-dev.
+Unpacking x11proto-bigreqs-dev (from .../x11proto-bigreqs-dev_1%3a1.1.1-2_all.deb) ...
+Selecting previously unselected package x11proto-dri2-dev.
+Unpacking x11proto-dri2-dev (from .../x11proto-dri2-dev_2.8-1~precise2_all.deb) ...
+Selecting previously unselected package x11proto-gl-dev.
+Unpacking x11proto-gl-dev (from .../x11proto-gl-dev_1.4.17-1~precise1_all.deb) ...
+Selecting previously unselected package x11proto-xcmisc-dev.
+Unpacking x11proto-xcmisc-dev (from .../x11proto-xcmisc-dev_1.2.1-2_all.deb) ...
+Selecting previously unselected package x11proto-xf86bigfont-dev.
+Unpacking x11proto-xf86bigfont-dev (from .../x11proto-xf86bigfont-dev_1.2.0-3_all.deb) ...
+Selecting previously unselected package x11proto-xf86dri-dev.
+Unpacking x11proto-xf86dri-dev (from .../x11proto-xf86dri-dev_2.1.1-2_all.deb) ...
+Selecting previously unselected package libpciaccess-dev.
+Unpacking libpciaccess-dev (from .../libpciaccess-dev_0.12.902-1ubuntu0.2_i386.deb) ...
+Selecting previously unselected package xserver-xorg-dev.
+Unpacking xserver-xorg-dev (from .../xserver-xorg-dev_2%3a1.11.4-0ubuntu10.14_i386.deb) ...
+Selecting previously unselected package xorg-dev.
+Unpacking xorg-dev (from .../xorg-dev_1%3a7.6+12ubuntu2_all.deb) ...
+Processing triggers for man-db ...
+Setting up libdrm2 (2.4.52-1~precise1) ...
+Setting up libpciaccess0 (0.12.902-1ubuntu0.2) ...
+Setting up libdrm-intel1 (2.4.52-1~precise1) ...
+Setting up libdrm-nouveau1a (2.4.52-1~precise1) ...
+Setting up libdrm-radeon1 (2.4.52-1~precise1) ...
+Setting up libxcb1 (1.8.1-1ubuntu0.2) ...
+Setting up libx11-6 (2:1.4.99.1-0ubuntu2.2) ...
+Setting up libxext6 (2:1.3.0-3ubuntu0.1) ...
+Setting up libdrm-nouveau2 (2.4.52-1~precise1) ...
+Setting up libexpat1 (2.0.1-7.2ubuntu1.1) ...
+Setting up libfreetype6 (2.4.8-1ubuntu2.1) ...
+Setting up ttf-dejavu-core (2.33-2ubuntu1) ...
+Setting up fontconfig-config (2.8.0-3ubuntu9.1) ...
+Setting up libfontconfig1 (2.8.0-3ubuntu9.1) ...
+Setting up libglapi-mesa (8.0.4-0ubuntu0.7) ...
+Setting up libx11-xcb1 (2:1.4.99.1-0ubuntu2.2) ...
+Setting up libxcb-glx0 (1.8.1-1ubuntu0.2) ...
+Setting up libxdamage1 (1:1.1.3-2build1) ...
+Setting up libxfixes3 (1:5.0-4ubuntu4.2) ...
+Setting up libxxf86vm1 (1:1.1.1-2ubuntu0.1) ...
+Setting up libgl1-mesa-glx (8.0.4-0ubuntu0.7) ...
+update-alternatives: using /usr/lib/i386-linux-gnu/mesa/ld.so.conf to provide /etc/ld.so.conf.d/i386-linux-gnu_GL.conf (i386-linux-gnu_gl_conf) in auto mode.
+Setting up libice6 (2:1.0.7-2build1) ...
+Setting up libllvm3.0 (3.0-4ubuntu1) ...
+Setting up libpixman-1-0 (0.30.2-1ubuntu0.0.0.0.1) ...
+Setting up libsm6 (2:1.2.0-2build1) ...
+Setting up libxt6 (1:1.1.1-2ubuntu0.1) ...
+Setting up libxmu6 (2:1.1.0-3) ...
+Setting up libxpm4 (1:3.5.9-4) ...
+Setting up libxaw7 (2:1.0.9-3ubuntu1) ...
+Setting up libxcomposite1 (1:0.4.3-2build1) ...
+Setting up libxrender1 (1:0.9.6-2ubuntu0.1) ...
+Setting up libxcursor1 (1:1.1.12-1ubuntu0.1) ...
+Setting up libxft2 (2.2.0-3ubuntu2) ...
+Setting up libxi6 (2:1.7.1.901-1ubuntu1~precise1) ...
+Setting up libxinerama1 (2:1.1.1-3ubuntu0.1) ...
+Setting up libxkbfile1 (1:1.0.7-1ubuntu0.1) ...
+Setting up libxrandr2 (2:1.3.2-2ubuntu0.2) ...
+Setting up libxres1 (2:1.0.5-1ubuntu0.1) ...
+Setting up xorg-sgml-doctools (1:1.10-1) ...
+Setting up x11proto-core-dev (7.0.22-1ubuntu0.1) ...
+Setting up libxau-dev (1:1.0.6-4) ...
+Setting up libxdmcp-dev (1:1.1.0-4) ...
+Setting up x11proto-input-dev (2.3-1~precise1) ...
+Setting up x11proto-kb-dev (1.0.5-2) ...
+Setting up xtrans-dev (1.2.6-2) ...
+Setting up libpthread-stubs0 (0.3-3) ...
+Setting up libpthread-stubs0-dev (0.3-3) ...
+Setting up libxcb1-dev (1.8.1-1ubuntu0.2) ...
+Setting up libx11-dev (2:1.4.99.1-0ubuntu2.2) ...
+Setting up x11proto-xext-dev (7.3.0-1~precise1) ...
+Setting up libxext-dev (2:1.3.0-3ubuntu0.1) ...
+Setting up x11proto-resource-dev (1.2.0-3) ...
+Setting up libxres-dev (2:1.0.5-1ubuntu0.1) ...
+Setting up libxss1 (1:1.2.1-2) ...
+Setting up libxtst6 (2:1.2.0-4ubuntu0.1) ...
+Setting up libxv1 (2:1.0.6-2ubuntu0.1) ...
+Setting up libglu1-mesa (8.0.4-0ubuntu0.7) ...
+Setting up libdmx1 (1:1.1.1-1ubuntu0.1) ...
+Setting up x11proto-dmx-dev (1:2.3.1-2) ...
+Setting up libdmx-dev (1:1.1.1-1ubuntu0.1) ...
+Setting up libdrm-dev (2.4.52-1~precise1) ...
+Setting up libexpat1-dev (2.0.1-7.2ubuntu1.1) ...
+Setting up libfreetype6-dev (2.4.8-1ubuntu2.1) ...
+Setting up pkg-config (0.26-1ubuntu1) ...
+Setting up libfontconfig1-dev (2.8.0-3ubuntu9.1) ...
+Setting up libfontenc1 (1:1.1.0-1) ...
+Setting up libfontenc-dev (1:1.1.0-1) ...
+Setting up libfs6 (2:1.0.3-1ubuntu0.1) ...
+Setting up x11proto-fonts-dev (2.1.1-3) ...
+Setting up libfs-dev (2:1.0.3-1ubuntu0.1) ...
+Setting up libgl1-mesa-dri (8.0.4-0ubuntu0.7) ...
+Setting up mesa-common-dev (8.0.4-0ubuntu0.7) ...
+Setting up libgl1-mesa-dev (8.0.4-0ubuntu0.7) ...
+Setting up libglu1-mesa-dev (8.0.4-0ubuntu0.7) ...
+Setting up libice-dev (2:1.0.7-2build1) ...
+Setting up libpixman-1-dev (0.30.2-1ubuntu0.0.0.0.1) ...
+Setting up libsm-dev (2:1.2.0-2build1) ...
+Setting up libx11-doc (2:1.4.99.1-0ubuntu2.2) ...
+Setting up libxt-dev (1:1.1.1-2ubuntu0.1) ...
+Setting up libxmu-headers (2:1.1.0-3) ...
+Setting up libxmu-dev (2:1.1.0-3) ...
+Setting up libxpm-dev (1:3.5.9-4) ...
+Setting up libxaw7-dev (2:1.0.9-3ubuntu1) ...
+Setting up x11proto-fixes-dev (1:5.0-2ubuntu1) ...
+Setting up libxfixes-dev (1:5.0-4ubuntu4.2) ...
+Setting up x11proto-composite-dev (1:0.4.2-2) ...
+Setting up libxcomposite-dev (1:0.4.3-2build1) ...
+Setting up x11proto-render-dev (2:0.11.1-2) ...
+Setting up libxrender-dev (1:0.9.6-2ubuntu0.1) ...
+Setting up libxcursor-dev (1:1.1.12-1ubuntu0.1) ...
+Setting up x11proto-damage-dev (1:1.2.1-2) ...
+Setting up libxdamage-dev (1:1.1.3-2build1) ...
+Setting up libxfont1 (1:1.4.4-1ubuntu0.2) ...
+Setting up libxfont-dev (1:1.4.4-1ubuntu0.2) ...
+Setting up libxft-dev (2.2.0-3ubuntu2) ...
+Setting up libxi-dev (2:1.7.1.901-1ubuntu1~precise1) ...
+Setting up x11proto-xinerama-dev (1.2.1-2) ...
+Setting up libxinerama-dev (2:1.1.1-3ubuntu0.1) ...
+Setting up libxkbfile-dev (1:1.0.7-1ubuntu0.1) ...
+Setting up libxmuu-dev (2:1.1.0-3) ...
+Setting up x11proto-randr-dev (1.4.0+git20120101.is.really.1.4.0-0ubuntu1~precise2) ...
+Setting up libxrandr-dev (2:1.3.2-2ubuntu0.2) ...
+Setting up x11proto-scrnsaver-dev (1.2.1-2) ...
+Setting up libxss-dev (1:1.2.1-2) ...
+Setting up x11proto-record-dev (1.14.1-2) ...
+Setting up libxtst-dev (2:1.2.0-4ubuntu0.1) ...
+Setting up x11proto-video-dev (2.3.1-2) ...
+Setting up libxv-dev (2:1.0.6-2ubuntu0.1) ...
+Setting up libxvmc1 (2:1.0.6-1ubuntu2.1) ...
+Setting up libxvmc-dev (2:1.0.6-1ubuntu2.1) ...
+Setting up libxxf86dga1 (2:1.1.2-1ubuntu0.1) ...
+Setting up x11proto-xf86dga-dev (2.1-3) ...
+Setting up libxxf86dga-dev (2:1.1.2-1ubuntu0.1) ...
+Setting up x11proto-xf86vidmode-dev (2.3.1-2) ...
+Setting up libxxf86vm-dev (1:1.1.1-2ubuntu0.1) ...
+Setting up x11proto-bigreqs-dev (1:1.1.1-2) ...
+Setting up x11proto-dri2-dev (2.8-1~precise2) ...
+Setting up x11proto-gl-dev (1.4.17-1~precise1) ...
+Setting up x11proto-xcmisc-dev (1.2.1-2) ...
+Setting up x11proto-xf86bigfont-dev (1.2.0-3) ...
+Setting up x11proto-xf86dri-dev (2.1.1-2) ...
+Setting up libpciaccess-dev (0.12.902-1ubuntu0.2) ...
+Setting up xserver-xorg-dev (2:1.11.4-0ubuntu10.14) ...
+Setting up xorg-dev (1:7.6+12ubuntu2) ...
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place
+-- Install GLFW3
+08:21:17.820666086
+--   wget http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
+08:21:17.829807356
+--2014-10-16 08:21:17--  http://downloads.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
+Resolving downloads.sourceforge.net (downloads.sourceforge.net)... 216.34.181.59
+Connecting to downloads.sourceforge.net (downloads.sourceforge.net)|216.34.181.59|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://heanet.dl.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip [following]
+--2014-10-16 08:21:18--  http://heanet.dl.sourceforge.net/project/glfw/glfw/3.0.4/glfw-3.0.4.zip
+Resolving heanet.dl.sourceforge.net (heanet.dl.sourceforge.net)... 193.1.193.66, 2001:770:18:aa40::c101:c142
+Connecting to heanet.dl.sourceforge.net (heanet.dl.sourceforge.net)|193.1.193.66|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 856700 (837K) [application/octet-stream]
+Saving to: `glfw-3.0.4.zip'
+
+     0K .......... .......... .......... .......... ..........  5%  177K 4s
+    50K .......... .......... .......... .......... .......... 11% 1.09M 2s
+   100K .......... .......... .......... .......... .......... 17% 1.43M 2s
+   150K .......... .......... .......... .......... .......... 23%  438K 2s
+   200K .......... .......... .......... .......... .......... 29% 2.17M 1s
+   250K .......... .......... .......... .......... .......... 35% 2.12M 1s
+   300K .......... .......... .......... .......... .......... 41% 1.72M 1s
+   350K .......... .......... .......... .......... .......... 47% 2.32M 1s
+   400K .......... .......... .......... .......... .......... 53% 2.88M 1s
+   450K .......... .......... .......... .......... .......... 59%  568K 0s
+   500K .......... .......... .......... .......... .......... 65% 2.06M 0s
+   550K .......... .......... .......... .......... .......... 71% 2.08M 0s
+   600K .......... .......... .......... .......... .......... 77% 2.95M 0s
+   650K .......... .......... .......... .......... .......... 83% 2.42M 0s
+   700K .......... .......... .......... .......... .......... 89% 1.41M 0s
+   750K .......... .......... .......... .......... .......... 95% 3.54M 0s
+   800K .......... .......... .......... ......               100%  198K=1.0s
+
+2014-10-16 08:21:21 (843 KB/s) - `glfw-3.0.4.zip' saved [856700/856700]
+
+--   unzip glfw-3.0.4.zip
+08:21:21.161508521
+Archive:  glfw-3.0.4.zip
+   creating: glfw-3.0.4/
+  inflating: glfw-3.0.4/.gitignore   
+   creating: glfw-3.0.4/docs/
+  inflating: glfw-3.0.4/docs/compat.dox  
+  inflating: glfw-3.0.4/docs/moving.dox  
+  inflating: glfw-3.0.4/docs/window.dox  
+  inflating: glfw-3.0.4/docs/build.dox  
+   creating: glfw-3.0.4/docs/html/
+  inflating: glfw-3.0.4/docs/html/group__time.html  
+  inflating: glfw-3.0.4/docs/html/index.html  
+  inflating: glfw-3.0.4/docs/html/functions_vars.html  
+  inflating: glfw-3.0.4/docs/html/closed.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x68.html  
+  inflating: glfw-3.0.4/docs/html/structGLFWgammaramp.html  
+  inflating: glfw-3.0.4/docs/html/dir_ced77f9823b212f18d14b97d44f17dc6.html  
+  inflating: glfw-3.0.4/docs/html/doxygen.css  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x62.html  
+  inflating: glfw-3.0.4/docs/html/ftv2lastnode.png  
+ extracting: glfw-3.0.4/docs/html/ftv2plastnode.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x66.html  
+  inflating: glfw-3.0.4/docs/html/modules.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x74.html  
+  inflating: glfw-3.0.4/docs/html/dynsections.js  
+  inflating: glfw-3.0.4/docs/html/files.html  
+  inflating: glfw-3.0.4/docs/html/group__clipboard.html  
+ extracting: glfw-3.0.4/docs/html/ftv2mnode.png  
+  inflating: glfw-3.0.4/docs/html/pages.html  
+  inflating: glfw-3.0.4/docs/html/group__errors.html  
+  inflating: glfw-3.0.4/docs/html/monitor.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x6c.html  
+  inflating: glfw-3.0.4/docs/html/nav_g.png  
+ extracting: glfw-3.0.4/docs/html/ftv2mo.png  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x6a.html  
+  inflating: glfw-3.0.4/docs/html/ftv2splitbar.png  
+  inflating: glfw-3.0.4/docs/html/dir_2ed3966b92992331bf8a66a32e738cef.html  
+ extracting: glfw-3.0.4/docs/html/sync_on.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x6a.html  
+  inflating: glfw-3.0.4/docs/html/build_8dox.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x63.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x77.html  
+ extracting: glfw-3.0.4/docs/html/nav_f.png  
+ extracting: glfw-3.0.4/docs/html/tab_h.png  
+  inflating: glfw-3.0.4/docs/html/quick.html  
+  inflating: glfw-3.0.4/docs/html/group__mods.html  
+  inflating: glfw-3.0.4/docs/html/build.html  
+  inflating: glfw-3.0.4/docs/html/group__context.html  
+  inflating: glfw-3.0.4/docs/html/bug.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x76.html  
+ extracting: glfw-3.0.4/docs/html/ftv2pnode.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x62.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x64.html  
+  inflating: glfw-3.0.4/docs/html/dir_85715018e387ccbec8815d3563c0262a.html  
+  inflating: glfw-3.0.4/docs/html/globals.html  
+  inflating: glfw-3.0.4/docs/html/group__error.html  
+ extracting: glfw-3.0.4/docs/html/ftv2doc.png  
+  inflating: glfw-3.0.4/docs/html/context_8dox.html  
+ extracting: glfw-3.0.4/docs/html/ftv2ns.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x70.html  
+  inflating: glfw-3.0.4/docs/html/classes.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x65.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x6e.html  
+  inflating: glfw-3.0.4/docs/html/news.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x72.html  
+  inflating: glfw-3.0.4/docs/html/globals_func.html  
+  inflating: glfw-3.0.4/docs/html/glfw3native_8h_source.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x76.html  
+ extracting: glfw-3.0.4/docs/html/doxygen.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x6d.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x69.html  
+  inflating: glfw-3.0.4/docs/html/ftv2blank.png  
+  inflating: glfw-3.0.4/docs/html/compile.html  
+ extracting: glfw-3.0.4/docs/html/tab_b.png  
+  inflating: glfw-3.0.4/docs/html/compat.html  
+ extracting: glfw-3.0.4/docs/html/tab_s.png  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x6e.html  
+  inflating: glfw-3.0.4/docs/html/globals_type.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x73.html  
+  inflating: glfw-3.0.4/docs/html/annotated.html  
+  inflating: glfw-3.0.4/docs/html/compile_8dox.html  
+  inflating: glfw-3.0.4/docs/html/open.png  
+  inflating: glfw-3.0.4/docs/html/group__input.html  
+  inflating: glfw-3.0.4/docs/html/compat_8dox.html  
+  inflating: glfw-3.0.4/docs/html/group__init.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x69.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x64.html  
+  inflating: glfw-3.0.4/docs/html/group__joysticks.html  
+  inflating: glfw-3.0.4/docs/html/group__buttons.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x6d.html  
+  inflating: glfw-3.0.4/docs/html/glfw3native_8h.html  
+  inflating: glfw-3.0.4/docs/html/monitor_8dox.html  
+ extracting: glfw-3.0.4/docs/html/ftv2link.png  
+  inflating: glfw-3.0.4/docs/html/window.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x70.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x72.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x6f.html  
+  inflating: glfw-3.0.4/docs/html/functions.html  
+  inflating: glfw-3.0.4/docs/html/tabs.css  
+  inflating: glfw-3.0.4/docs/html/ftv2node.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x6c.html  
+ extracting: glfw-3.0.4/docs/html/ftv2folderclosed.png  
+  inflating: glfw-3.0.4/docs/html/news_8dox.html  
+ extracting: glfw-3.0.4/docs/html/sync_off.png  
+  inflating: glfw-3.0.4/docs/html/moving_8dox.html  
+  inflating: glfw-3.0.4/docs/html/moving.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x66.html  
+  inflating: glfw-3.0.4/docs/html/group__keys.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x6b.html  
+ extracting: glfw-3.0.4/docs/html/ftv2cl.png  
+ extracting: glfw-3.0.4/docs/html/ftv2mlastnode.png  
+ extracting: glfw-3.0.4/docs/html/tab_a.png  
+  inflating: glfw-3.0.4/docs/html/context.html  
+  inflating: glfw-3.0.4/docs/html/group__monitor.html  
+ extracting: glfw-3.0.4/docs/html/ftv2folderopen.png  
+  inflating: glfw-3.0.4/docs/html/ftv2vertline.png  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x73.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x6f.html  
+  inflating: glfw-3.0.4/docs/html/extra.css  
+  inflating: glfw-3.0.4/docs/html/window_8dox.html  
+  inflating: glfw-3.0.4/docs/html/globals_0x6b.html  
+  inflating: glfw-3.0.4/docs/html/quick_8dox.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x63.html  
+  inflating: glfw-3.0.4/docs/html/bdwn.png  
+  inflating: glfw-3.0.4/docs/html/main_8dox.html  
+  inflating: glfw-3.0.4/docs/html/glfw3_8h.html  
+   creating: glfw-3.0.4/docs/html/search/
+  inflating: glfw-3.0.4/docs/html/search/all_68.js  
+  inflating: glfw-3.0.4/docs/html/search/nomatches.html  
+  inflating: glfw-3.0.4/docs/html/search/defines_67.js  
+  inflating: glfw-3.0.4/docs/html/search/files_6d.js  
+  inflating: glfw-3.0.4/docs/html/search/pages_63.js  
+  inflating: glfw-3.0.4/docs/html/search/typedefs_67.js  
+  inflating: glfw-3.0.4/docs/html/search/pages_77.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_77.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_77.html  
+  inflating: glfw-3.0.4/docs/html/search/all_63.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_62.js  
+  inflating: glfw-3.0.4/docs/html/search/all_74.js  
+  inflating: glfw-3.0.4/docs/html/search/all_6b.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_6d.html  
+  inflating: glfw-3.0.4/docs/html/search/all_71.html  
+  inflating: glfw-3.0.4/docs/html/search/files_63.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_67.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_62.html  
+  inflating: glfw-3.0.4/docs/html/search/all_77.js  
+  inflating: glfw-3.0.4/docs/html/search/all_6e.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_63.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_6e.js  
+  inflating: glfw-3.0.4/docs/html/search/typedefs_67.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_6a.js  
+ extracting: glfw-3.0.4/docs/html/search/close.png  
+  inflating: glfw-3.0.4/docs/html/search/search.css  
+  inflating: glfw-3.0.4/docs/html/search/all_71.js  
+  inflating: glfw-3.0.4/docs/html/search/all_67.html  
+  inflating: glfw-3.0.4/docs/html/search/all_6a.js  
+ extracting: glfw-3.0.4/docs/html/search/mag_sel.png  
+  inflating: glfw-3.0.4/docs/html/search/pages_67.html  
+  inflating: glfw-3.0.4/docs/html/search/files_67.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_74.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_72.html  
+  inflating: glfw-3.0.4/docs/html/search/defines_67.html  
+  inflating: glfw-3.0.4/docs/html/search/files_71.html  
+  inflating: glfw-3.0.4/docs/html/search/search_m.png  
+  inflating: glfw-3.0.4/docs/html/search/all_62.js  
+  inflating: glfw-3.0.4/docs/html/search/all_77.html  
+  inflating: glfw-3.0.4/docs/html/search/all_62.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_73.js  
+  inflating: glfw-3.0.4/docs/html/search/variables_73.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_69.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_6d.js  
+  inflating: glfw-3.0.4/docs/html/search/all_6d.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_6b.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_77.js  
+  inflating: glfw-3.0.4/docs/html/search/all_65.html  
+  inflating: glfw-3.0.4/docs/html/search/files_77.js  
+  inflating: glfw-3.0.4/docs/html/search/pages_6e.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_63.js  
+  inflating: glfw-3.0.4/docs/html/search/all_68.html  
+  inflating: glfw-3.0.4/docs/html/search/files_67.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_68.js  
+  inflating: glfw-3.0.4/docs/html/search/all_63.js  
+  inflating: glfw-3.0.4/docs/html/search/variables_72.js  
+  inflating: glfw-3.0.4/docs/html/search/pages_73.js  
+  inflating: glfw-3.0.4/docs/html/search/functions_67.js  
+  inflating: glfw-3.0.4/docs/html/search/files_6e.js  
+  inflating: glfw-3.0.4/docs/html/search/all_69.js  
+  inflating: glfw-3.0.4/docs/html/search/files_63.js  
+  inflating: glfw-3.0.4/docs/html/search/all_67.js  
+  inflating: glfw-3.0.4/docs/html/search/classes_67.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_65.js  
+  inflating: glfw-3.0.4/docs/html/search/pages_77.js  
+  inflating: glfw-3.0.4/docs/html/search/files_6d.html  
+  inflating: glfw-3.0.4/docs/html/search/variables_62.html  
+  inflating: glfw-3.0.4/docs/html/search/files_77.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_6d.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_62.js  
+  inflating: glfw-3.0.4/docs/html/search/variables_67.js  
+  inflating: glfw-3.0.4/docs/html/search/all_6b.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_74.js  
+  inflating: glfw-3.0.4/docs/html/search/all_72.js  
+  inflating: glfw-3.0.4/docs/html/search/all_73.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_65.html  
+  inflating: glfw-3.0.4/docs/html/search/functions_67.html  
+  inflating: glfw-3.0.4/docs/html/search/files_6e.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_63.html  
+ extracting: glfw-3.0.4/docs/html/search/search_l.png  
+  inflating: glfw-3.0.4/docs/html/search/all_6d.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_6d.js  
+  inflating: glfw-3.0.4/docs/html/search/files_62.js  
+  inflating: glfw-3.0.4/docs/html/search/search.js  
+ extracting: glfw-3.0.4/docs/html/search/search_r.png  
+  inflating: glfw-3.0.4/docs/html/search/groups_69.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_6e.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_67.js  
+  inflating: glfw-3.0.4/docs/html/search/variables_68.html  
+  inflating: glfw-3.0.4/docs/html/search/groups_6e.js  
+  inflating: glfw-3.0.4/docs/html/search/all_6e.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_6b.js  
+  inflating: glfw-3.0.4/docs/html/search/files_71.js  
+  inflating: glfw-3.0.4/docs/html/search/classes_67.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_77.js  
+  inflating: glfw-3.0.4/docs/html/search/groups_6a.html  
+  inflating: glfw-3.0.4/docs/html/search/all_73.html  
+  inflating: glfw-3.0.4/docs/html/search/all_6a.html  
+  inflating: glfw-3.0.4/docs/html/search/files_62.html  
+  inflating: glfw-3.0.4/docs/html/search/all_72.html  
+  inflating: glfw-3.0.4/docs/html/search/all_69.html  
+  inflating: glfw-3.0.4/docs/html/search/all_74.html  
+  inflating: glfw-3.0.4/docs/html/search/pages_73.html  
+  inflating: glfw-3.0.4/docs/html/search/all_65.js  
+ extracting: glfw-3.0.4/docs/html/bc_s.png  
+  inflating: glfw-3.0.4/docs/html/globals_0x67.html  
+  inflating: glfw-3.0.4/docs/html/structGLFWvidmode.html  
+  inflating: glfw-3.0.4/docs/html/group__native.html  
+  inflating: glfw-3.0.4/docs/html/nav_h.png  
+  inflating: glfw-3.0.4/docs/html/jquery.js  
+  inflating: glfw-3.0.4/docs/html/glfw3_8h_source.html  
+  inflating: glfw-3.0.4/docs/html/group__window.html  
+  inflating: glfw-3.0.4/docs/html/globals_defs_0x67.html  
+  inflating: glfw-3.0.4/docs/footer.html  
+  inflating: glfw-3.0.4/docs/internal.dox  
+  inflating: glfw-3.0.4/docs/compile.dox  
+  inflating: glfw-3.0.4/docs/main.dox  
+  inflating: glfw-3.0.4/docs/CMakeLists.txt  
+  inflating: glfw-3.0.4/docs/news.dox  
+  inflating: glfw-3.0.4/docs/monitor.dox  
+  inflating: glfw-3.0.4/docs/quick.dox  
+  inflating: glfw-3.0.4/docs/Doxyfile.in  
+  inflating: glfw-3.0.4/docs/extra.css  
+  inflating: glfw-3.0.4/docs/header.html  
+  inflating: glfw-3.0.4/docs/context.dox  
+  inflating: glfw-3.0.4/cmake_uninstall.cmake.in  
+  inflating: glfw-3.0.4/CMakeLists.txt  
+   creating: glfw-3.0.4/CMake/
+  inflating: glfw-3.0.4/CMake/i586-mingw32msvc.cmake  
+  inflating: glfw-3.0.4/CMake/x86_64-w64-mingw32.cmake  
+   creating: glfw-3.0.4/CMake/modules/
+  inflating: glfw-3.0.4/CMake/modules/FindEGL.cmake  
+  inflating: glfw-3.0.4/CMake/modules/FindGLESv1.cmake  
+  inflating: glfw-3.0.4/CMake/modules/FindGLESv2.cmake  
+  inflating: glfw-3.0.4/CMake/amd64-mingw32msvc.cmake  
+  inflating: glfw-3.0.4/CMake/i686-w64-mingw32.cmake  
+  inflating: glfw-3.0.4/CMake/i686-pc-mingw32.cmake  
+   creating: glfw-3.0.4/tests/
+  inflating: glfw-3.0.4/tests/joysticks.c  
+  inflating: glfw-3.0.4/tests/gamma.c  
+  inflating: glfw-3.0.4/tests/sharing.c  
+  inflating: glfw-3.0.4/tests/events.c  
+  inflating: glfw-3.0.4/tests/glfwinfo.c  
+  inflating: glfw-3.0.4/tests/iconify.c  
+  inflating: glfw-3.0.4/tests/defaults.c  
+  inflating: glfw-3.0.4/tests/tearing.c  
+  inflating: glfw-3.0.4/tests/title.c  
+  inflating: glfw-3.0.4/tests/modes.c  
+  inflating: glfw-3.0.4/tests/CMakeLists.txt  
+  inflating: glfw-3.0.4/tests/clipboard.c  
+  inflating: glfw-3.0.4/tests/threads.c  
+  inflating: glfw-3.0.4/tests/windows.c  
+  inflating: glfw-3.0.4/tests/accuracy.c  
+  inflating: glfw-3.0.4/tests/reopen.c  
+  inflating: glfw-3.0.4/tests/peter.c  
+  inflating: glfw-3.0.4/tests/fsaa.c  
+   creating: glfw-3.0.4/examples/
+  inflating: glfw-3.0.4/examples/wave.c  
+  inflating: glfw-3.0.4/examples/heightmap.c  
+  inflating: glfw-3.0.4/examples/splitview.c  
+  inflating: glfw-3.0.4/examples/boing.c  
+  inflating: glfw-3.0.4/examples/CMakeLists.txt  
+  inflating: glfw-3.0.4/examples/simple.c  
+  inflating: glfw-3.0.4/examples/gears.c  
+   creating: glfw-3.0.4/deps/
+  inflating: glfw-3.0.4/deps/getopt.h  
+  inflating: glfw-3.0.4/deps/getopt.c  
+  inflating: glfw-3.0.4/deps/tinycthread.h  
+   creating: glfw-3.0.4/deps/GL/
+  inflating: glfw-3.0.4/deps/GL/glxext.h  
+  inflating: glfw-3.0.4/deps/GL/wglext.h  
+  inflating: glfw-3.0.4/deps/GL/glext.h  
+   creating: glfw-3.0.4/deps/EGL/
+  inflating: glfw-3.0.4/deps/EGL/eglext.h  
+  inflating: glfw-3.0.4/deps/tinycthread.c  
+  inflating: glfw-3.0.4/COPYING.txt  
+   creating: glfw-3.0.4/include/
+   creating: glfw-3.0.4/include/GLFW/
+  inflating: glfw-3.0.4/include/GLFW/glfw3native.h  
+  inflating: glfw-3.0.4/include/GLFW/glfw3.h  
+   creating: glfw-3.0.4/src/
+  inflating: glfw-3.0.4/src/cocoa_platform.h  
+  inflating: glfw-3.0.4/src/glx_platform.h  
+  inflating: glfw-3.0.4/src/x11_joystick.c  
+  inflating: glfw-3.0.4/src/x11_gamma.c  
+  inflating: glfw-3.0.4/src/x11_time.c  
+  inflating: glfw-3.0.4/src/win32_init.c  
+  inflating: glfw-3.0.4/src/win32_platform.h  
+  inflating: glfw-3.0.4/src/gamma.c  
+  inflating: glfw-3.0.4/src/egl_context.c  
+  inflating: glfw-3.0.4/src/win32_joystick.c  
+  inflating: glfw-3.0.4/src/context.c  
+  inflating: glfw-3.0.4/src/glfw_config.h.in  
+  inflating: glfw-3.0.4/src/glx_context.c  
+  inflating: glfw-3.0.4/src/joystick.c  
+  inflating: glfw-3.0.4/src/monitor.c  
+  inflating: glfw-3.0.4/src/wgl_platform.h  
+  inflating: glfw-3.0.4/src/win32_gamma.c  
+  inflating: glfw-3.0.4/src/init.c   
+  inflating: glfw-3.0.4/src/cocoa_joystick.m  
+  inflating: glfw-3.0.4/src/wgl_context.c  
+  inflating: glfw-3.0.4/src/x11_monitor.c  
+  inflating: glfw-3.0.4/src/win32_monitor.c  
+  inflating: glfw-3.0.4/src/glfw3.pc.in  
+  inflating: glfw-3.0.4/src/time.c   
+  inflating: glfw-3.0.4/src/x11_init.c  
+  inflating: glfw-3.0.4/src/CMakeLists.txt  
+  inflating: glfw-3.0.4/src/cocoa_init.m  
+  inflating: glfw-3.0.4/src/x11_window.c  
+  inflating: glfw-3.0.4/src/x11_platform.h  
+  inflating: glfw-3.0.4/src/clipboard.c  
+  inflating: glfw-3.0.4/src/win32_window.c  
+  inflating: glfw-3.0.4/src/egl_platform.h  
+  inflating: glfw-3.0.4/src/cocoa_window.m  
+  inflating: glfw-3.0.4/src/cocoa_clipboard.m  
+  inflating: glfw-3.0.4/src/nsgl_platform.h  
+  inflating: glfw-3.0.4/src/cocoa_time.c  
+  inflating: glfw-3.0.4/src/window.c  
+  inflating: glfw-3.0.4/src/cocoa_gamma.c  
+  inflating: glfw-3.0.4/src/internal.h  
+  inflating: glfw-3.0.4/src/x11_clipboard.c  
+  inflating: glfw-3.0.4/src/win32_time.c  
+  inflating: glfw-3.0.4/src/glfwConfigVersion.cmake.in  
+  inflating: glfw-3.0.4/src/glfwConfig.cmake.in  
+  inflating: glfw-3.0.4/src/input.c  
+  inflating: glfw-3.0.4/src/nsgl_context.m  
+  inflating: glfw-3.0.4/src/win32_clipboard.c  
+  inflating: glfw-3.0.4/src/cocoa_monitor.m  
+  inflating: glfw-3.0.4/src/x11_unicode.c  
+  inflating: glfw-3.0.4/README.md    
+-- Installing GLEW
+08:21:41.930691826
+--   wget http://downloads.sourceforge.net/project/glew/glew/1.11.0/glew-1.11.0.tgz
+08:21:41.937023524
+--2014-10-16 08:21:41--  http://downloads.sourceforge.net/project/glew/glew/1.11.0/glew-1.11.0.tgz
+Resolving downloads.sourceforge.net (downloads.sourceforge.net)... 216.34.181.59
+Connecting to downloads.sourceforge.net (downloads.sourceforge.net)|216.34.181.59|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://switch.dl.sourceforge.net/project/glew/glew/1.11.0/glew-1.11.0.tgz [following]
+--2014-10-16 08:21:42--  http://switch.dl.sourceforge.net/project/glew/glew/1.11.0/glew-1.11.0.tgz
+Resolving switch.dl.sourceforge.net (switch.dl.sourceforge.net)... 130.59.112.131
+Connecting to switch.dl.sourceforge.net (switch.dl.sourceforge.net)|130.59.112.131|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 601430 (587K) [application/octet-stream]
+Saving to: `glew-1.11.0.tgz'
+
+     0K .......... .......... .......... .......... ..........  8%  234K 2s
+    50K .......... .......... .......... .......... .......... 17% 1.45M 1s
+   100K .......... .......... .......... .......... .......... 25% 1.52M 1s
+   150K .......... .......... .......... .......... .......... 34% 1.51M 1s
+   200K .......... .......... .......... .......... .......... 42% 1.69M 0s
+   250K .......... .......... .......... .......... .......... 51% 2.06M 0s
+   300K .......... .......... .......... .......... .......... 59% 2.16M 0s
+   350K .......... .......... .......... .......... .......... 68% 2.27M 0s
+   400K .......... .......... .......... .......... .......... 76% 1.81M 0s
+   450K .......... .......... .......... .......... .......... 85% 2.61M 0s
+   500K .......... .......... .......... .......... .......... 93% 2.47M 0s
+   550K .......... .......... .......... .......              100%  210K=0.7s
+
+2014-10-16 08:21:44 (902 KB/s) - `glew-1.11.0.tgz' saved [601430/601430]
+
+--   tar -xvf glew-1.11.0.tgz
+08:21:44.542528837
+glew-1.11.0/
+glew-1.11.0/TODO.txt
+glew-1.11.0/auto/
+glew-1.11.0/auto/core/
+glew-1.11.0/auto/core/gl/
+glew-1.11.0/auto/core/gl/GLX_MESA_swap_control
+glew-1.11.0/auto/core/gl/GL_APPLE_texture_range
+glew-1.11.0/auto/core/gl/GL_VERSION_3_2
+glew-1.11.0/auto/core/gl/GLX_EXT_framebuffer_sRGB
+glew-1.11.0/auto/core/gl/GLX_VERSION_1_4
+glew-1.11.0/auto/core/gl/GL_ATI_separate_stencil
+glew-1.11.0/auto/core/gl/GL_EXT_timer_query
+glew-1.11.0/auto/core/gl/GL_EXT_texture_compression_latc
+glew-1.11.0/auto/core/gl/GL_ATI_vertex_streams
+glew-1.11.0/auto/core/gl/GLX_EXT_create_context_es_profile
+glew-1.11.0/auto/core/gl/GL_ATI_pn_triangles
+glew-1.11.0/auto/core/gl/GL_NV_geometry_program4
+glew-1.11.0/auto/core/gl/GL_VERSION_4_4
+glew-1.11.0/auto/core/gl/GL_ARB_draw_instanced
+glew-1.11.0/auto/core/gl/GL_EXT_draw_instanced
+glew-1.11.0/auto/core/gl/GLX_SUN_video_resize
+glew-1.11.0/auto/core/gl/GL_EXT_draw_range_elements
+glew-1.11.0/auto/core/gl/GL_VERSION_3_0
+glew-1.11.0/auto/core/gl/GL_EXT_texture_buffer_object
+glew-1.11.0/auto/core/gl/GL_NV_vertex_program3
+glew-1.11.0/auto/core/gl/GLX_VERSION_1_2
+glew-1.11.0/auto/core/gl/GLX_AMD_gpu_association
+glew-1.11.0/auto/core/gl/GL_NV_path_rendering
+glew-1.11.0/auto/core/gl/GLX_VERSION_1_3
+glew-1.11.0/auto/core/gl/GL_NV_fragment_program2
+glew-1.11.0/auto/core/gl/GL_ARB_matrix_palette
+glew-1.11.0/auto/core/gl/GL_ARB_multitexture
+glew-1.11.0/auto/core/gl/WGL_ARB_create_context
+glew-1.11.0/auto/core/gl/WGL_NV_gpu_affinity
+glew-1.11.0/auto/core/gl/GL_NV_vertex_program2_option
+glew-1.11.0/auto/core/gl/GL_EXT_texture_integer
+glew-1.11.0/auto/core/gl/GLX_NV_vertex_array_range
+glew-1.11.0/auto/core/gl/GL_NV_parameter_buffer_object
+glew-1.11.0/auto/core/gl/GL_EXT_pixel_buffer_object
+glew-1.11.0/auto/core/gl/GL_NVX_gpu_memory_info
+glew-1.11.0/auto/core/gl/WGL_ATI_render_texture_rectangle
+glew-1.11.0/auto/core/gl/WGL_EXT_create_context_es_profile
+glew-1.11.0/auto/core/gl/GLX_EXT_create_context_es2_profile
+glew-1.11.0/auto/core/gl/GL_APPLE_float_pixels
+glew-1.11.0/auto/core/gl/GL_VERSION_2_0
+glew-1.11.0/auto/core/gl/GLX_SGIX_swap_group
+glew-1.11.0/auto/core/gl/GL_ARB_imaging
+glew-1.11.0/auto/core/gl/GL_NV_fragment_program4
+glew-1.11.0/auto/core/gl/WGL_NV_vertex_array_range
+glew-1.11.0/auto/core/gl/GL_NV_geometry_shader4
+glew-1.11.0/auto/core/gl/GLX_SGIX_hyperpipe
+glew-1.11.0/auto/core/gl/GL_EXT_packed_float
+glew-1.11.0/auto/core/gl/GL_NV_present_video
+glew-1.11.0/auto/core/gl/WGL_EXT_pixel_format_packed_float
+glew-1.11.0/auto/core/gl/GL_EXT_texture_compression_rgtc
+glew-1.11.0/auto/core/gl/GL_VERSION_4_1
+glew-1.11.0/auto/core/gl/GL_VERSION_4_3
+glew-1.11.0/auto/core/gl/GL_EXT_texture_cube_map
+glew-1.11.0/auto/core/gl/GL_NV_vertex_program4
+glew-1.11.0/auto/core/gl/GL_ARB_robustness
+glew-1.11.0/auto/core/gl/GL_EXT_fog_coord
+glew-1.11.0/auto/core/gl/GL_NV_tessellation_program5
+glew-1.11.0/auto/core/gl/GL_SGIX_shadow
+glew-1.11.0/auto/core/gl/GL_NV_transform_feedback
+glew-1.11.0/auto/core/gl/WGL_EXT_create_context_es2_profile
+glew-1.11.0/auto/core/gl/GL_ATIX_point_sprites
+glew-1.11.0/auto/core/gl/GLX_ATI_render_texture
+glew-1.11.0/auto/core/gl/GL_EXT_gpu_program_parameters
+glew-1.11.0/auto/core/gl/GL_ATI_envmap_bumpmap
+glew-1.11.0/auto/core/gl/GL_EXT_vertex_shader
+glew-1.11.0/auto/core/gl/GL_VERSION_3_1
+glew-1.11.0/auto/core/gl/GL_NV_depth_buffer_float
+glew-1.11.0/auto/core/gl/GL_ATI_map_object_buffer
+glew-1.11.0/auto/core/gl/GL_ARB_vertex_attrib_64bit
+glew-1.11.0/auto/core/gl/GL_APPLE_pixel_buffer
+glew-1.11.0/auto/core/gl/GL_EXT_bindable_uniform
+glew-1.11.0/auto/core/gl/GL_VERSION_3_3
+glew-1.11.0/auto/core/gl/GLX_SGIS_shared_multisample
+glew-1.11.0/auto/core/gl/GLX_NV_float_buffer
+glew-1.11.0/auto/core/gl/GL_EXT_gpu_shader4
+glew-1.11.0/auto/core/gl/GLX_EXT_fbconfig_packed_float
+glew-1.11.0/auto/core/gl/GL_NV_gpu_program4
+glew-1.11.0/auto/core/gl/GL_VERSION_4_2
+glew-1.11.0/auto/core/gl/GL_EXT_texture_array
+glew-1.11.0/auto/core/gl/GL_EXT_framebuffer_sRGB
+glew-1.11.0/auto/core/gl/GL_ARB_internalformat_query2
+glew-1.11.0/auto/core/gl/GL_ATIX_texture_env_route
+glew-1.11.0/auto/core/gl/GL_EXT_texture_shared_exponent
+glew-1.11.0/auto/core/gl/GL_NV_gpu_program5
+glew-1.11.0/auto/core/gl/GL_EXT_debug_marker
+glew-1.11.0/auto/core/gl/GL_VERSION_1_5
+glew-1.11.0/auto/core/gl/GL_VERSION_1_4
+glew-1.11.0/auto/core/gl/GL_VERSION_1_3
+glew-1.11.0/auto/core/gl/GL_ARB_vertex_blend
+glew-1.11.0/auto/core/gl/GL_ARB_separate_shader_objects
+glew-1.11.0/auto/core/gl/GLX_ATI_pixel_format_float
+glew-1.11.0/auto/core/gl/GL_EXT_texture_edge_clamp
+glew-1.11.0/auto/core/gl/GL_ATI_texture_compression_3dc
+glew-1.11.0/auto/core/gl/GL_EXT_depth_bounds_test
+glew-1.11.0/auto/core/gl/GLX_SGIX_swap_barrier
+glew-1.11.0/auto/core/gl/GLX_ARB_get_proc_address
+glew-1.11.0/auto/core/gl/GL_ATI_shader_texture_lod
+glew-1.11.0/auto/core/gl/GL_NV_vdpau_interop
+glew-1.11.0/auto/core/gl/GL_VERSION_1_2
+glew-1.11.0/auto/core/gl/GL_EXT_Cg_shader
+glew-1.11.0/auto/core/gl/GLX_SGI_video_sync
+glew-1.11.0/auto/core/gl/GL_NV_framebuffer_multisample_coverage
+glew-1.11.0/auto/core/gl/GL_EXT_geometry_shader4
+glew-1.11.0/auto/core/gl/GL_EXT_texture_rectangle
+glew-1.11.0/auto/core/gl/GL_ARB_instanced_arrays
+glew-1.11.0/auto/core/gl/GL_KTX_buffer_region
+glew-1.11.0/auto/core/gl/GL_ATIX_vertex_shader_output_point_size
+glew-1.11.0/auto/core/gl/GL_NV_depth_range_unclamped
+glew-1.11.0/auto/core/gl/WGL_EXT_framebuffer_sRGB
+glew-1.11.0/auto/core/gl/GL_VERSION_2_1
+glew-1.11.0/auto/core/gl/GL_VERSION_1_2_1
+glew-1.11.0/auto/core/gl/GL_EXT_secondary_color
+glew-1.11.0/auto/core/gl/GL_SUN_read_video_pixels
+glew-1.11.0/auto/core/gl/GL_VERSION_4_5
+glew-1.11.0/auto/core/gl/GL_WIN_swap_hint
+glew-1.11.0/auto/core/gl/GL_VERSION_4_0
+glew-1.11.0/auto/core/gl/GL_ATIX_texture_env_combine3
+glew-1.11.0/auto/core/gl/GL_NV_fragment_program_option
+glew-1.11.0/auto/doc/
+glew-1.11.0/auto/doc/advanced.html
+glew-1.11.0/auto/doc/basic.html
+glew-1.11.0/auto/doc/index.html
+glew-1.11.0/auto/doc/install.html
+glew-1.11.0/auto/doc/build.html
+glew-1.11.0/auto/doc/log.html
+glew-1.11.0/auto/doc/credits.html
+glew-1.11.0/auto/src/
+glew-1.11.0/auto/src/glew.rc
+glew-1.11.0/auto/src/glew_init_tail.c
+glew-1.11.0/auto/src/glew_utils.c
+glew-1.11.0/auto/src/glew_init_wgl.c
+glew-1.11.0/auto/src/wglew_head.h
+glew-1.11.0/auto/src/glxew_mid.h
+glew-1.11.0/auto/src/glew_str_wgl.c
+glew-1.11.0/auto/src/wglew_mid.h
+glew-1.11.0/auto/src/glewinfo_gl.c
+glew-1.11.0/auto/src/header.html
+glew-1.11.0/auto/src/visualinfo.rc
+glew-1.11.0/auto/src/glew_tail.h
+glew-1.11.0/auto/src/glewinfo_head.c
+glew-1.11.0/auto/src/glew_str_tail.c
+glew-1.11.0/auto/src/glew_utils.h
+glew-1.11.0/auto/src/glewinfo_wgl.c
+glew-1.11.0/auto/src/glxew_head.h
+glew-1.11.0/auto/src/glewinfo_tail.c
+glew-1.11.0/auto/src/glew_head.c
+glew-1.11.0/auto/src/khronos_license.h
+glew-1.11.0/auto/src/glewinfo_glx.c
+glew-1.11.0/auto/src/footer.html
+glew-1.11.0/auto/src/glewinfo.rc
+glew-1.11.0/auto/src/glew_head.h
+glew-1.11.0/auto/src/mesa_license.h
+glew-1.11.0/auto/src/glew_str_glx.c
+glew-1.11.0/auto/src/glew_str_head.c
+glew-1.11.0/auto/src/glew_license.h
+glew-1.11.0/auto/src/glxew_tail.h
+glew-1.11.0/auto/src/glew_init_gl.c
+glew-1.11.0/auto/src/wglew_tail.h
+glew-1.11.0/auto/src/glew_init_glx.c
+glew-1.11.0/auto/extensions/
+glew-1.11.0/auto/extensions/gl/
+glew-1.11.0/auto/extensions/gl/GL_ARB_robustness_share_group_isolation
+glew-1.11.0/auto/extensions/gl/GL_ARB_transform_feedback3
+glew-1.11.0/auto/extensions/gl/GL_ARB_blend_func_extended
+glew-1.11.0/auto/extensions/gl/WGL_I3D_gamma
+glew-1.11.0/auto/extensions/gl/GLX_MESA_swap_control
+glew-1.11.0/auto/extensions/gl/GL_GREMEDY_string_marker
+glew-1.11.0/auto/extensions/gl/GL_EXT_fragment_lighting
+glew-1.11.0/auto/extensions/gl/GL_SGIS_texture_edge_clamp
+glew-1.11.0/auto/extensions/gl/GL_ARB_occlusion_query
+glew-1.11.0/auto/extensions/gl/GL_NV_bindless_texture
+glew-1.11.0/auto/extensions/gl/GL_APPLE_texture_range
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_env_dot3
+glew-1.11.0/auto/extensions/gl/GL_KHR_blend_equation_advanced
+glew-1.11.0/auto/extensions/gl/GL_ATI_text_fragment_shader
+glew-1.11.0/auto/extensions/gl/GL_APPLE_fence
+glew-1.11.0/auto/extensions/gl/GL_EXT_pixel_transform_color_table
+glew-1.11.0/auto/extensions/gl/GL_AMD_sample_positions
+glew-1.11.0/auto/extensions/gl/GL_AMD_transform_feedback4
+glew-1.11.0/auto/extensions/gl/GL_ARB_indirect_parameters
+glew-1.11.0/auto/extensions/gl/GLX_EXT_framebuffer_sRGB
+glew-1.11.0/auto/extensions/gl/GL_ARB_framebuffer_no_attachments
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_env_add
+glew-1.11.0/auto/extensions/gl/WGL_NV_render_texture_rectangle
+glew-1.11.0/auto/extensions/gl/GLX_ARB_robustness_application_isolation
+glew-1.11.0/auto/extensions/gl/GL_ATI_texture_float
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_array_range
+glew-1.11.0/auto/extensions/gl/GLX_NV_video_out
+glew-1.11.0/auto/extensions/gl/GL_ARB_viewport_array
+glew-1.11.0/auto/extensions/gl/GL_ARB_compressed_texture_pixel_storage
+glew-1.11.0/auto/extensions/gl/GL_AMD_shader_stencil_export
+glew-1.11.0/auto/extensions/gl/GL_EXT_index_array_formats
+glew-1.11.0/auto/extensions/gl/GL_EXT_cmyka
+glew-1.11.0/auto/extensions/gl/GL_AMD_query_buffer_object
+glew-1.11.0/auto/extensions/gl/GLX_ARB_create_context_robustness
+glew-1.11.0/auto/extensions/gl/GL_SGIX_texture_lod_bias
+glew-1.11.0/auto/extensions/gl/GL_PGI_misc_hints
+glew-1.11.0/auto/extensions/gl/GL_ARB_explicit_attrib_location
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_gather
+glew-1.11.0/auto/extensions/gl/GL_ATI_separate_stencil
+glew-1.11.0/auto/extensions/gl/GL_EXT_timer_query
+glew-1.11.0/auto/extensions/gl/GL_NV_video_capture
+glew-1.11.0/auto/extensions/gl/GL_HP_occlusion_test
+glew-1.11.0/auto/extensions/gl/GL_EXT_framebuffer_multisample_blit_scaled
+glew-1.11.0/auto/extensions/gl/GL_APPLE_object_purgeable
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_type_2_10_10_10_rev
+glew-1.11.0/auto/extensions/gl/GL_EXT_shared_texture_palette
+glew-1.11.0/auto/extensions/gl/GL_SGIS_pixel_texture
+glew-1.11.0/auto/extensions/gl/GL_MESA_resize_buffers
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_shader2
+glew-1.11.0/auto/extensions/gl/GL_SGIX_async_pixel
+glew-1.11.0/auto/extensions/gl/WGL_EXT_swap_control_tear
+glew-1.11.0/auto/extensions/gl/GL_SGIS_generate_mipmap
+glew-1.11.0/auto/extensions/gl/GLX_MESA_query_renderer
+glew-1.11.0/auto/extensions/gl/GL_EXT_422_pixels
+glew-1.11.0/auto/extensions/gl/GL_ARB_draw_buffers
+glew-1.11.0/auto/extensions/gl/GL_ARB_ES2_compatibility
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_compression_latc
+glew-1.11.0/auto/extensions/gl/GL_EXT_paletted_texture
+glew-1.11.0/auto/extensions/gl/GL_MESAX_texture_stack
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_env_combine
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_atomic_counters
+glew-1.11.0/auto/extensions/gl/GL_ATI_vertex_streams
+glew-1.11.0/auto/extensions/gl/GLX_EXT_create_context_es_profile
+glew-1.11.0/auto/extensions/gl/GL_SUNX_constant_data
+glew-1.11.0/auto/extensions/gl/GL_SGIS_texture_lod
+glew-1.11.0/auto/extensions/gl/GL_ATI_pn_triangles
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_border_clamp
+glew-1.11.0/auto/extensions/gl/GL_ARB_half_float_vertex
+glew-1.11.0/auto/extensions/gl/GL_EXT_draw_buffers2
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_buffer_unified_memory
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_framebuffer_blit
+glew-1.11.0/auto/extensions/gl/GL_NV_geometry_program4
+glew-1.11.0/auto/extensions/gl/GL_SUN_global_alpha
+glew-1.11.0/auto/extensions/gl/GL_NV_bindless_multi_draw_indirect
+glew-1.11.0/auto/extensions/gl/GL_EXT_stencil_two_side
+glew-1.11.0/auto/extensions/gl/GL_ARB_draw_instanced
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_visual_select_group
+glew-1.11.0/auto/extensions/gl/GL_EXT_vertex_weighting
+glew-1.11.0/auto/extensions/gl/GL_INTEL_map_texture
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_texture_compression_dxt3
+glew-1.11.0/auto/extensions/gl/GL_SGIS_color_range
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_rectangle
+glew-1.11.0/auto/extensions/gl/GL_ARB_fragment_coord_conventions
+glew-1.11.0/auto/extensions/gl/GL_WIN_phong_shading
+glew-1.11.0/auto/extensions/gl/GLX_ARB_framebuffer_sRGB
+glew-1.11.0/auto/extensions/gl/GL_ARB_conditional_render_inverted
+glew-1.11.0/auto/extensions/gl/GL_EXT_draw_instanced
+glew-1.11.0/auto/extensions/gl/GLX_SUN_video_resize
+glew-1.11.0/auto/extensions/gl/WGL_3DFX_multisample
+glew-1.11.0/auto/extensions/gl/GL_EXT_draw_range_elements
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_lod_bias
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_program
+glew-1.11.0/auto/extensions/gl/GL_KHR_debug
+glew-1.11.0/auto/extensions/gl/GLX_NV_swap_group
+glew-1.11.0/auto/extensions/gl/GL_ARB_transform_feedback_instanced
+glew-1.11.0/auto/extensions/gl/GL_EXT_light_texture
+glew-1.11.0/auto/extensions/gl/WGL_EXT_multisample
+glew-1.11.0/auto/extensions/gl/GL_ARB_explicit_uniform_location
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_AMD_vertex_shader_layer
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_program3
+glew-1.11.0/auto/extensions/gl/GL_ARB_fragment_program_shadow
+glew-1.11.0/auto/extensions/gl/GL_APPLE_ycbcr_422
+glew-1.11.0/auto/extensions/gl/GL_ARB_sparse_buffer
+glew-1.11.0/auto/extensions/gl/GL_AMD_depth_clamp_separate
+glew-1.11.0/auto/extensions/gl/GL_MESA_window_pos
+glew-1.11.0/auto/extensions/gl/GL_SGI_color_matrix
+glew-1.11.0/auto/extensions/gl/GL_EXT_x11_sync_object
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_buffer_range
+glew-1.11.0/auto/extensions/gl/WGL_NV_DX_interop
+glew-1.11.0/auto/extensions/gl/GL_SGIX_async
+glew-1.11.0/auto/extensions/gl/GL_NV_blend_equation_advanced_coherent
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_program
+glew-1.11.0/auto/extensions/gl/GL_SGIX_texture_coordinate_clamp
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_texture_usage
+glew-1.11.0/auto/extensions/gl/GL_EXT_packed_pixels
+glew-1.11.0/auto/extensions/gl/GL_NV_fog_distance
+glew-1.11.0/auto/extensions/gl/GL_NV_pixel_data_range
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_filter_anisotropic
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_non_power_of_two
+glew-1.11.0/auto/extensions/gl/GL_AMD_debug_output
+glew-1.11.0/auto/extensions/gl/GLX_AMD_gpu_association
+glew-1.11.0/auto/extensions/gl/GL_NV_path_rendering
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_buffer_load
+glew-1.11.0/auto/extensions/gl/GL_NV_primitive_restart
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_texture_lod
+glew-1.11.0/auto/extensions/gl/GL_INTEL_performance_query
+glew-1.11.0/auto/extensions/gl/GL_NV_fragment_program2
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_mirror_clamp
+glew-1.11.0/auto/extensions/gl/GL_SGIX_shadow_ambient
+glew-1.11.0/auto/extensions/gl/GL_ARB_matrix_palette
+glew-1.11.0/auto/extensions/gl/GLX_EXT_visual_rating
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_multisample
+glew-1.11.0/auto/extensions/gl/WGL_I3D_image_buffer
+glew-1.11.0/auto/extensions/gl/GL_EXT_coordinate_frame
+glew-1.11.0/auto/extensions/gl/GLX_EXT_swap_control_tear
+glew-1.11.0/auto/extensions/gl/WGL_NV_video_capture
+glew-1.11.0/auto/extensions/gl/GL_ARB_multitexture
+glew-1.11.0/auto/extensions/gl/GL_EXT_separate_specular_color
+glew-1.11.0/auto/extensions/gl/GL_ARB_clear_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_ARB_shading_language_packing
+glew-1.11.0/auto/extensions/gl/GL_EXT_vertex_attrib_64bit
+glew-1.11.0/auto/extensions/gl/WGL_ARB_create_context
+glew-1.11.0/auto/extensions/gl/GL_ARB_base_instance
+glew-1.11.0/auto/extensions/gl/GL_ARB_point_sprite
+glew-1.11.0/auto/extensions/gl/GL_ATI_vertex_array_object
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_env_combine4
+glew-1.11.0/auto/extensions/gl/WGL_NV_gpu_affinity
+glew-1.11.0/auto/extensions/gl/GL_ARB_timer_query
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_cube_map
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_program2_option
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_integer
+glew-1.11.0/auto/extensions/gl/GL_NV_evaluators
+glew-1.11.0/auto/extensions/gl/GL_EXT_blend_equation_separate
+glew-1.11.0/auto/extensions/gl/GL_ARB_copy_image
+glew-1.11.0/auto/extensions/gl/GLX_NV_vertex_array_range
+glew-1.11.0/auto/extensions/gl/GL_INTEL_parallel_arrays
+glew-1.11.0/auto/extensions/gl/GL_NV_parameter_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_ARB_robustness_application_isolation
+glew-1.11.0/auto/extensions/gl/GL_EXT_pixel_buffer_object
+glew-1.11.0/auto/extensions/gl/WGL_AMD_gpu_association
+glew-1.11.0/auto/extensions/gl/GL_NVX_gpu_memory_info
+glew-1.11.0/auto/extensions/gl/GL_NV_parameter_buffer_object2
+glew-1.11.0/auto/extensions/gl/GL_APPLE_element_array
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_objects
+glew-1.11.0/auto/extensions/gl/GL_NV_fragment_program
+glew-1.11.0/auto/extensions/gl/GL_ARB_ES3_1_compatibility
+glew-1.11.0/auto/extensions/gl/WGL_ATI_render_texture_rectangle
+glew-1.11.0/auto/extensions/gl/GL_HP_texture_lighting
+glew-1.11.0/auto/extensions/gl/WGL_I3D_digital_video_control
+glew-1.11.0/auto/extensions/gl/GL_AMD_performance_monitor
+glew-1.11.0/auto/extensions/gl/GL_ARB_stencil_texturing
+glew-1.11.0/auto/extensions/gl/GLX_SGI_cushion
+glew-1.11.0/auto/extensions/gl/GL_EXT_compiled_vertex_array
+glew-1.11.0/auto/extensions/gl/GL_NV_blend_square
+glew-1.11.0/auto/extensions/gl/GL_EXT_copy_texture
+glew-1.11.0/auto/extensions/gl/WGL_EXT_create_context_es_profile
+glew-1.11.0/auto/extensions/gl/GL_NV_copy_depth_to_color
+glew-1.11.0/auto/extensions/gl/GL_SGIS_sharpen_texture
+glew-1.11.0/auto/extensions/gl/GLX_EXT_create_context_es2_profile
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_perturb_normal
+glew-1.11.0/auto/extensions/gl/GL_SGIX_texture_add_env
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_compression_dxt1
+glew-1.11.0/auto/extensions/gl/GL_ARB_window_pos
+glew-1.11.0/auto/extensions/gl/GL_EXT_shadow_funcs
+glew-1.11.0/auto/extensions/gl/GL_ARB_get_texture_sub_image
+glew-1.11.0/auto/extensions/gl/GL_OML_subsample
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_query_lod
+glew-1.11.0/auto/extensions/gl/GL_APPLE_float_pixels
+glew-1.11.0/auto/extensions/gl/GL_INGR_color_clamp
+glew-1.11.0/auto/extensions/gl/GL_EXT_vertex_array_bgra
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_subroutine
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_swap_group
+glew-1.11.0/auto/extensions/gl/GL_ARB_conservative_depth
+glew-1.11.0/auto/extensions/gl/WGL_ARB_buffer_region
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_sRGB_decode
+glew-1.11.0/auto/extensions/gl/GL_ARB_tessellation_shader
+glew-1.11.0/auto/extensions/gl/GL_EXT_vertex_array
+glew-1.11.0/auto/extensions/gl/WGL_NV_present_video
+glew-1.11.0/auto/extensions/gl/GL_OES_read_format
+glew-1.11.0/auto/extensions/gl/GLX_ARB_context_flush_control
+glew-1.11.0/auto/extensions/gl/GL_ARB_compute_variable_group_size
+glew-1.11.0/auto/extensions/gl/GLX_3DFX_multisample
+glew-1.11.0/auto/extensions/gl/GL_APPLE_aux_depth_stencil
+glew-1.11.0/auto/extensions/gl/GL_NV_depth_clamp
+glew-1.11.0/auto/extensions/gl/GL_ARB_seamless_cube_map
+glew-1.11.0/auto/extensions/gl/GL_ARB_imaging
+glew-1.11.0/auto/extensions/gl/GL_SGIX_fog_offset
+glew-1.11.0/auto/extensions/gl/GL_ARB_multisample
+glew-1.11.0/auto/extensions/gl/GL_OES_compressed_paletted_texture
+glew-1.11.0/auto/extensions/gl/GL_NV_fragment_program4
+glew-1.11.0/auto/extensions/gl/GL_ARB_multi_draw_indirect
+glew-1.11.0/auto/extensions/gl/WGL_NV_vertex_array_range
+glew-1.11.0/auto/extensions/gl/GL_KHR_robustness
+glew-1.11.0/auto/extensions/gl/GL_NV_point_sprite
+glew-1.11.0/auto/extensions/gl/WGL_EXT_display_color_table
+glew-1.11.0/auto/extensions/gl/GL_HP_convolution_border_modes
+glew-1.11.0/auto/extensions/gl/GL_ARB_invalidate_subdata
+glew-1.11.0/auto/extensions/gl/GL_ARB_geometry_shader4
+glew-1.11.0/auto/extensions/gl/GL_NV_geometry_shader4
+glew-1.11.0/auto/extensions/gl/GL_ATI_meminfo
+glew-1.11.0/auto/extensions/gl/GL_EXT_index_func
+glew-1.11.0/auto/extensions/gl/GL_EXT_packed_depth_stencil
+glew-1.11.0/auto/extensions/gl/GL_IBM_rasterpos_clip
+glew-1.11.0/auto/extensions/gl/GL_EXT_framebuffer_object
+glew-1.11.0/auto/extensions/gl/GL_EXT_debug_label
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_hyperpipe
+glew-1.11.0/auto/extensions/gl/GLX_SGIS_blended_overlay
+glew-1.11.0/auto/extensions/gl/GL_EXT_packed_float
+glew-1.11.0/auto/extensions/gl/GL_NV_present_video
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_texture_image_samples
+glew-1.11.0/auto/extensions/gl/GL_ARB_pipeline_statistics_query
+glew-1.11.0/auto/extensions/gl/WGL_EXT_pixel_format_packed_float
+glew-1.11.0/auto/extensions/gl/GL_EXT_scene_marker
+glew-1.11.0/auto/extensions/gl/GLX_SGI_make_current_read
+glew-1.11.0/auto/extensions/gl/GL_AMD_multi_draw_indirect
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_compression_rgtc
+glew-1.11.0/auto/extensions/gl/GL_SGIX_ycrcb
+glew-1.11.0/auto/extensions/gl/GL_AMD_draw_buffers_blend
+glew-1.11.0/auto/extensions/gl/GL_KHR_texture_compression_astc_hdr
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_depth_texture
+glew-1.11.0/auto/extensions/gl/GL_EXT_pixel_transform
+glew-1.11.0/auto/extensions/gl/GL_SGIS_fog_function
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_image_load_store
+glew-1.11.0/auto/extensions/gl/GL_ARB_transpose_matrix
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_group_vote
+glew-1.11.0/auto/extensions/gl/GLX_EXT_texture_from_pixmap
+glew-1.11.0/auto/extensions/gl/WGL_EXT_depth_float
+glew-1.11.0/auto/extensions/gl/GLX_ARB_robustness_share_group_isolation
+glew-1.11.0/auto/extensions/gl/GL_ARB_shading_language_100
+glew-1.11.0/auto/extensions/gl/GL_AMD_occlusion_query_event
+glew-1.11.0/auto/extensions/gl/GL_EXT_abgr
+glew-1.11.0/auto/extensions/gl/GL_NV_texgen_reflection
+glew-1.11.0/auto/extensions/gl/GL_AMD_blend_minmax_factor
+glew-1.11.0/auto/extensions/gl/GL_EXT_rescale_normal
+glew-1.11.0/auto/extensions/gl/GL_NV_light_max_exponent
+glew-1.11.0/auto/extensions/gl/GL_SGIS_texture_select
+glew-1.11.0/auto/extensions/gl/GL_SGIS_detail_texture
+glew-1.11.0/auto/extensions/gl/GL_APPLE_vertex_array_object
+glew-1.11.0/auto/extensions/gl/GL_EXT_histogram
+glew-1.11.0/auto/extensions/gl/GLX_OML_sync_control
+glew-1.11.0/auto/extensions/gl/GLX_MESA_pixmap_colormap
+glew-1.11.0/auto/extensions/gl/GL_SGIX_interlace
+glew-1.11.0/auto/extensions/gl/GL_APPLE_rgb_422
+glew-1.11.0/auto/extensions/gl/GL_S3_s3tc
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_cube_map
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_thread_shuffle
+glew-1.11.0/auto/extensions/gl/GL_AMD_gcn_shader
+glew-1.11.0/auto/extensions/gl/GL_ARB_map_buffer_alignment
+glew-1.11.0/auto/extensions/gl/GL_ARB_half_float_pixel
+glew-1.11.0/auto/extensions/gl/GL_SGIX_tag_sample_buffer
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_program4
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_compression
+glew-1.11.0/auto/extensions/gl/GL_ARB_fragment_layer_viewport
+glew-1.11.0/auto/extensions/gl/GL_EXT_cull_vertex
+glew-1.11.0/auto/extensions/gl/GL_SGIX_flush_raster
+glew-1.11.0/auto/extensions/gl/GL_ARB_compute_shader
+glew-1.11.0/auto/extensions/gl/GL_ARB_robustness
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_atomic_counters
+glew-1.11.0/auto/extensions/gl/GL_EXT_fog_coord
+glew-1.11.0/auto/extensions/gl/GL_NV_tessellation_program5
+glew-1.11.0/auto/extensions/gl/GL_INTEL_fragment_shader_ordering
+glew-1.11.0/auto/extensions/gl/GL_PGI_vertex_hints
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_shader3
+glew-1.11.0/auto/extensions/gl/GL_NV_occlusion_query
+glew-1.11.0/auto/extensions/gl/GL_KHR_robust_buffer_access_behavior
+glew-1.11.0/auto/extensions/gl/GL_SGIX_shadow
+glew-1.11.0/auto/extensions/gl/GL_NV_transform_feedback
+glew-1.11.0/auto/extensions/gl/GL_NV_packed_depth_stencil
+glew-1.11.0/auto/extensions/gl/GLX_NV_present_video
+glew-1.11.0/auto/extensions/gl/GL_ARB_pixel_buffer_object
+glew-1.11.0/auto/extensions/gl/WGL_EXT_create_context_es2_profile
+glew-1.11.0/auto/extensions/gl/GL_ARB_map_buffer_range
+glew-1.11.0/auto/extensions/gl/GLX_MESA_agp_offset
+glew-1.11.0/auto/extensions/gl/GLX_MESA_set_3dfx_mode
+glew-1.11.0/auto/extensions/gl/GL_3DFX_texture_compression_FXT1
+glew-1.11.0/auto/extensions/gl/GL_ARB_ES3_compatibility
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_barrier
+glew-1.11.0/auto/extensions/gl/GL_ATIX_point_sprites
+glew-1.11.0/auto/extensions/gl/WGL_ARB_context_flush_control
+glew-1.11.0/auto/extensions/gl/GL_EXT_shader_integer_mix
+glew-1.11.0/auto/extensions/gl/GL_INGR_interlace_read
+glew-1.11.0/auto/extensions/gl/GL_AMD_gpu_shader_int64
+glew-1.11.0/auto/extensions/gl/GL_ARB_uniform_buffer_object
+glew-1.11.0/auto/extensions/gl/WGL_ARB_robustness_application_isolation
+glew-1.11.0/auto/extensions/gl/WGL_EXT_pixel_format
+glew-1.11.0/auto/extensions/gl/GL_NV_deep_texture3D
+glew-1.11.0/auto/extensions/gl/GL_OES_byte_coordinates
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_buffer_object
+glew-1.11.0/auto/extensions/gl/GLX_ATI_render_texture
+glew-1.11.0/auto/extensions/gl/GL_ARB_fragment_program
+glew-1.11.0/auto/extensions/gl/GL_EXT_gpu_program_parameters
+glew-1.11.0/auto/extensions/gl/GL_3DFX_multisample
+glew-1.11.0/auto/extensions/gl/GL_EXT_separate_shader_objects
+glew-1.11.0/auto/extensions/gl/GLX_EXT_import_context
+glew-1.11.0/auto/extensions/gl/WGL_NV_swap_group
+glew-1.11.0/auto/extensions/gl/WGL_ARB_framebuffer_sRGB
+glew-1.11.0/auto/extensions/gl/GL_ARB_debug_output
+glew-1.11.0/auto/extensions/gl/GL_ATI_envmap_bumpmap
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_env_combine
+glew-1.11.0/auto/extensions/gl/WGL_I3D_swap_frame_lock
+glew-1.11.0/auto/extensions/gl/WGL_NV_float_buffer
+glew-1.11.0/auto/extensions/gl/GL_ATI_fragment_shader
+glew-1.11.0/auto/extensions/gl/GL_ATI_vertex_attrib_array_object
+glew-1.11.0/auto/extensions/gl/GL_ARB_direct_state_access
+glew-1.11.0/auto/extensions/gl/GL_ARB_program_interface_query
+glew-1.11.0/auto/extensions/gl/GL_APPLE_row_bytes
+glew-1.11.0/auto/extensions/gl/GL_ARB_derivative_control
+glew-1.11.0/auto/extensions/gl/GL_KHR_texture_compression_astc_ldr
+glew-1.11.0/auto/extensions/gl/WGL_ARB_robustness_share_group_isolation
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_stencil8
+glew-1.11.0/auto/extensions/gl/GL_NV_gpu_program_fp64
+glew-1.11.0/auto/extensions/gl/GL_EXT_vertex_shader
+glew-1.11.0/auto/extensions/gl/GL_OML_resample
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_env_dot3
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_multisample
+glew-1.11.0/auto/extensions/gl/GL_EXT_misc_attribute
+glew-1.11.0/auto/extensions/gl/GL_SUN_vertex
+glew-1.11.0/auto/extensions/gl/GL_AMD_conservative_depth
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_storage_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_NV_depth_buffer_float
+glew-1.11.0/auto/extensions/gl/GL_ATI_map_object_buffer
+glew-1.11.0/auto/extensions/gl/WGL_ATI_pixel_format_float
+glew-1.11.0/auto/extensions/gl/GL_ARB_sample_shading
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_thread_group
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_attrib_64bit
+glew-1.11.0/auto/extensions/gl/WGL_ARB_pbuffer
+glew-1.11.0/auto/extensions/gl/GL_ARB_depth_clamp
+glew-1.11.0/auto/extensions/gl/GL_SUN_triangle_list
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_env
+glew-1.11.0/auto/extensions/gl/GL_AMD_shader_stencil_value_export
+glew-1.11.0/auto/extensions/gl/GLX_NV_multisample_coverage
+glew-1.11.0/auto/extensions/gl/WGL_NV_delay_before_swap
+glew-1.11.0/auto/extensions/gl/GLX_NV_copy_buffer
+glew-1.11.0/auto/extensions/gl/GL_EXT_subtexture
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_float
+glew-1.11.0/auto/extensions/gl/GL_SGIS_texture4D
+glew-1.11.0/auto/extensions/gl/GL_EXT_point_parameters
+glew-1.11.0/auto/extensions/gl/GL_REGAL_error_string
+glew-1.11.0/auto/extensions/gl/GL_ARB_sampler_objects
+glew-1.11.0/auto/extensions/gl/GL_AMD_vertex_shader_tessellator
+glew-1.11.0/auto/extensions/gl/GL_ATI_draw_buffers
+glew-1.11.0/auto/extensions/gl/GL_APPLE_pixel_buffer
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_mirror_clamp_to_edge
+glew-1.11.0/auto/extensions/gl/GL_3DFX_tbuffer
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_cube_map_array
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_shader
+glew-1.11.0/auto/extensions/gl/GL_EXT_bindable_uniform
+glew-1.11.0/auto/extensions/gl/GL_NV_conditional_render
+glew-1.11.0/auto/extensions/gl/GL_SGIX_depth_texture
+glew-1.11.0/auto/extensions/gl/WGL_EXT_pbuffer
+glew-1.11.0/auto/extensions/gl/GL_ARB_buffer_storage
+glew-1.11.0/auto/extensions/gl/GL_EXT_index_material
+glew-1.11.0/auto/extensions/gl/GL_SUN_mesh_array
+glew-1.11.0/auto/extensions/gl/GLX_SGIS_color_range
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_atomic_int64
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_array_bgra
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_env_crossbar
+glew-1.11.0/auto/extensions/gl/GL_ARB_copy_buffer
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_translated_shader_source
+glew-1.11.0/auto/extensions/gl/GL_NVX_conditional_render
+glew-1.11.0/auto/extensions/gl/GL_ARB_transform_feedback_overflow_query
+glew-1.11.0/auto/extensions/gl/GL_WIN_specular_fog
+glew-1.11.0/auto/extensions/gl/GL_ARB_depth_texture
+glew-1.11.0/auto/extensions/gl/GL_SGIX_texture_scale_bias
+glew-1.11.0/auto/extensions/gl/GL_REGAL_ES1_0_compatibility
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_array_object
+glew-1.11.0/auto/extensions/gl/GLX_EXT_swap_control
+glew-1.11.0/auto/extensions/gl/GL_ARB_enhanced_layouts
+glew-1.11.0/auto/extensions/gl/GL_ARB_framebuffer_sRGB
+glew-1.11.0/auto/extensions/gl/GLX_SGIS_shared_multisample
+glew-1.11.0/auto/extensions/gl/GL_SGIX_pixel_texture
+glew-1.11.0/auto/extensions/gl/GL_SGIS_texture_border_clamp
+glew-1.11.0/auto/extensions/gl/GL_ARB_gpu_shader_fp64
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_atomic_float
+glew-1.11.0/auto/extensions/gl/GL_EXT_blend_color
+glew-1.11.0/auto/extensions/gl/GLX_NV_float_buffer
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_stencil_export
+glew-1.11.0/auto/extensions/gl/GL_MESA_ycbcr_texture
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_compression_vtc
+glew-1.11.0/auto/extensions/gl/GL_IBM_static_data
+glew-1.11.0/auto/extensions/gl/GL_NV_shader_storage_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_NV_fence
+glew-1.11.0/auto/extensions/gl/GL_EXT_gpu_shader4
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_timer_query
+glew-1.11.0/auto/extensions/gl/GL_INTEL_texture_scissor
+glew-1.11.0/auto/extensions/gl/GL_OML_interlace
+glew-1.11.0/auto/extensions/gl/GL_NV_transform_feedback2
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_attrib_binding
+glew-1.11.0/auto/extensions/gl/GL_ARB_query_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_IBM_multimode_draw_arrays
+glew-1.11.0/auto/extensions/gl/WGL_NV_DX_interop2
+glew-1.11.0/auto/extensions/gl/GLX_EXT_fbconfig_packed_float
+glew-1.11.0/auto/extensions/gl/GL_ARB_color_buffer_float
+glew-1.11.0/auto/extensions/gl/WGL_3DL_stereo_control
+glew-1.11.0/auto/extensions/gl/GL_EXT_stencil_wrap
+glew-1.11.0/auto/extensions/gl/WGL_EXT_extensions_string
+glew-1.11.0/auto/extensions/gl/GL_NV_float_buffer
+glew-1.11.0/auto/extensions/gl/GL_NV_gpu_program4
+glew-1.11.0/auto/extensions/gl/GL_ARB_draw_buffers_blend
+glew-1.11.0/auto/extensions/gl/GL_SGIX_fog_texture
+glew-1.11.0/auto/extensions/gl/GL_SGIX_sprite
+glew-1.11.0/auto/extensions/gl/GL_EXT_blend_subtract
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_array
+glew-1.11.0/auto/extensions/gl/WGL_I3D_swap_frame_usage
+glew-1.11.0/auto/extensions/gl/GLX_NV_copy_image
+glew-1.11.0/auto/extensions/gl/GL_NV_gpu_shader5
+glew-1.11.0/auto/extensions/gl/GL_ARB_framebuffer_object
+glew-1.11.0/auto/extensions/gl/GL_AMD_seamless_cubemap_per_texture
+glew-1.11.0/auto/extensions/gl/GL_NV_gpu_program5_mem_extended
+glew-1.11.0/auto/extensions/gl/GL_ATI_element_array
+glew-1.11.0/auto/extensions/gl/GL_ARB_depth_buffer_float
+glew-1.11.0/auto/extensions/gl/GL_EXT_framebuffer_blit
+glew-1.11.0/auto/extensions/gl/GL_EXT_framebuffer_sRGB
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_sRGB
+glew-1.11.0/auto/extensions/gl/GL_REGAL_ES1_1_compatibility
+glew-1.11.0/auto/extensions/gl/WGL_EXT_swap_control
+glew-1.11.0/auto/extensions/gl/GL_NV_bindless_multi_draw_indirect_count
+glew-1.11.0/auto/extensions/gl/GL_SGIX_blend_alpha_minmax
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_attrib_integer_64bit
+glew-1.11.0/auto/extensions/gl/GL_ARB_internalformat_query2
+glew-1.11.0/auto/extensions/gl/WGL_ARB_pixel_format
+glew-1.11.0/auto/extensions/gl/GL_SGIX_texture_multi_buffer
+glew-1.11.0/auto/extensions/gl/GL_EXT_stencil_clear_tag
+glew-1.11.0/auto/extensions/gl/GL_AMD_texture_texture4
+glew-1.11.0/auto/extensions/gl/GL_AMD_vertex_shader_viewport_index
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_pbuffer
+glew-1.11.0/auto/extensions/gl/GL_ARB_fragment_shader
+glew-1.11.0/auto/extensions/gl/GL_EXT_multi_draw_arrays
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_bit_encoding
+glew-1.11.0/auto/extensions/gl/GL_EXT_polygon_offset
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_rectangle
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_precision
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_swizzle
+glew-1.11.0/auto/extensions/gl/.dummy
+glew-1.11.0/auto/extensions/gl/GLX_EXT_buffer_age
+glew-1.11.0/auto/extensions/gl/GL_ATIX_texture_env_route
+glew-1.11.0/auto/extensions/gl/WGL_ARB_pixel_format_float
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_env_add
+glew-1.11.0/auto/extensions/gl/GL_EXT_clip_volume_hint
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_shared_exponent
+glew-1.11.0/auto/extensions/gl/GL_NV_gpu_program5
+glew-1.11.0/auto/extensions/gl/GL_EXT_blend_func_separate
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_texture_compression_dxt5
+glew-1.11.0/auto/extensions/gl/GLX_SUN_get_transparent_index
+glew-1.11.0/auto/extensions/gl/GL_EXT_debug_marker
+glew-1.11.0/auto/extensions/gl/GL_SGIX_fragment_specular_lighting
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_program1_1
+glew-1.11.0/auto/extensions/gl/GL_EXT_framebuffer_multisample
+glew-1.11.0/auto/extensions/gl/GL_ARB_compatibility
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_array_range2
+glew-1.11.0/auto/extensions/gl/WGL_EXT_make_current_read
+glew-1.11.0/auto/extensions/gl/GL_OES_single_precision
+glew-1.11.0/auto/extensions/gl/GL_EXT_convolution
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_pack_reverse_row_order
+glew-1.11.0/auto/extensions/gl/GL_NV_register_combiners2
+glew-1.11.0/auto/extensions/gl/GL_NV_register_combiners
+glew-1.11.0/auto/extensions/gl/GL_SGIX_convolution_accuracy
+glew-1.11.0/auto/extensions/gl/GL_ARB_gpu_shader5
+glew-1.11.0/auto/extensions/gl/GLX_MESA_release_buffers
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_rg
+glew-1.11.0/auto/extensions/gl/GL_EXT_provoking_vertex
+glew-1.11.0/auto/extensions/gl/GL_NV_draw_texture
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_draw_parameters
+glew-1.11.0/auto/extensions/gl/GL_APPLE_vertex_array_range
+glew-1.11.0/auto/extensions/gl/GLX_ARB_fbconfig_float
+glew-1.11.0/auto/extensions/gl/GL_AMD_interleaved_elements
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_blend
+glew-1.11.0/auto/extensions/gl/GLX_ARB_create_context_profile
+glew-1.11.0/auto/extensions/gl/GL_AMD_shader_atomic_counter_ops
+glew-1.11.0/auto/extensions/gl/GL_KHR_blend_equation_advanced_coherent
+glew-1.11.0/auto/extensions/gl/GL_SGIX_ir_instrument1
+glew-1.11.0/auto/extensions/gl/GL_ARB_separate_shader_objects
+glew-1.11.0/auto/extensions/gl/GL_ARB_shadow_ambient
+glew-1.11.0/auto/extensions/gl/GLX_ATI_pixel_format_float
+glew-1.11.0/auto/extensions/gl/GL_APPLE_specular_vector
+glew-1.11.0/auto/extensions/gl/GL_AMD_sparse_texture
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_edge_clamp
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_swizzle
+glew-1.11.0/auto/extensions/gl/GL_ARB_clear_texture
+glew-1.11.0/auto/extensions/gl/GLX_EXT_stereo_tree
+glew-1.11.0/auto/extensions/gl/GL_ATI_texture_compression_3dc
+glew-1.11.0/auto/extensions/gl/GL_ARB_arrays_of_arrays
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_buffer_object_rgb32
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_object
+glew-1.11.0/auto/extensions/gl/GL_EXT_depth_bounds_test
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_swap_barrier
+glew-1.11.0/auto/extensions/gl/GL_REGAL_extension_query
+glew-1.11.0/auto/extensions/gl/GLX_ARB_get_proc_address
+glew-1.11.0/auto/extensions/gl/GL_EXT_shader_image_load_store
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_barrier
+glew-1.11.0/auto/extensions/gl/GL_ATI_texture_mirror_once
+glew-1.11.0/auto/extensions/gl/GL_ATI_shader_texture_lod
+glew-1.11.0/auto/extensions/gl/GL_SGIX_resample
+glew-1.11.0/auto/extensions/gl/WGL_ARB_make_current_read
+glew-1.11.0/auto/extensions/gl/GL_ARB_seamless_cubemap_per_texture
+glew-1.11.0/auto/extensions/gl/GL_NV_vdpau_interop
+glew-1.11.0/auto/extensions/gl/GL_ARB_point_parameters
+glew-1.11.0/auto/extensions/gl/WGL_ARB_render_texture
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_framebuffer_multisample
+glew-1.11.0/auto/extensions/gl/GL_AMD_name_gen_delete
+glew-1.11.0/auto/extensions/gl/GLX_NV_delay_before_swap
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_view
+glew-1.11.0/auto/extensions/gl/GL_ARB_sync
+glew-1.11.0/auto/extensions/gl/WGL_ARB_create_context_profile
+glew-1.11.0/auto/extensions/gl/GL_SGIS_multisample
+glew-1.11.0/auto/extensions/gl/GLX_EXT_scene_marker
+glew-1.11.0/auto/extensions/gl/GL_SGIX_reference_plane
+glew-1.11.0/auto/extensions/gl/GL_NV_blend_equation_advanced
+glew-1.11.0/auto/extensions/gl/GL_SGIX_framezoom
+glew-1.11.0/auto/extensions/gl/GL_KHR_context_flush_control
+glew-1.11.0/auto/extensions/gl/WGL_NV_render_depth_texture
+glew-1.11.0/auto/extensions/gl/GL_ARB_cull_distance
+glew-1.11.0/auto/extensions/gl/GLX_OML_swap_method
+glew-1.11.0/auto/extensions/gl/GL_APPLE_transform_hint
+glew-1.11.0/auto/extensions/gl/GL_NV_multisample_coverage
+glew-1.11.0/auto/extensions/gl/GL_SUN_convolution_border_modes
+glew-1.11.0/auto/extensions/gl/GL_NV_explicit_multisample
+glew-1.11.0/auto/extensions/gl/GL_SGIX_async_histogram
+glew-1.11.0/auto/extensions/gl/GLX_MESA_copy_sub_buffer
+glew-1.11.0/auto/extensions/gl/GLX_INTEL_swap_event
+glew-1.11.0/auto/extensions/gl/GL_EXT_bgra
+glew-1.11.0/auto/extensions/gl/GL_ARB_transform_feedback2
+glew-1.11.0/auto/extensions/gl/GL_IBM_vertex_array_lists
+glew-1.11.0/auto/extensions/gl/GL_ATI_texture_env_combine3
+glew-1.11.0/auto/extensions/gl/GL_EXT_Cg_shader
+glew-1.11.0/auto/extensions/gl/GL_AMD_stencil_operation_extended
+glew-1.11.0/auto/extensions/gl/GL_ARB_shading_language_include
+glew-1.11.0/auto/extensions/gl/GL_EXT_blend_logic_op
+glew-1.11.0/auto/extensions/gl/GL_SGIX_clipmap
+glew-1.11.0/auto/extensions/gl/GL_GREMEDY_frame_terminator
+glew-1.11.0/auto/extensions/gl/WGL_NV_copy_image
+glew-1.11.0/auto/extensions/gl/GLX_SGI_video_sync
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_storage
+glew-1.11.0/auto/extensions/gl/GL_NV_framebuffer_multisample_coverage
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_video_resize
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_compression_bptc
+glew-1.11.0/auto/extensions/gl/GL_EXT_geometry_shader4
+glew-1.11.0/auto/extensions/gl/GL_SGIS_point_line_texgen
+glew-1.11.0/auto/extensions/gl/GLX_SGIS_multisample
+glew-1.11.0/auto/extensions/gl/GL_IBM_texture_mirrored_repeat
+glew-1.11.0/auto/extensions/gl/GL_SGIX_list_priority
+glew-1.11.0/auto/extensions/gl/GL_SGI_texture_color_table
+glew-1.11.0/auto/extensions/gl/GL_EXT_index_texture
+glew-1.11.0/auto/extensions/gl/GL_REGAL_enable
+glew-1.11.0/auto/extensions/gl/GL_HP_image_transform
+glew-1.11.0/auto/extensions/gl/GL_REGAL_log
+glew-1.11.0/auto/extensions/gl/GL_AMD_transform_feedback3_lines_triangles
+glew-1.11.0/auto/extensions/gl/WGL_NV_video_output
+glew-1.11.0/auto/extensions/gl/GLX_ARB_create_context
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_rgb10_a2ui
+glew-1.11.0/auto/extensions/gl/GLX_ARB_multisample
+glew-1.11.0/auto/extensions/gl/GL_SGIX_vertex_preclip
+glew-1.11.0/auto/extensions/gl/GL_SGIX_pixel_texture_bits
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture3D
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_rectangle
+glew-1.11.0/auto/extensions/gl/GL_NV_half_float
+glew-1.11.0/auto/extensions/gl/GL_EXT_blend_minmax
+glew-1.11.0/auto/extensions/gl/GL_NV_multisample_filter_hint
+glew-1.11.0/auto/extensions/gl/GLX_EXT_visual_info
+glew-1.11.0/auto/extensions/gl/GLX_NV_video_capture
+glew-1.11.0/auto/extensions/gl/GLX_SGI_swap_control
+glew-1.11.0/auto/extensions/gl/GL_EXT_transform_feedback
+glew-1.11.0/auto/extensions/gl/WGL_NV_multisample_coverage
+glew-1.11.0/auto/extensions/gl/GL_REND_screen_coordinates
+glew-1.11.0/auto/extensions/gl/GL_ARB_clip_control
+glew-1.11.0/auto/extensions/gl/GL_SGI_color_table
+glew-1.11.0/auto/extensions/gl/GL_ARB_instanced_arrays
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_mirrored_repeat
+glew-1.11.0/auto/extensions/gl/GL_NV_vertex_program2
+glew-1.11.0/auto/extensions/gl/GL_KTX_buffer_region
+glew-1.11.0/auto/extensions/gl/GL_SGIX_texture_range
+glew-1.11.0/auto/extensions/gl/GL_SUN_slice_accum
+glew-1.11.0/auto/extensions/gl/GL_ARB_sparse_texture
+glew-1.11.0/auto/extensions/gl/GL_APPLE_flush_buffer_range
+glew-1.11.0/auto/extensions/gl/GL_ATIX_vertex_shader_output_point_size
+glew-1.11.0/auto/extensions/gl/WGL_ARB_multisample
+glew-1.11.0/auto/extensions/gl/GL_EXT_direct_state_access
+glew-1.11.0/auto/extensions/gl/GL_NV_compute_program5
+glew-1.11.0/auto/extensions/gl/GL_NV_depth_range_unclamped
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_type_10f_11f_11f_rev
+glew-1.11.0/auto/extensions/gl/WGL_OML_sync_control
+glew-1.11.0/auto/extensions/gl/GL_APPLE_client_storage
+glew-1.11.0/auto/extensions/gl/GL_ARB_internalformat_query
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_storage_multisample
+glew-1.11.0/auto/extensions/gl/WGL_EXT_framebuffer_sRGB
+glew-1.11.0/auto/extensions/gl/GL_EXT_multisample
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_texture_compression_dxt1
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_instanced_arrays
+glew-1.11.0/auto/extensions/gl/WGL_ARB_extensions_string
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_query_levels
+glew-1.11.0/auto/extensions/gl/WGL_ARB_create_context_robustness
+glew-1.11.0/auto/extensions/gl/GL_ARB_draw_indirect
+glew-1.11.0/auto/extensions/gl/GL_NV_copy_image
+glew-1.11.0/auto/extensions/gl/GL_AMD_shader_trinary_minmax
+glew-1.11.0/auto/extensions/gl/GL_ANGLE_program_binary
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_AMD_pinned_memory
+glew-1.11.0/auto/extensions/gl/GL_ARB_shader_image_size
+glew-1.11.0/auto/extensions/gl/GL_ARB_shading_language_420pack
+glew-1.11.0/auto/extensions/gl/GLX_SGIX_fbconfig
+glew-1.11.0/auto/extensions/gl/WGL_I3D_genlock
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture
+glew-1.11.0/auto/extensions/gl/GL_ARB_provoking_vertex
+glew-1.11.0/auto/extensions/gl/GL_EXT_secondary_color
+glew-1.11.0/auto/extensions/gl/GL_ARB_texture_compression_rgtc
+glew-1.11.0/auto/extensions/gl/GL_ARB_cl_event
+glew-1.11.0/auto/extensions/gl/GL_ARB_bindless_texture
+glew-1.11.0/auto/extensions/gl/GL_ARB_multi_bind
+glew-1.11.0/auto/extensions/gl/GL_ARB_vertex_shader
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_snorm
+glew-1.11.0/auto/extensions/gl/GL_EXT_texture_compression_s3tc
+glew-1.11.0/auto/extensions/gl/GL_SUN_read_video_pixels
+glew-1.11.0/auto/extensions/gl/GL_APPLE_vertex_program_evaluators
+glew-1.11.0/auto/extensions/gl/GL_MESA_pack_invert
+glew-1.11.0/auto/extensions/gl/GL_REGAL_proc_address
+glew-1.11.0/auto/extensions/gl/GL_ARB_occlusion_query2
+glew-1.11.0/auto/extensions/gl/GL_ARB_get_program_binary
+glew-1.11.0/auto/extensions/gl/GL_NV_texgen_emboss
+glew-1.11.0/auto/extensions/gl/GL_SGIS_texture_filter4
+glew-1.11.0/auto/extensions/gl/GL_SGIX_vertex_preclip_hint
+glew-1.11.0/auto/extensions/gl/GLX_ARB_vertex_buffer_object
+glew-1.11.0/auto/extensions/gl/GL_ARB_shadow
+glew-1.11.0/auto/extensions/gl/GL_ARB_robust_buffer_access_behavior
+glew-1.11.0/auto/extensions/gl/GL_EXT_shader_image_load_formatted
+glew-1.11.0/auto/extensions/gl/GL_WIN_swap_hint
+glew-1.11.0/auto/extensions/gl/GL_ATIX_texture_env_combine3
+glew-1.11.0/auto/extensions/gl/GL_NV_texture_expand_normal
+glew-1.11.0/auto/extensions/gl/GL_NV_fragment_program_option
+glew-1.11.0/auto/extensions/gl/GL_ARB_draw_elements_base_vertex
+glew-1.11.0/auto/extensions/gl/GL_EXT_color_subtable
+glew-1.11.0/auto/extensions/gl/GL_IBM_cull_vertex
+glew-1.11.0/auto/bin/
+glew-1.11.0/auto/bin/make_str.pl
+glew-1.11.0/auto/bin/parse_spec.pl
+glew-1.11.0/auto/bin/make_info_list.pl
+glew-1.11.0/auto/bin/update_ext.sh
+glew-1.11.0/auto/bin/make_info.pl
+glew-1.11.0/auto/bin/make_def_fun.pl
+glew-1.11.0/auto/bin/make.pl
+glew-1.11.0/auto/bin/filter_spec.py
+glew-1.11.0/auto/bin/filter_gl_ext.sh
+glew-1.11.0/auto/bin/make_init.pl
+glew-1.11.0/auto/bin/make_struct_fun.pl
+glew-1.11.0/auto/bin/make_def_var.pl
+glew-1.11.0/auto/bin/make_struct_var.pl
+glew-1.11.0/auto/bin/make_list.pl
+glew-1.11.0/auto/bin/make_header.pl
+glew-1.11.0/auto/bin/make_html.pl
+glew-1.11.0/auto/bin/filter_gles_ext.sh
+glew-1.11.0/auto/lib/
+glew-1.11.0/auto/lib/OpenGL/
+glew-1.11.0/auto/lib/OpenGL/Spec.pm
+glew-1.11.0/auto/custom.txt
+glew-1.11.0/auto/blacklist
+glew-1.11.0/auto/Makefile
+glew-1.11.0/config/
+glew-1.11.0/config/Makefile.fedora-mingw32
+glew-1.11.0/config/Makefile.cygwin
+glew-1.11.0/config/version
+glew-1.11.0/config/config.guess
+glew-1.11.0/config/Makefile.darwin-x86_64
+glew-1.11.0/config/Makefile.openbsd
+glew-1.11.0/config/Makefile.netbsd
+glew-1.11.0/config/Makefile.freebsd
+glew-1.11.0/config/Makefile.linux
+glew-1.11.0/config/Makefile.haiku
+glew-1.11.0/config/Makefile.solaris
+glew-1.11.0/config/Makefile.cygming
+glew-1.11.0/config/Makefile.nacl-64
+glew-1.11.0/config/Makefile.nacl-32
+glew-1.11.0/config/Makefile.mingw
+glew-1.11.0/config/Makefile.darwin-ppc
+glew-1.11.0/config/Makefile.irix
+glew-1.11.0/config/Makefile.gnu
+glew-1.11.0/config/Makefile.linux-mingw32
+glew-1.11.0/config/Makefile.linux-mingw64
+glew-1.11.0/config/Makefile.kfreebsd
+glew-1.11.0/config/Makefile.darwin
+glew-1.11.0/config/Makefile.solaris-gcc
+glew-1.11.0/doc/
+glew-1.11.0/doc/advanced.html
+glew-1.11.0/doc/basic.html
+glew-1.11.0/doc/glew.png
+glew-1.11.0/doc/index.html
+glew-1.11.0/doc/install.html
+glew-1.11.0/doc/glxew.html
+glew-1.11.0/doc/glew.txt
+glew-1.11.0/doc/build.html
+glew-1.11.0/doc/wglew.html
+glew-1.11.0/doc/gpl.txt
+glew-1.11.0/doc/mesa.txt
+glew-1.11.0/doc/khronos.txt
+glew-1.11.0/doc/new.png
+glew-1.11.0/doc/glew.css
+glew-1.11.0/doc/glew.html
+glew-1.11.0/doc/ogl_sm.jpg
+glew-1.11.0/doc/log.html
+glew-1.11.0/doc/credits.html
+glew-1.11.0/README.txt
+glew-1.11.0/LICENSE.txt
+glew-1.11.0/src/
+glew-1.11.0/src/glew.c
+glew-1.11.0/src/visualinfo.c
+glew-1.11.0/src/glewinfo.c
+glew-1.11.0/include/
+glew-1.11.0/include/GL/
+glew-1.11.0/include/GL/glew.h
+glew-1.11.0/include/GL/glxew.h
+glew-1.11.0/include/GL/wglew.h
+glew-1.11.0/bin/
+glew-1.11.0/glew.pc.in
+glew-1.11.0/lib/
+glew-1.11.0/build/
+glew-1.11.0/build/glew.rc
+glew-1.11.0/build/vc10/
+glew-1.11.0/build/vc10/glewinfo.vcxproj
+glew-1.11.0/build/vc10/common.props
+glew-1.11.0/build/vc10/glew_shared.vcxproj
+glew-1.11.0/build/vc10/glew_static.vcxproj
+glew-1.11.0/build/vc10/glew.sln
+glew-1.11.0/build/vc10/visualinfo.vcxproj
+glew-1.11.0/build/visualinfo.rc
+glew-1.11.0/build/vc12/
+glew-1.11.0/build/vc12/glewinfo.vcxproj
+glew-1.11.0/build/vc12/common.props
+glew-1.11.0/build/vc12/glew_shared.vcxproj
+glew-1.11.0/build/vc12/glew_static.vcxproj
+glew-1.11.0/build/vc12/glew.sln
+glew-1.11.0/build/vc12/visualinfo.vcxproj
+glew-1.11.0/build/glewinfo.rc
+glew-1.11.0/build/vc6/
+glew-1.11.0/build/vc6/glew_static.dsp
+glew-1.11.0/build/vc6/glew.dsw
+glew-1.11.0/build/vc6/visualinfo.dsp
+glew-1.11.0/build/vc6/glew_shared.dsp
+glew-1.11.0/build/vc6/glewinfo.dsp
+glew-1.11.0/build/vc6/Makefile
+glew-1.11.0/Makefile
