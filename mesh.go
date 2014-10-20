@@ -18,7 +18,7 @@ func NewMesh(geometry Geometry, material Material) Mesh {
 		vertexBuffer: vertexBuffer,
 		geometry:     geometry,
 		material:     material,
-		Transform:    NewTransform(),
+		Transform:    NewTransform(1),
 	}
 
 	if material.Color() != nil {

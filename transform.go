@@ -8,38 +8,46 @@ type transform struct {
 	quaternion mgl32.Quat
 	scale      mgl32.Vec3
 
-	translationMatrix mgl32.Mat4
-	rotationMatrix    mgl32.Mat4
-	scaleMatrix       mgl32.Mat4
+	multiplier float32
+
+	up      mgl32.Vec3
+	right   mgl32.Vec3
+	forward mgl32.Vec3
+
+	matrix mgl32.Mat4
 }
 
-func NewTransform() transform {
+func NewTransform(multiplier float32) transform {
 	return transform{
 		position:   mgl32.Vec3{0, 0, 0},
 		rotation:   mgl32.Vec3{0, 0, 0},
 		quaternion: mgl32.QuatIdent(),
 		scale:      mgl32.Vec3{1, 1, 1},
 
-		translationMatrix: mgl32.Ident4(),
-		rotationMatrix:    mgl32.Ident4(),
-		scaleMatrix:       mgl32.Ident4(),
+		multiplier: multiplier,
+
+		up:      mgl32.Vec3{0, 1, 0},
+		right:   mgl32.Vec3{1, 0, 0},
+		forward: mgl32.Vec3{0, 0, -1},
+
+		matrix: mgl32.Ident4(),
 	}
 }
 
 func (t *transform) SetPosition(x, y, z float32) {
-	t.position = mgl32.Vec3{x, y, z}
+	t.position = mgl32.Vec3{x * t.multiplier, y * t.multiplier, z * t.multiplier}
 
-	t.translationMatrix[12] = x
-	t.translationMatrix[13] = y
-	t.translationMatrix[14] = z
+	t.matrix[12] = x
+	t.matrix[13] = y
+	t.matrix[14] = z
 }
 
 func (t *transform) Scale(x, y, z float32) {
-	t.scale = mgl32.Vec3{x, y, z}
+	t.scale = mgl32.Vec3{x * t.multiplier, y * t.multiplier, z * t.multiplier}
 
-	t.scaleMatrix[0] = x
-	t.scaleMatrix[5] = y
-	t.scaleMatrix[10] = z
+	t.matrix[0] = x
+	t.matrix[5] = y
+	t.matrix[10] = z
 }
 
 func (t *transform) RotateX(angle float32) {
@@ -58,10 +66,20 @@ func (t *transform) RotateZ(angle float32) {
 }
 
 func (t *transform) rotateOnAxis(axis mgl32.Vec3, angle float32) {
-	t.quaternion = mgl32.QuatRotate(angle, axis)
-	t.rotationMatrix = t.rotationMatrix.Mul4(t.quaternion.Mat4())
+	q1 := mgl32.QuatRotate(angle*t.multiplier, axis)
+	t.matrix = t.matrix.Mul4(q1.Mat4())
+}
+
+func (t *transform) LookAt(x, y, z float32) {
+	target := mgl32.Vec3{x, y, z}
+
+	t.matrix = mgl32.LookAtV(
+		t.position,
+		target,
+		t.up,
+	)
 }
 
 func (t *transform) ModelMatrix() mgl32.Mat4 {
-	return t.translationMatrix.Mul4(t.rotationMatrix).Mul4(t.scaleMatrix)
+	return t.matrix
 }

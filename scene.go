@@ -4,8 +4,8 @@ type scene struct {
 	objects []*Mesh
 }
 
-func NewScene() scene {
-	return scene{}
+func NewScene() *scene {
+	return &scene{}
 }
 
 func (s *scene) Add(mesh *Mesh) {
