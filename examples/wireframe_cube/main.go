@@ -21,8 +21,8 @@ func main() {
 
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
-	camera.SetPosition(4.0, 3.0, 4.0)
-	camera.LookAt(0, 0, 0)
+	camera.Transform.SetPosition(4.0, 3.0, 4.0)
+	camera.Transform.LookAt(0, 0, 0)
 
 	box := three.NewCubeGeometry(1)
 	blue := three.NewMeshBasicMaterial()
@@ -37,7 +37,7 @@ func main() {
 		renderer.Render(scene, camera)
 	}
 
-	renderer.Unload(&scene)
+	renderer.Unload(scene)
 
 	renderer.OpenGLSentinel()
 }

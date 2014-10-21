@@ -1,6 +1,8 @@
 package three
 
-import "github.com/go-gl/mathgl/mgl32"
+import (
+	"github.com/go-gl/mathgl/mgl32"
+)
 
 type transform struct {
 	position   mgl32.Vec3
@@ -35,19 +37,19 @@ func NewTransform(multiplier float32) transform {
 }
 
 func (t *transform) SetPosition(x, y, z float32) {
-	t.position = mgl32.Vec3{x * t.multiplier, y * t.multiplier, z * t.multiplier}
+	t.position = mgl32.Vec3{x, y, z}
 
-	t.matrix[12] = x
-	t.matrix[13] = y
-	t.matrix[14] = z
+	t.matrix[12] = x * t.multiplier
+	t.matrix[13] = y * t.multiplier
+	t.matrix[14] = z * t.multiplier
 }
 
 func (t *transform) Scale(x, y, z float32) {
-	t.scale = mgl32.Vec3{x * t.multiplier, y * t.multiplier, z * t.multiplier}
+	t.scale = mgl32.Vec3{x, y, z}
 
-	t.matrix[0] = x
-	t.matrix[5] = y
-	t.matrix[10] = z
+	t.matrix[0] = x * t.multiplier
+	t.matrix[5] = y * t.multiplier
+	t.matrix[10] = z * t.multiplier
 }
 
 func (t *transform) RotateX(angle float32) {

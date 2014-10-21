@@ -74,7 +74,8 @@ func (r *Renderer) Render(scene *scene, camera *perspectiveCamera) {
 		program := element.material.Program(element)
 		program.use()
 
-		view := camera.Transform.ModelMatrix().Inv()
+		// Is already inverted by multiplier
+		view := camera.Transform.ModelMatrix()
 		projection := camera.projectionMatrix
 		MVP := projection.Mul4(view).Mul4(element.Transform.ModelMatrix())
 
