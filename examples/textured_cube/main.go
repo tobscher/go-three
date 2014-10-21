@@ -23,7 +23,6 @@ func main() {
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
 	camera.Transform.SetPosition(0, 0, 1000)
-	camera.Transform.LookAt(0, 0, 0)
 
 	box := three.NewCubeGeometry(200)
 	texture := three.NewMeshBasicMaterial()
