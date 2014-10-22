@@ -65,7 +65,7 @@ func (r *Renderer) SetSize(width, height int) {
 	r.Height = height
 }
 
-func (r *Renderer) Render(scene *scene, camera *perspectiveCamera) {
+func (r *Renderer) Render(scene *Scene, camera *perspectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
@@ -118,7 +118,7 @@ func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
 }
 
-func (r *Renderer) Unload(s *scene) {
+func (r *Renderer) Unload(s *Scene) {
 	log.Println("Cleaning up...")
 
 	for _, element := range s.objects {

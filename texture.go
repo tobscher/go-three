@@ -4,19 +4,22 @@ import (
 	"github.com/go-gl/gl"
 )
 
-type texture struct {
+// Texture represents a graphic that can be rendered on any geometry.
+type Texture struct {
 	glTexture gl.Texture
 }
 
-func NewTexture(path string) (*texture, error) {
+// NewTexture returns a new DDS texture loaded from the given path.
+func NewTexture(path string) (*Texture, error) {
 	t, err := TextureFromDDS(path)
 	if err != nil {
 		return nil, err
 	}
 
-	return &texture{glTexture: t}, nil
+	return &Texture{glTexture: t}, nil
 }
 
-func (t *texture) unload() {
+// Unload deallocates the opengl texture object.
+func (t *Texture) Unload() {
 	t.glTexture.Delete()
 }

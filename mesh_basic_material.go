@@ -6,7 +6,7 @@ type meshBasicMaterial struct {
 	colorsDirty  bool
 	color        *Color
 	textureDirty bool
-	texture      *texture
+	texture      *Texture
 	wireframe    bool
 }
 
@@ -49,13 +49,13 @@ func (m *meshBasicMaterial) SetColorsDirty(dirty bool) {
 	m.colorsDirty = dirty
 }
 
-func (m *meshBasicMaterial) SetTexture(texture *texture) *meshBasicMaterial {
+func (m *meshBasicMaterial) SetTexture(texture *Texture) *meshBasicMaterial {
 	m.textureDirty = true
 	m.texture = texture
 	return m
 }
 
-func (m meshBasicMaterial) Texture() *texture {
+func (m meshBasicMaterial) Texture() *Texture {
 	return m.texture
 }
 

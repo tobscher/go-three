@@ -8,7 +8,7 @@ type Material interface {
 	ColorsDirty() bool
 	SetColorsDirty(bool)
 
-	Texture() *texture
+	Texture() *Texture
 	TextureDirty() bool
 	SetTextureDirty(bool)
 
