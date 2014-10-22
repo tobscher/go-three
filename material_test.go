@@ -18,7 +18,7 @@ func (m *MockMaterial) ColorsDirty() bool {
 func (m *MockMaterial) SetColorsDirty(dirty bool) {
 }
 
-func (m *MockMaterial) Texture() *texture {
+func (m *MockMaterial) Texture() *Texture {
 	return nil
 }
 
