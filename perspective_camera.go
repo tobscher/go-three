@@ -3,7 +3,7 @@ package three
 import "github.com/go-gl/mathgl/mgl32"
 
 type perspectiveCamera struct {
-	Transform        transform
+	Transform        Transform
 	projectionMatrix mgl32.Mat4
 }
 

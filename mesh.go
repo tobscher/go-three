@@ -8,7 +8,7 @@ type Mesh struct {
 	geometry Geometry
 	material Material
 
-	Transform transform
+	Transform Transform
 }
 
 func NewMesh(geometry Geometry, material Material) Mesh {
