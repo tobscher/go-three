@@ -65,7 +65,7 @@ func (r *Renderer) SetSize(width, height int) {
 	r.Height = height
 }
 
-func (r *Renderer) Render(scene *Scene, camera *perspectiveCamera) {
+func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
