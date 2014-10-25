@@ -26,4 +26,6 @@ _testmain.go
 Vagrantfile
 .vagrant/
 
-examples/examples
+# Examples
+examples/wireframe_cube/wireframe_cube
+examples/textured_cube/textured_cube

@@ -15,6 +15,9 @@ script:
   - "export SKIP_GLFW=true"
   - go test -v
 
+after_script:
+  - ./scripts/build-examples
+
 after_failure:
   - ./scripts/after-failure
 after_error:

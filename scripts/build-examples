@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+changedir() {
+  echo "Building example $@"
+  pushd $@ >> /dev/null
+}
+
+die() {
+  echo "Failure: $@"
+  exit 1
+}
+
+pushd "examples" >> /dev/null
+  for D in `find . -mindepth 1 -maxdepth 1 -type d`
+  do
+    changedir $D
+      go get -d ||
+        die "Could not fetch dependencies for example: $D"
+      go build ||
+        die "Could not build example: $D"
+    popd >> /dev/null
+  done
+popd >> /dev/null
