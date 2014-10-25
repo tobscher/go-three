@@ -25,7 +25,7 @@ func TestNewTransform(t *testing.T) {
 	}
 
 	if transform.quaternion != defaultQuaternion {
-		t.Errorf("Default quaternion was not identity, got: ", transform.quaternion)
+		t.Errorf("Default quaternion was not identity, got: %v", transform.quaternion)
 	}
 
 	if transform.up != defaultUp {
