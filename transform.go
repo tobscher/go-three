@@ -93,7 +93,7 @@ func (t *Transform) Translate(v mgl32.Vec3) {
 	t.matrix[14] = t.position[2]
 }
 
-// Scale scales the 3D object by the given factor
+// Scale sets the scale factor of the 3D object to the given values
 // and updates it's matrix accordingly.
 func (t *Transform) Scale(x, y, z float32) {
 	t.scale = mgl32.Vec3{x, y, z}
@@ -106,6 +106,8 @@ func (t *Transform) Scale(x, y, z float32) {
 // RotateX rotates the 3D object by the given angle (in radians) around the x axis.
 // The model matrix is updated accordingly.
 func (t *Transform) RotateX(angle float32) {
+	t.rotation[0] += angle
+
 	v1 := mgl32.Vec3{1, 0, 0}
 	t.rotateOnAxis(v1, angle)
 }
@@ -113,6 +115,8 @@ func (t *Transform) RotateX(angle float32) {
 // RotateY rotates the 3D object by the given angle (in radians) around the x axis.
 // The model matrix is updated accordingly.
 func (t *Transform) RotateY(angle float32) {
+	t.rotation[1] += angle
+
 	v1 := mgl32.Vec3{0, 1, 0}
 	t.rotateOnAxis(v1, angle)
 }
@@ -120,17 +124,21 @@ func (t *Transform) RotateY(angle float32) {
 // RotateZ rotates the 3D object by the given angle (in radians) around the x axis.
 // The model matrix is updated accordingly.
 func (t *Transform) RotateZ(angle float32) {
+	t.rotation[2] += angle
+
 	v1 := mgl32.Vec3{0, 0, 1}
 	t.rotateOnAxis(v1, angle)
 }
 
 func (t *Transform) rotateOnAxis(axis mgl32.Vec3, angle float32) {
 	q1 := mgl32.QuatRotate(angle*t.multiplier, axis)
+	t.quaternion = t.quaternion.Mul(q1)
+
 	t.matrix = t.matrix.Mul4(q1.Mat4())
 }
 
 // LookAt changes the transformation of the 3D object
-// so it looks at the target position. The model matrix
+// to face the target's position. The model matrix
 // will be updated accordingly.
 //
 // Note: This transformation makes use of the up vector.
