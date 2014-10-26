@@ -1,36 +1,34 @@
-package three
+package geometries
 
 import (
 	"github.com/go-gl/mathgl/mgl32"
+	three "github.com/tobscher/go-three"
 )
 
 // Use struct composition
-type boxGeometry struct {
+type Box struct {
+	geometry three.Geometry
+
 	width  float32
 	height float32
 	depth  float32
 }
 
-func NewBoxGeometry(width, height, depth float32) *boxGeometry {
-	return &boxGeometry{
+func NewBox(width, height, depth float32) *Box {
+	box := Box{
 		width:  width,
 		height: height,
-		depth:  depth}
-}
+		depth:  depth,
+	}
 
-func NewCubeGeometry(size float32) *boxGeometry {
-	return NewBoxGeometry(size, size, size)
-}
+	vertices := make([]mgl32.Vec3, 0)
 
-func (bg *boxGeometry) generateVertexBuffer() []float32 {
-	bufferData := make([]float32, 0)
-
-	halfWidth := bg.width / 2.0
-	halfHeight := bg.height / 2.0
-	halfDepth := bg.depth / 2.0
+	halfWidth := width / 2.0
+	halfHeight := height / 2.0
+	halfDepth := depth / 2.0
 
 	// Bottom plane
-	bufferData = append(bufferData, buildPlane(
+	vertices = append(vertices, buildPlane(
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
@@ -38,7 +36,7 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 	)...)
 
 	// Side 1
-	bufferData = append(bufferData, buildPlane(
+	vertices = append(vertices, buildPlane(
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
@@ -46,7 +44,7 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 	)...)
 
 	// Side 2
-	bufferData = append(bufferData, buildPlane(
+	vertices = append(vertices, buildPlane(
 		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
@@ -54,7 +52,7 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 	)...)
 
 	// // Side 3
-	bufferData = append(bufferData, buildPlane(
+	vertices = append(vertices, buildPlane(
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
@@ -62,7 +60,7 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 	)...)
 
 	// // Side 4
-	bufferData = append(bufferData, buildPlane(
+	vertices = append(vertices, buildPlane(
 		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
@@ -70,23 +68,33 @@ func (bg *boxGeometry) generateVertexBuffer() []float32 {
 	)...)
 
 	// Top plane
-	bufferData = append(bufferData, buildPlane(
+	vertices = append(vertices, buildPlane(
 		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
 		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
 	)...)
 
-	return bufferData
+	box.geometry.Vertices = vertices
+
+	return &box
 }
 
-func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []float32 {
-	return []float32{
-		v1.X(), v1.Y(), v1.Z(),
-		v4.X(), v4.Y(), v4.Z(),
-		v3.X(), v3.Y(), v3.Z(),
-		v1.X(), v1.Y(), v1.Z(),
-		v2.X(), v2.Y(), v2.Z(),
-		v4.X(), v4.Y(), v4.Z(),
+func NewCube(size float32) *Box {
+	return NewBox(size, size, size)
+}
+
+func (b *Box) Vertices() []mgl32.Vec3 {
+	return b.geometry.Vertices
+}
+
+func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []mgl32.Vec3 {
+	return []mgl32.Vec3{
+		v1,
+		v4,
+		v3,
+		v1,
+		v2,
+		v4,
 	}
 }

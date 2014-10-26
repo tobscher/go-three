@@ -8,10 +8,11 @@ import (
 	"strings"
 )
 
+// Knows about attributes and uniforms
 type Program struct {
 	attributes map[string]Attribute
 	glProgram  gl.Program
-	loaded     bool
+	Loaded     bool
 	matrixID   gl.UniformLocation
 }
 
@@ -26,13 +27,18 @@ const (
 	SHADER_VERSION = "#version 330 core"
 )
 
-func (p *Program) load(program gl.Program) {
+func NewProgram() *Program {
+	return &Program{
+		attributes: make(map[string]Attribute),
+	}
+}
+
+func (p *Program) Load(program gl.Program) {
 	log.Println("*** Program loaded ***")
 
-	p.attributes = make(map[string]Attribute)
 	p.glProgram = program
 	p.matrixID = p.glProgram.GetUniformLocation("MVP")
-	p.loaded = true
+	p.Loaded = true
 }
 
 func (p *Program) unload() {

@@ -4,6 +4,8 @@ import (
 	"log"
 
 	three "github.com/tobscher/go-three"
+	geometries "github.com/tobscher/go-three/geometries"
+	materials "github.com/tobscher/go-three/materials"
 )
 
 const (
@@ -24,8 +26,8 @@ func main() {
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
 	camera.Transform.SetPosition(0, 0, 1000)
 
-	box := three.NewCubeGeometry(200)
-	texture := three.NewMeshBasicMaterial()
+	box := geometries.NewCube(200)
+	texture := materials.NewBasic()
 	t, err := three.NewTexture("textures/uvgrid01.dds")
 	if err != nil {
 		log.Panic(err)

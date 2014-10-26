@@ -65,13 +65,19 @@ func (r *Renderer) SetSize(width, height int) {
 	r.Height = height
 }
 
+// Generate buffers on the fly if they aren't generated already
+// Check if underlying data needs updating.
 func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for _, element := range scene.objects {
-		program := element.material.Program(element)
+		program := element.material.Program()
+		if program == nil {
+			program = makeProgram(element)
+			element.material.SetProgram(program)
+		}
 		program.use()
 
 		// Is already inverted by multiplier
@@ -82,28 +88,22 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		// Set model view projection matrix
 		program.MatrixID().UniformMatrix4fv(false, MVP)
 
-		// Set position attribute
-		vertexAttrib := gl.AttribLocation(0)
-		vertexAttrib.EnableArray()
-		element.vertexBuffer.bind(gl.ARRAY_BUFFER)
-		vertexAttrib.AttribPointer(3, gl.FLOAT, false, 0, nil)
-
 		var toDisable []gl.AttribLocation
 
 		for _, attribute := range program.attributes {
 			toDisable = append(toDisable, attribute.enableFor(element))
 		}
 
-		if element.material.Wireframe() {
-			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
-		} else {
-			gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
+		t, ok := element.material.(Wireframed)
+		if ok {
+			if t.Wireframe() {
+				gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
+			} else {
+				gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
+			}
 		}
 
-		gl.DrawArrays(gl.TRIANGLES, 0, element.vertexBuffer.vertexCount())
-
-		// Mandatory attribute
-		vertexAttrib.DisableArray()
+		gl.DrawArrays(gl.TRIANGLES, 0, len(element.geometry.Vertices()))
 
 		for _, location := range toDisable {
 			location.DisableArray()
@@ -118,17 +118,97 @@ func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
 }
 
+func makeProgram(mesh *Mesh) *Program {
+	program := NewProgram()
+	material := mesh.material
+	geometry := mesh.geometry
+
+	program.attributes["vertex"] = NewAttribute(0, 3, newVertexBuffer(geometry))
+
+	var feature ProgramFeature
+	if c, cOk := material.(Colored); cOk {
+		if c.Color() != nil {
+			program.attributes["color"] = NewAttribute(1, 3, newColorBuffer(len(geometry.Vertices()), c))
+			feature = COLOR
+		}
+	}
+
+	if t, tOk := material.(Textured); tOk {
+		if t.Texture() != nil {
+			program.attributes["texture"] = NewAttribute(1, 2, newUvBuffer(len(geometry.Vertices()), t))
+			feature = TEXTURE
+		}
+	}
+
+	program.Load(MakeProgram(feature))
+
+	return program
+}
+
+func newVertexBuffer(geometry Shape) *buffer {
+	result := []float32{}
+
+	for _, vertex := range geometry.Vertices() {
+		result = append(result, vertex.X(), vertex.Y(), vertex.Z())
+	}
+
+	b := NewBuffer(result)
+	return &b
+}
+
+// Do not use color value per vertex
+func newColorBuffer(count int, material Colored) *buffer {
+	result := []float32{}
+
+	for i := 0; i < count; i++ {
+		color := material.Color()
+		result = append(result, color.R(), color.G(), color.B())
+	}
+
+	b := NewBuffer(result)
+	return &b
+}
+
+func newUvBuffer(count int, material Textured) *buffer {
+	result := []float32{}
+
+	for i := 0; i < 6; i++ {
+		result = append(result,
+			1, 1,
+			0, 0,
+			1, 0,
+
+			1, 1,
+			0, 1,
+			0, 0,
+		)
+	}
+
+	// Invert V because we're using a compressed texture
+	for i := 1; i < len(result); i += 2 {
+		result[i] = 1.0 - result[i]
+	}
+
+	b := NewBuffer(result)
+	return &b
+}
+
 func (r *Renderer) Unload(s *Scene) {
 	log.Println("Cleaning up...")
 
 	for _, element := range s.objects {
-		colorBuffer := element.ColorBuffer()
-		colorBuffer.unload()
+		colorBuffer, ok := element.buffers["color"]
+		if ok {
+			colorBuffer.unload()
+		}
 
-		element.vertexBuffer.unload()
+		vertexBuffer, ok := element.buffers["vertex"]
+		if ok {
+			vertexBuffer.unload()
+		}
 
-		program := element.material.Program(element)
-		program.unload()
+		// 		program := element.material.Program()
+		// 		program.unload()
 	}
 
 	r.vertexArray.Delete()

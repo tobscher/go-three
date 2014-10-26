@@ -1,10 +1,13 @@
 package three
 
+import "github.com/go-gl/mathgl/mgl32"
+
 // Geometry is the interface which defines the shape of a
 // 3D object.
-//
-// generateVertexBuffer returns an array of points which define the shape
-// of the underlying geometry.
-type Geometry interface {
-	generateVertexBuffer() []float32
+type Shape interface {
+	Vertices() []mgl32.Vec3
+}
+
+type Geometry struct {
+	Vertices []mgl32.Vec3
 }

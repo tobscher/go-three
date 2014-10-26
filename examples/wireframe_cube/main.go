@@ -2,6 +2,8 @@ package main
 
 import (
 	three "github.com/tobscher/go-three"
+	"github.com/tobscher/go-three/geometries"
+	"github.com/tobscher/go-three/materials"
 	"log"
 )
 
@@ -24,14 +26,16 @@ func main() {
 	camera.Transform.SetPosition(4.0, 3.0, 4.0)
 	camera.Transform.LookAt(0, 0, 0)
 
-	box := three.NewCubeGeometry(1)
-	blue := three.NewMeshBasicMaterial()
+	box := geometries.NewCube(1)
+	blue := materials.NewBasic()
 	blue.SetColor(&three.Color{0.0, 0.0, 1.0})
 	blue.SetWireframe(true)
 
 	mesh := three.NewMesh(box, blue)
 
 	scene.Add(&mesh)
+
+	blue.SetColor(&three.Color{1.0, 0.0, 0.0})
 
 	for !renderer.ShouldClose() {
 		renderer.Render(scene, camera)
