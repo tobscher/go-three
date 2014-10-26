@@ -23,8 +23,11 @@ const (
 	TEXTURE
 )
 
-const (
-	SHADER_VERSION = "#version 330 core"
+var (
+	featureDefinitions = map[ProgramFeature]string{
+		COLOR:   "USE_COLOR",
+		TEXTURE: "USE_TEXTURE",
+	}
 )
 
 func NewProgram() *Program {
@@ -64,123 +67,83 @@ func MakeProgram(features ProgramFeature) gl.Program {
 }
 
 func loadVertexShader(features ProgramFeature) string {
-	formatted := fmt.Sprintf(`%v
+	formatted := fmt.Sprintf(`
+#version 330 core
 
 %v
 
-%v
+layout(location = 0) in vec3 vertexPosition_modelspace;
 
-%v
+#ifdef USE_COLOR
+  layout(location = 1) in vec3 vertexColor;
+  out vec3 fragmentColor;
+#endif
+
+#ifdef USE_TEXTURE
+  layout(location = 1) in vec2 vertexUV;
+  out vec2 UV;
+#endif
+
+uniform mat4 MVP;
 
 void main() {
-  %v
-}`, SHADER_VERSION, loadVertexIns(features), loadVertexOuts(features), loadVertexUniforms(features), loadVertexFeatures(features))
+  gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
+
+#ifdef USE_COLOR
+  fragmentColor = vertexColor;
+#endif
+
+#ifdef USE_TEXTURE
+  UV = vertexUV;
+#endif
+}`, getShaderDefinitions(features))
+
 	return formatted
 }
 
 func loadFragmentShader(features ProgramFeature) string {
-	formatted := fmt.Sprintf(`%v
+	formatted := fmt.Sprintf(`
+#version 330 core
 
 %v
-%v
 
-%v
+#ifdef USE_COLOR
+  in vec3 fragmentColor;
+#endif
+out vec3 color;
+
+#ifdef USE_TEXTURE
+  in vec2 UV;
+  uniform sampler2D textureSampler;
+#endif
 
 void main() {
-  %v
-}`, SHADER_VERSION, loadFragmentIns(features), loadFragmentOuts(features), loadFragmentUniforms(features), loadFragmentFeatures(features))
+#ifdef USE_COLOR
+  color = fragmentColor;
+#endif
+
+#ifdef USE_TEXTURE
+  color = texture(textureSampler, UV).rgb;
+#endif
+}`, getShaderDefinitions(features))
+
 	return formatted
 }
 
-// Fragment
-func loadFragmentIns(features ProgramFeature) string {
-	ins := []string{}
+func getShaderDefinitions(features ProgramFeature) string {
+	defines := []string{}
 
-	if features&COLOR == COLOR {
-		ins = append(ins, "in vec3 fragmentColor;")
+	if hasFeature(features, COLOR) {
+		defines = append(defines, fmt.Sprintf("#define %v", featureDefinitions[COLOR]))
 	}
 
-	if features&TEXTURE == TEXTURE {
-		ins = append(ins, "in vec2 UV;")
+	if hasFeature(features, TEXTURE) {
+		defines = append(defines, fmt.Sprintf("#define %v", featureDefinitions[TEXTURE]))
 	}
-	return strings.Join(ins, "\n")
+
+	return strings.Join(defines, "\n")
 }
 
-func loadFragmentOuts(features ProgramFeature) string {
-	return "out vec3 color;"
-}
-
-func loadFragmentUniforms(features ProgramFeature) string {
-	if features&TEXTURE == TEXTURE {
-		return "uniform sampler2D textureSampler;"
-	}
-
-	return "// No uniforms"
-}
-
-func loadFragmentFeatures(features ProgramFeature) string {
-	if features&COLOR == COLOR {
-		return "color = fragmentColor;"
-	}
-
-	if features&TEXTURE == TEXTURE {
-		return "color = texture(textureSampler, UV).rgb;"
-	}
-
-	return ""
-}
-
-// Vertex
-func loadVertexIns(features ProgramFeature) string {
-	ins := []string{
-		"layout(location = 0) in vec3 vertexPosition_modelspace;",
-	}
-
-	if features&COLOR == COLOR {
-		ins = append(ins, "layout(location = 1) in vec3 vertexColor;")
-	}
-
-	if features&TEXTURE == TEXTURE {
-		ins = append(ins, "layout(location = 1) in vec2 vertexUV;")
-	}
-
-	return strings.Join(ins, "\n")
-}
-
-func loadVertexOuts(features ProgramFeature) string {
-	outs := []string{}
-
-	if features&COLOR == COLOR {
-		outs = append(outs, "out vec3 fragmentColor;")
-	}
-
-	if features&TEXTURE == TEXTURE {
-		outs = append(outs, "out vec2 UV;")
-	}
-
-	return strings.Join(outs, "\n")
-}
-
-func loadVertexUniforms(features ProgramFeature) string {
-	uniforms := []string{
-		"uniform mat4 MVP;",
-	}
-
-	return strings.Join(uniforms, "\n")
-}
-
-func loadVertexFeatures(features ProgramFeature) string {
-	result := []string{
-		"gl_Position =  MVP * vec4(vertexPosition_modelspace,1);",
-	}
-
-	if features&COLOR == COLOR {
-		result = append(result, "  fragmentColor = vertexColor;")
-	}
-
-	if features&TEXTURE == TEXTURE {
-		result = append(result, "  UV = vertexUV;")
-	}
-
-	return strings.Join(result, "\n")
+func hasFeature(features ProgramFeature, feature ProgramFeature) bool {
+	return features&feature == feature
 }
