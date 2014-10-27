@@ -10,6 +10,7 @@ import (
 	glh "github.com/tobscher/glh"
 )
 
+// Renderer handles mesh rendering to the window.
 type Renderer struct {
 	Width       int
 	Height      int
@@ -17,6 +18,7 @@ type Renderer struct {
 	window      *glfw.Window
 }
 
+// NewRenderer creates a new Renderer with the given window size and title.
 func NewRenderer(width, height int, title string) (*Renderer, error) {
 	// Error callback
 	glfw.SetErrorCallback(errorCallback)
@@ -60,13 +62,7 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	return &renderer, nil
 }
 
-func (r *Renderer) SetSize(width, height int) {
-	r.Width = width
-	r.Height = height
-}
-
-// Generate buffers on the fly if they aren't generated already
-// Check if underlying data needs updating.
+// Render renders the given scene with the given camera to the window.
 func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 	width, height := r.window.GetFramebufferSize()
 	gl.Viewport(0, 0, width, height)
@@ -97,7 +93,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		var toDisable []gl.AttribLocation
 
 		for _, attribute := range program.attributes {
-			toDisable = append(toDisable, attribute.enableFor(element))
+			toDisable = append(toDisable, attribute.enableFor())
 		}
 
 		t, ok := element.material.(Wireframed)
@@ -120,6 +116,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 	glfw.PollEvents()
 }
 
+// ShouldClose indicates if the window should be closed.
 func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
 }
@@ -156,7 +153,7 @@ func createProgram(mesh *Mesh) *Program {
 	return program
 }
 
-func newVertexBuffer(geometry Shape) *buffer {
+func newVertexBuffer(geometry Shape) *Buffer {
 	result := []float32{}
 
 	for _, vertex := range geometry.Vertices() {
@@ -167,7 +164,7 @@ func newVertexBuffer(geometry Shape) *buffer {
 	return &b
 }
 
-func newUvBuffer(geometry Shape) *buffer {
+func newUvBuffer(geometry Shape) *Buffer {
 	result := []float32{}
 
 	for _, uv := range geometry.VertexUvs() {
@@ -183,6 +180,7 @@ func newUvBuffer(geometry Shape) *buffer {
 	return &b
 }
 
+// Unload deallocates the given scene and all its shader programs.
 func (r *Renderer) Unload(s *Scene) {
 	log.Println("Cleaning up...")
 
@@ -195,6 +193,7 @@ func (r *Renderer) Unload(s *Scene) {
 	glfw.Terminate()
 }
 
+// OpenGLSentinel reports any OpenGL related errors.
 func (r *Renderer) OpenGLSentinel() {
 	glh.OpenGLSentinel()
 }

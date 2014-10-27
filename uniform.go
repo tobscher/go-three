@@ -5,10 +5,14 @@ import (
 	"github.com/go-gl/mathgl/mgl32"
 )
 
+// Uniform describes a uniform value which is passed
+// to the shader program.
 type Uniform struct {
 	location gl.UniformLocation
 }
 
+// NewUniform creates a new uniform using the given identifier to lookup
+// the uniform position in the shader program.
 func NewUniform(program *Program, identifier string) *Uniform {
 	uniform := Uniform{
 		program.glProgram.GetUniformLocation(identifier),

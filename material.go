@@ -1,8 +1,10 @@
 package three
 
-// Material is the interface which defines the appearance of 3D objects.
+// Appearance is the interface which defines the appearance of 3D objects.
 // For example: solid color, textured, etc.
 //
+// SetProgram is used to store the given program and to cache it inside
+// the material.
 // Program returns a program which is used to define the appearance of
 // the 3D object. A program consists of a vertex and a fragment shader.
 type Appearance interface {

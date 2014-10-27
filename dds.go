@@ -25,11 +25,12 @@ type ddsHeader struct {
 }
 
 const (
-	fourCC_DXT1 uint32 = 0x31545844 // Equivalent to "DXT1" in ASCII
-	fourCC_DXT3        = 0x33545844 // Equivalent to "DXT3" in ASCII
-	fourCC_DXT5        = 0x35545844 // Equivalent to "DXT5" in ASCII
+	fourCCDXT1 uint32 = 0x31545844 // Equivalent to "DXT1" in ASCII
+	fourCCDXT3        = 0x33545844 // Equivalent to "DXT3" in ASCII
+	fourCCDXT5        = 0x35545844 // Equivalent to "DXT5" in ASCII
 )
 
+// TextureFromDDS creates an OpenGL texture from the given file.
 func TextureFromDDS(fname string) (gl.Texture, error) {
 	file, err := os.Open(fname)
 	if err != nil {
@@ -69,20 +70,20 @@ func TextureFromDDS(fname string) (gl.Texture, error) {
 	var blockSize uint32
 	var format gl.GLenum
 	switch header.PixelFormat.FourCC {
-	case fourCC_DXT1:
+	case fourCCDXT1:
 		format = gl.COMPRESSED_RGBA_S3TC_DXT1_EXT
 		//components = 3
 		blockSize = 8
-	case fourCC_DXT3:
+	case fourCCDXT3:
 		format = gl.COMPRESSED_RGBA_S3TC_DXT3_EXT
 		//components = 4
 		blockSize = 16
-	case fourCC_DXT5:
+	case fourCCDXT5:
 		format = gl.COMPRESSED_RGBA_S3TC_DXT5_EXT
 		//components = 4
 		blockSize = 16
 	default:
-		return gl.Texture(0), fmt.Errorf("Invalid four CC in DDS header. Got: %x; Expected %x; %x; or %x", header.PixelFormat.FourCC, fourCC_DXT1, fourCC_DXT3, fourCC_DXT5)
+		return gl.Texture(0), fmt.Errorf("Invalid four CC in DDS header. Got: %x; Expected %x; %x; or %x", header.PixelFormat.FourCC, fourCCDXT1, fourCCDXT3, fourCCDXT5)
 	}
 
 	offset := 0

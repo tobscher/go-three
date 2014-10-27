@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// Knows about attributes and uniforms
+// Program is a GLSL shader program.
 type Program struct {
 	attributes map[string]Attribute
 	glProgram  gl.Program
@@ -16,10 +16,13 @@ type Program struct {
 	uniforms   map[string]*Uniform
 }
 
+// ProgramFeature type.
 type ProgramFeature int
 
 const (
+	// COLOR feature
 	COLOR ProgramFeature = 1 << iota
+	// TEXTURE feature
 	TEXTURE
 )
 
@@ -30,6 +33,7 @@ var (
 	}
 )
 
+// NewProgram returns a new Program with attributes and uniforms collection initialised.
 func NewProgram() *Program {
 	return &Program{
 		attributes: make(map[string]Attribute),
@@ -37,6 +41,7 @@ func NewProgram() *Program {
 	}
 }
 
+// Load sets the given OpenGL program.
 func (p *Program) Load(program gl.Program) {
 	log.Println("*** Program loaded ***")
 
@@ -55,6 +60,9 @@ func (p Program) use() {
 	p.glProgram.Use()
 }
 
+// MakeProgram loads a shader program for the given features.
+// Features will be activated via pre-processor directives.
+// e.g. #define USE_TEXTURE
 func MakeProgram(features ProgramFeature) gl.Program {
 	vertSource := loadVertexShader(features)
 	fragSource := loadFragmentShader(features)
