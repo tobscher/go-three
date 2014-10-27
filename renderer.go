@@ -75,7 +75,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 	for _, element := range scene.objects {
 		program := element.material.Program()
 		if program == nil {
-			program = makeProgram(element)
+			program = createProgram(element)
 			element.material.SetProgram(program)
 		}
 		program.use()
@@ -86,7 +86,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		MVP := projection.Mul4(view).Mul4(element.Transform.modelMatrix())
 
 		// Set model view projection matrix
-		program.MatrixID().UniformMatrix4fv(false, MVP)
+		program.uniforms["MVP"].apply(MVP)
 
 		var toDisable []gl.AttribLocation
 
@@ -118,13 +118,15 @@ func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
 }
 
-func makeProgram(mesh *Mesh) *Program {
+func createProgram(mesh *Mesh) *Program {
 	program := NewProgram()
 	material := mesh.material
 	geometry := mesh.geometry
 
+	// Attributes
 	program.attributes["vertex"] = NewAttribute(0, 3, newVertexBuffer(geometry))
 
+	// Use uniform or allow vertex colors (via interface, needs to come from geometry)
 	var feature ProgramFeature
 	if c, cOk := material.(Colored); cOk {
 		if c.Color() != nil {
@@ -133,6 +135,7 @@ func makeProgram(mesh *Mesh) *Program {
 		}
 	}
 
+	// Let geometry return UVs
 	if t, tOk := material.(Textured); tOk {
 		if t.Texture() != nil {
 			program.attributes["texture"] = NewAttribute(1, 2, newUvBuffer(len(geometry.Vertices()), t))
@@ -141,6 +144,9 @@ func makeProgram(mesh *Mesh) *Program {
 	}
 
 	program.Load(MakeProgram(feature))
+
+	// Uniforms
+	program.uniforms["MVP"] = NewUniform(program, "MVP")
 
 	return program
 }
@@ -157,6 +163,7 @@ func newVertexBuffer(geometry Shape) *buffer {
 }
 
 // Do not use color value per vertex
+// instead use uniform for diffuse color
 func newColorBuffer(count int, material Colored) *buffer {
 	result := []float32{}
 

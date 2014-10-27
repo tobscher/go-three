@@ -13,7 +13,7 @@ type Program struct {
 	attributes map[string]Attribute
 	glProgram  gl.Program
 	Loaded     bool
-	matrixID   gl.UniformLocation
+	uniforms   map[string]*Uniform
 }
 
 type ProgramFeature int
@@ -33,6 +33,7 @@ var (
 func NewProgram() *Program {
 	return &Program{
 		attributes: make(map[string]Attribute),
+		uniforms:   make(map[string]*Uniform),
 	}
 }
 
@@ -40,7 +41,6 @@ func (p *Program) Load(program gl.Program) {
 	log.Println("*** Program loaded ***")
 
 	p.glProgram = program
-	p.matrixID = p.glProgram.GetUniformLocation("MVP")
 	p.Loaded = true
 }
 
@@ -50,10 +50,6 @@ func (p *Program) unload() {
 
 func (p Program) use() {
 	p.glProgram.Use()
-}
-
-func (p Program) MatrixID() gl.UniformLocation {
-	return p.matrixID
 }
 
 func MakeProgram(features ProgramFeature) gl.Program {
