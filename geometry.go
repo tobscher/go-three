@@ -6,8 +6,10 @@ import "github.com/go-gl/mathgl/mgl32"
 // 3D object.
 type Shape interface {
 	Vertices() []mgl32.Vec3
+	VertexUvs() []mgl32.Vec2
 }
 
 type Geometry struct {
-	Vertices []mgl32.Vec3
+	Vertices  []mgl32.Vec3
+	VertexUvs []mgl32.Vec2
 }

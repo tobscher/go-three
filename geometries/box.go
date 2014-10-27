@@ -22,6 +22,7 @@ func NewBox(width, height, depth float32) *Box {
 	}
 
 	vertices := make([]mgl32.Vec3, 0)
+	vertexUvs := boxUvs()
 
 	halfWidth := width / 2.0
 	halfHeight := height / 2.0
@@ -76,6 +77,7 @@ func NewBox(width, height, depth float32) *Box {
 	)...)
 
 	box.geometry.Vertices = vertices
+	box.geometry.VertexUvs = vertexUvs
 
 	return &box
 }
@@ -88,6 +90,10 @@ func (b *Box) Vertices() []mgl32.Vec3 {
 	return b.geometry.Vertices
 }
 
+func (b *Box) VertexUvs() []mgl32.Vec2 {
+	return b.geometry.VertexUvs
+}
+
 func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []mgl32.Vec3 {
 	return []mgl32.Vec3{
 		v1,
@@ -97,4 +103,22 @@ func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []mgl32.Vec3 {
 		v2,
 		v4,
 	}
+}
+
+func boxUvs() []mgl32.Vec2 {
+	result := []mgl32.Vec2{}
+
+	for i := 0; i < 6; i++ {
+		result = append(result,
+			mgl32.Vec2{1, 1},
+			mgl32.Vec2{0, 0},
+			mgl32.Vec2{1, 0},
+
+			mgl32.Vec2{1, 1},
+			mgl32.Vec2{0, 1},
+			mgl32.Vec2{0, 0},
+		)
+	}
+
+	return result
 }

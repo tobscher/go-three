@@ -142,7 +142,7 @@ func createProgram(mesh *Mesh) *Program {
 	// Let geometry return UVs
 	if t, tOk := material.(Textured); tOk {
 		if t.Texture() != nil {
-			program.attributes["texture"] = NewAttribute(1, 2, newUvBuffer(len(geometry.Vertices()), t))
+			program.attributes["texture"] = NewAttribute(1, 2, newUvBuffer(geometry))
 			feature = TEXTURE
 		}
 	}
@@ -167,33 +167,11 @@ func newVertexBuffer(geometry Shape) *buffer {
 	return &b
 }
 
-// Do not use color value per vertex
-// instead use uniform for diffuse color
-func newColorBuffer(count int, material Colored) *buffer {
+func newUvBuffer(geometry Shape) *buffer {
 	result := []float32{}
 
-	for i := 0; i < count; i++ {
-		color := material.Color()
-		result = append(result, color.R(), color.G(), color.B())
-	}
-
-	b := NewBuffer(result)
-	return &b
-}
-
-func newUvBuffer(count int, material Textured) *buffer {
-	result := []float32{}
-
-	for i := 0; i < 6; i++ {
-		result = append(result,
-			1, 1,
-			0, 0,
-			1, 0,
-
-			1, 1,
-			0, 1,
-			0, 0,
-		)
+	for _, uv := range geometry.VertexUvs() {
+		result = append(result, uv.X(), uv.Y())
 	}
 
 	// Invert V because we're using a compressed texture
