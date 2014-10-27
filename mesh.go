@@ -1,7 +1,6 @@
 package three
 
 type Mesh struct {
-	buffers  map[string]buffer
 	geometry Shape
 	material Appearance
 

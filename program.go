@@ -45,6 +45,9 @@ func (p *Program) Load(program gl.Program) {
 }
 
 func (p *Program) unload() {
+	for _, attribute := range p.attributes {
+		attribute.buffer.unload()
+	}
 	p.glProgram.Delete()
 }
 

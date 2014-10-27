@@ -209,18 +209,8 @@ func (r *Renderer) Unload(s *Scene) {
 	log.Println("Cleaning up...")
 
 	for _, element := range s.objects {
-		colorBuffer, ok := element.buffers["color"]
-		if ok {
-			colorBuffer.unload()
-		}
-
-		vertexBuffer, ok := element.buffers["vertex"]
-		if ok {
-			vertexBuffer.unload()
-		}
-
-		// 		program := element.material.Program()
-		// 		program.unload()
+		program := element.material.Program()
+		program.unload()
 	}
 
 	r.vertexArray.Delete()
