@@ -5,7 +5,7 @@ import (
 	three "github.com/tobscher/go-three"
 )
 
-// Use struct composition
+// Box defines a box geometry consisting of 6 faces
 type Box struct {
 	geometry three.Geometry
 
@@ -14,6 +14,8 @@ type Box struct {
 	depth  float32
 }
 
+// NewBox creates a new Box with the given width, height and depth.
+// This method will generate the required vertices and its uv mappings.
 func NewBox(width, height, depth float32) *Box {
 	box := Box{
 		width:  width,
@@ -21,7 +23,7 @@ func NewBox(width, height, depth float32) *Box {
 		depth:  depth,
 	}
 
-	vertices := make([]mgl32.Vec3, 0)
+	var vertices []mgl32.Vec3
 	vertexUvs := boxUvs()
 
 	halfWidth := width / 2.0
@@ -82,14 +84,18 @@ func NewBox(width, height, depth float32) *Box {
 	return &box
 }
 
+// NewCube generates a new Box for the given side.
+// Vertices and VertexUvs will be created accordingly.
 func NewCube(size float32) *Box {
 	return NewBox(size, size, size)
 }
 
+// Vertices returns the list of used vertices to create a box geometry.
 func (b *Box) Vertices() []mgl32.Vec3 {
 	return b.geometry.Vertices
 }
 
+// VertexUvs returns the uv mapping for each vertex.
 func (b *Box) VertexUvs() []mgl32.Vec2 {
 	return b.geometry.VertexUvs
 }
