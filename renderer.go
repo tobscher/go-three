@@ -88,6 +88,12 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		// Set model view projection matrix
 		program.uniforms["MVP"].apply(MVP)
 
+		if c, ok := element.material.(Colored); ok {
+			if c.Color() != nil {
+				program.uniforms["diffuse"].apply(c.Color())
+			}
+		}
+
 		var toDisable []gl.AttribLocation
 
 		for _, attribute := range program.attributes {
@@ -126,11 +132,9 @@ func createProgram(mesh *Mesh) *Program {
 	// Attributes
 	program.attributes["vertex"] = NewAttribute(0, 3, newVertexBuffer(geometry))
 
-	// Use uniform or allow vertex colors (via interface, needs to come from geometry)
 	var feature ProgramFeature
 	if c, cOk := material.(Colored); cOk {
 		if c.Color() != nil {
-			program.attributes["color"] = NewAttribute(1, 3, newColorBuffer(len(geometry.Vertices()), c))
 			feature = COLOR
 		}
 	}
@@ -147,6 +151,7 @@ func createProgram(mesh *Mesh) *Program {
 
 	// Uniforms
 	program.uniforms["MVP"] = NewUniform(program, "MVP")
+	program.uniforms["diffuse"] = NewUniform(program, "diffuse")
 
 	return program
 }

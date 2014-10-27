@@ -20,5 +20,7 @@ func (u *Uniform) apply(value interface{}) {
 	switch t := value.(type) {
 	case mgl32.Mat4:
 		u.location.UniformMatrix4fv(false, t)
+	case *Color:
+		u.location.Uniform3fv(1, t.Float())
 	}
 }

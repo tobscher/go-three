@@ -38,6 +38,9 @@ func main() {
 	blue.SetColor(&three.Color{1.0, 0.0, 0.0})
 
 	for !renderer.ShouldClose() {
+		mesh.Transform.RotateX(0.01)
+		mesh.Transform.RotateY(0.02)
+
 		renderer.Render(scene, camera)
 	}
 

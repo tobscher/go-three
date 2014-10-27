@@ -20,3 +20,10 @@ func (c Color) G() float32 {
 func (c Color) B() float32 {
 	return c[2]
 }
+
+// Float returns the current as array of float32's
+func (c Color) Float() []float32 {
+	return []float32{
+		c[0], c[1], c[2],
+	}
+}

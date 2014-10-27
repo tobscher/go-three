@@ -70,11 +70,6 @@ func loadVertexShader(features ProgramFeature) string {
 
 layout(location = 0) in vec3 vertexPosition_modelspace;
 
-#ifdef USE_COLOR
-  layout(location = 1) in vec3 vertexColor;
-  out vec3 fragmentColor;
-#endif
-
 #ifdef USE_TEXTURE
   layout(location = 1) in vec2 vertexUV;
   out vec2 UV;
@@ -84,10 +79,6 @@ uniform mat4 MVP;
 
 void main() {
   gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
-
-#ifdef USE_COLOR
-  fragmentColor = vertexColor;
-#endif
 
 #ifdef USE_TEXTURE
   UV = vertexUV;
@@ -104,9 +95,9 @@ func loadFragmentShader(features ProgramFeature) string {
 %v
 
 #ifdef USE_COLOR
-  in vec3 fragmentColor;
+  uniform vec3 diffuse;
 #endif
-out vec3 color;
+out vec4 color;
 
 #ifdef USE_TEXTURE
   in vec2 UV;
@@ -115,11 +106,11 @@ out vec3 color;
 
 void main() {
 #ifdef USE_COLOR
-  color = fragmentColor;
+  color = vec4(diffuse, 1.0);
 #endif
 
 #ifdef USE_TEXTURE
-  color = texture(textureSampler, UV).rgb;
+  color = vec4(texture(textureSampler, UV).rgb, 1.0);
 #endif
 }`, getShaderDefinitions(features))
 
