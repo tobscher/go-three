@@ -5,7 +5,6 @@ import (
 
 	three "github.com/tobscher/go-three"
 	geometries "github.com/tobscher/go-three/geometries"
-	materials "github.com/tobscher/go-three/materials"
 )
 
 const (
@@ -27,7 +26,7 @@ func main() {
 	camera.Transform.SetPosition(0, 0, 1000)
 
 	box := geometries.NewCube(200)
-	texture := materials.NewBasic()
+	texture := three.NewBasicMaterial()
 	t, err := three.NewTexture("textures/uvgrid01.dds")
 	if err != nil {
 		log.Panic(err)
