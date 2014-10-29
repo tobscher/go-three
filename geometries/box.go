@@ -24,7 +24,7 @@ func NewBox(width, height, depth float32) *Box {
 	}
 
 	var vertices []mgl32.Vec3
-	vertexUvs := boxUvs()
+	uvs := boxUvs()
 
 	halfWidth := width / 2.0
 	halfHeight := height / 2.0
@@ -78,8 +78,8 @@ func NewBox(width, height, depth float32) *Box {
 		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
 	)...)
 
-	box.geometry.Vertices = vertices
-	box.geometry.VertexUvs = vertexUvs
+	box.geometry.SetVertices(vertices)
+	box.geometry.SetUVs(uvs)
 
 	return &box
 }
@@ -92,12 +92,12 @@ func NewCube(size float32) *Box {
 
 // Vertices returns the list of used vertices to create a box geometry.
 func (b *Box) Vertices() []mgl32.Vec3 {
-	return b.geometry.Vertices
+	return b.geometry.Vertices()
 }
 
 // VertexUvs returns the uv mapping for each vertex.
-func (b *Box) VertexUvs() []mgl32.Vec2 {
-	return b.geometry.VertexUvs
+func (b *Box) UVs() []mgl32.Vec2 {
+	return b.geometry.UVs()
 }
 
 func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []mgl32.Vec3 {

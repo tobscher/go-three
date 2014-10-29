@@ -17,7 +17,7 @@ func (m *MockGeometry) Vertices() []mgl32.Vec3 {
 	}
 }
 
-func (m *MockGeometry) VertexUvs() []mgl32.Vec2 {
+func (m *MockGeometry) UVs() []mgl32.Vec2 {
 	return []mgl32.Vec2{
 		mgl32.Vec2{0, 0},
 		mgl32.Vec2{1, 0},

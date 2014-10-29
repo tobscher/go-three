@@ -170,7 +170,7 @@ func newVertexBuffer(geometry Shape) *Buffer {
 func newUvBuffer(geometry Shape) *Buffer {
 	result := []float32{}
 
-	for _, uv := range geometry.VertexUvs() {
+	for _, uv := range geometry.UVs() {
 		result = append(result, uv.X(), uv.Y())
 	}
 

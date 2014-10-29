@@ -10,7 +10,7 @@ type BasicMaterial struct {
 	wireframe bool
 }
 
-// NewBasic creates a new Basic material.
+// NewBasicMaterial creates a new Basic material.
 func NewBasicMaterial() *BasicMaterial {
 	material := BasicMaterial{}
 	return &material
