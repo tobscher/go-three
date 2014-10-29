@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"runtime"
 
 	gl "github.com/go-gl/gl"
 	glfw "github.com/go-gl/glfw3"
@@ -20,6 +21,8 @@ type Renderer struct {
 
 // NewRenderer creates a new Renderer with the given window size and title.
 func NewRenderer(width, height int, title string) (*Renderer, error) {
+	runtime.LockOSThread()
+
 	// Error callback
 	glfw.SetErrorCallback(errorCallback)
 
