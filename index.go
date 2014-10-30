@@ -22,5 +22,5 @@ func (i *Index) enable() {
 }
 
 func (i *Index) disable() {
-	i.glBuffer.Delete()
+	i.glBuffer.Unbind(gl.ELEMENT_ARRAY_BUFFER)
 }

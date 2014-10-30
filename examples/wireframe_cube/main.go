@@ -1,9 +1,10 @@
 package main
 
 import (
+	"log"
+
 	three "github.com/tobscher/go-three"
 	"github.com/tobscher/go-three/geometries"
-	"log"
 )
 
 const (
@@ -28,7 +29,7 @@ func main() {
 	box := geometries.NewTetrahedron()
 	blue := three.NewBasicMaterial()
 	blue.SetColor(&three.Color{0.0, 0.0, 1.0})
-	// blue.SetWireframe(true)
+	blue.SetWireframe(true)
 
 	mesh := three.NewMesh(box, blue)
 
