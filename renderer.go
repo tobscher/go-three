@@ -114,7 +114,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		}
 		element.index.enable()
 
-		gl.DrawElements(gl.TRIANGLE_STRIP, len(element.index.buffer.data), gl.UNSIGNED_SHORT, nil)
+		gl.DrawElements(gl.TRIANGLE_STRIP, element.index.count, gl.UNSIGNED_SHORT, nil)
 		// gl.DrawArrays(gl.TRIANGLES, 0, len(element.geometry.Vertices()))
 
 		for _, location := range toDisable {
@@ -134,14 +134,13 @@ func (r *Renderer) ShouldClose() bool {
 }
 
 func generateIndex(mesh *Mesh) *Index {
-	data := []interface{}{}
+	data := []uint16{}
 
 	for _, f := range mesh.geometry.Faces() {
 		data = append(data, f.A(), f.B(), f.C())
 	}
 
-	buffer := NewBuffer(data, gl.ELEMENT_ARRAY_BUFFER, 2)
-	index := NewIndex(&buffer)
+	index := NewIndex(data)
 	return index
 }
 

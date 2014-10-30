@@ -5,17 +5,22 @@ import (
 )
 
 type Index struct {
-	buffer *Buffer
+	glBuffer gl.Buffer
+	count    int
 }
 
-func NewIndex(buffer *Buffer) *Index {
-	return &Index{buffer: buffer}
+func NewIndex(data []uint16) *Index {
+	glBuffer := gl.GenBuffer()
+	glBuffer.Bind(gl.ELEMENT_ARRAY_BUFFER)
+	gl.BufferData(gl.ELEMENT_ARRAY_BUFFER, len(data)*2, data, gl.STATIC_DRAW)
+
+	return &Index{glBuffer: glBuffer, count: len(data)}
 }
 
 func (i *Index) enable() {
-	i.buffer.bind(gl.ELEMENT_ARRAY_BUFFER)
+	i.glBuffer.Bind(gl.ELEMENT_ARRAY_BUFFER)
 }
 
 func (i *Index) disable() {
-	i.buffer.unbind(gl.ELEMENT_ARRAY_BUFFER)
+	i.glBuffer.Delete()
 }
