@@ -54,8 +54,12 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	}
 	gl.GetError()
 
+	gl.ClearColor(0., 0., 0.4, 0.)
+
 	gl.Enable(gl.DEPTH_TEST)
 	gl.DepthFunc(gl.LESS)
+
+	gl.Enable(gl.CULL_FACE)
 
 	// Vertex buffers
 	vertexArray := gl.GenVertexArray()
@@ -78,6 +82,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 			element.material.SetProgram(program)
 		}
 		program.use()
+		defer program.unuse()
 
 		// Is already inverted by multiplier
 		view := camera.Transform.modelMatrix()
@@ -93,11 +98,21 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 			}
 		}
 
-		var toDisable []gl.AttribLocation
-
 		for _, attribute := range program.attributes {
-			toDisable = append(toDisable, attribute.enableFor())
+			attribute.enable()
+			defer attribute.disable()
+			attribute.bindBuffer()
+			defer attribute.unbindBuffer()
+			attribute.pointer()
+			attribute.bindBuffer()
 		}
+
+		vertexAttrib := gl.AttribLocation(0)
+		vertexAttrib.EnableArray()
+		defer vertexAttrib.DisableArray()
+		element.vertexBuffer.Bind(gl.ARRAY_BUFFER)
+		defer element.vertexBuffer.Unbind(gl.ARRAY_BUFFER)
+		vertexAttrib.AttribPointer(3, gl.FLOAT, false, 0, nil)
 
 		t, ok := element.material.(Wireframed)
 		if ok {
@@ -108,20 +123,10 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 			}
 		}
 
-		// Bind element array buffer
-		if element.index == nil {
-			element.index = generateIndex(element)
-		}
 		element.index.enable()
+		defer element.index.disable()
 
-		gl.DrawElements(gl.TRIANGLE_STRIP, element.index.count, gl.UNSIGNED_SHORT, nil)
-		// gl.DrawArrays(gl.TRIANGLES, 0, len(element.geometry.Vertices()))
-
-		for _, location := range toDisable {
-			location.DisableArray()
-		}
-
-		element.index.disable()
+		gl.DrawElements(gl.TRIANGLES, element.index.count, gl.UNSIGNED_SHORT, nil)
 	}
 
 	r.window.SwapBuffers()
@@ -133,24 +138,13 @@ func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
 }
 
-func generateIndex(mesh *Mesh) *Index {
-	data := []uint16{}
-
-	for _, f := range mesh.geometry.Faces() {
-		data = append(data, f.A(), f.B(), f.C())
-	}
-
-	index := NewIndex(data)
-	return index
-}
-
 func createProgram(mesh *Mesh) *Program {
 	program := NewProgram()
 	material := mesh.material
 	geometry := mesh.geometry
 
 	// Attributes
-	program.attributes["vertex"] = NewAttribute(0, 3, newVertexBuffer(geometry))
+	// program.attributes["vertex"] = NewAttribute(0, 3, newVertexBuffer(geometry))
 
 	var feature ProgramFeature
 	if c, cOk := material.(Colored); cOk {
@@ -174,17 +168,6 @@ func createProgram(mesh *Mesh) *Program {
 	program.uniforms["diffuse"] = NewUniform(program, "diffuse")
 
 	return program
-}
-
-func newVertexBuffer(geometry Shape) *Buffer {
-	result := []interface{}{}
-
-	for _, vertex := range geometry.Vertices() {
-		result = append(result, vertex.X(), vertex.Y(), vertex.Z())
-	}
-
-	b := NewBuffer(result, gl.ARRAY_BUFFER, 3*4)
-	return &b
 }
 
 func newUvBuffer(geometry Shape) *Buffer {

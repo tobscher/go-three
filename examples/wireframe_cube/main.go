@@ -26,7 +26,7 @@ func main() {
 	camera.Transform.SetPosition(4.0, 3.0, 4.0)
 	camera.Transform.LookAt(0, 0, 0)
 
-	box := geometries.NewTetrahedron()
+	box := geometries.NewCube(1)
 	blue := three.NewBasicMaterial()
 	blue.SetColor(&three.Color{0.0, 0.0, 1.0})
 	blue.SetWireframe(true)

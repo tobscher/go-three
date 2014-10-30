@@ -23,39 +23,74 @@ func NewBox(width, height, depth float32) *Box {
 		depth:  depth,
 	}
 
-	uvs := boxUvs()
-
 	halfWidth := width / 2.0
 	halfHeight := height / 2.0
 	halfDepth := depth / 2.0
 
 	vertices := []mgl32.Vec3{
-		// Bottom vertices
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth}, // 1
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth}, // 2
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth}, // 3
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth}, // 4
-
-		// Top vertices
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth}, // 5
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth}, // 6
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth}, // 7
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth}, // 8
+		// front
+		mgl32.Vec3{-halfWidth, -halfHeight, halfDepth},
+		mgl32.Vec3{halfWidth, -halfHeight, halfDepth},
+		mgl32.Vec3{halfWidth, halfHeight, halfDepth},
+		mgl32.Vec3{-halfWidth, halfHeight, halfDepth},
+		// top
+		mgl32.Vec3{-halfWidth, halfHeight, halfDepth},
+		mgl32.Vec3{halfWidth, halfHeight, halfDepth},
+		mgl32.Vec3{halfWidth, halfHeight, -halfDepth},
+		mgl32.Vec3{-halfWidth, halfHeight, -halfDepth},
+		// back
+		mgl32.Vec3{halfWidth, -halfHeight, -halfDepth},
+		mgl32.Vec3{-halfWidth, -halfHeight, -halfDepth},
+		mgl32.Vec3{-halfWidth, halfHeight, -halfDepth},
+		mgl32.Vec3{halfWidth, halfHeight, -halfDepth},
+		//bottom
+		mgl32.Vec3{-halfWidth, -halfHeight, -halfDepth},
+		mgl32.Vec3{halfWidth, -halfHeight, -halfDepth},
+		mgl32.Vec3{halfWidth, -halfHeight, halfDepth},
+		mgl32.Vec3{-halfWidth, -halfHeight, halfDepth},
+		// left
+		mgl32.Vec3{-halfWidth, -halfHeight, -halfDepth},
+		mgl32.Vec3{-halfWidth, -halfHeight, halfDepth},
+		mgl32.Vec3{-halfWidth, halfHeight, halfDepth},
+		mgl32.Vec3{-halfWidth, halfHeight, -halfDepth},
+		// right
+		mgl32.Vec3{halfWidth, -halfHeight, halfDepth},
+		mgl32.Vec3{halfWidth, -halfHeight, -halfDepth},
+		mgl32.Vec3{halfWidth, halfHeight, -halfDepth},
+		mgl32.Vec3{halfWidth, halfHeight, halfDepth},
 	}
 
-	var faces []*three.Face
-	// Bottom
-	faces = append(faces, buildFace(0, 1, 2, 3)...)
-	// Side 1
-	faces = append(faces, buildFace(2, 3, 7, 6)...)
-	// Side 2
-	faces = append(faces, buildFace(3, 1, 6, 4)...)
-	// Side 3
-	faces = append(faces, buildFace(0, 2, 5, 7)...)
-	// Side 4
-	faces = append(faces, buildFace(1, 0, 4, 5)...)
-	// Top
-	faces = append(faces, buildFace(4, 5, 6, 7)...)
+	var uvs []mgl32.Vec2
+
+	for i := 0; i < 6; i++ {
+		uvs = append(uvs,
+			mgl32.Vec2{0.0, 0.0},
+			mgl32.Vec2{1.0, 0.0},
+			mgl32.Vec2{1.0, 1.0},
+			mgl32.Vec2{0.0, 1.0},
+		)
+	}
+
+	faces := []*three.Face{
+		// front
+		three.NewFace(0, 1, 2),
+		three.NewFace(2, 3, 0),
+		// top
+		three.NewFace(4, 5, 6),
+		three.NewFace(6, 7, 4),
+		// back
+		three.NewFace(8, 9, 10),
+		three.NewFace(10, 11, 8),
+		// bottom
+		three.NewFace(12, 13, 14),
+		three.NewFace(14, 15, 12),
+		// left
+		three.NewFace(16, 17, 18),
+		three.NewFace(18, 19, 16),
+		// right
+		three.NewFace(20, 21, 22),
+		three.NewFace(22, 23, 20),
+	}
 
 	box.geometry.SetVertices(vertices)
 	box.geometry.SetUVs(uvs)
@@ -83,29 +118,4 @@ func (b *Box) Faces() []*three.Face {
 // VertexUvs returns the uv mapping for each vertex.
 func (b *Box) UVs() []mgl32.Vec2 {
 	return b.geometry.UVs()
-}
-
-func buildFace(v1, v2, v3, v4 uint16) []*three.Face {
-	return []*three.Face{
-		three.NewFace(v1, v4, v3),
-		three.NewFace(v1, v2, v4),
-	}
-}
-
-func boxUvs() []mgl32.Vec2 {
-	result := []mgl32.Vec2{}
-
-	for i := 0; i < 6; i++ {
-		result = append(result,
-			mgl32.Vec2{1, 1},
-			mgl32.Vec2{0, 0},
-			mgl32.Vec2{1, 0},
-
-			mgl32.Vec2{1, 1},
-			mgl32.Vec2{0, 1},
-			mgl32.Vec2{0, 0},
-		)
-	}
-
-	return result
 }

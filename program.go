@@ -60,6 +60,10 @@ func (p Program) use() {
 	p.glProgram.Use()
 }
 
+func (p Program) unuse() {
+	p.glProgram.Unuse()
+}
+
 // MakeProgram loads a shader program for the given features.
 // Features will be activated via pre-processor directives.
 // e.g. #define USE_TEXTURE

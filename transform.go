@@ -14,9 +14,9 @@ type Transform struct {
 
 	multiplier float32
 
-	up      mgl32.Vec3
-	right   mgl32.Vec3
-	forward mgl32.Vec3
+	Up      mgl32.Vec3
+	Right   mgl32.Vec3
+	Forward mgl32.Vec3
 
 	matrix mgl32.Mat4
 }
@@ -41,9 +41,9 @@ func NewTransform(multiplier float32) Transform {
 
 		multiplier: multiplier,
 
-		up:      mgl32.Vec3{0, 1, 0},
-		right:   mgl32.Vec3{1, 0, 0},
-		forward: mgl32.Vec3{0, 0, -1},
+		Up:      mgl32.Vec3{0, 1, 0},
+		Right:   mgl32.Vec3{1, 0, 0},
+		Forward: mgl32.Vec3{0, 0, -1},
 
 		matrix: mgl32.Ident4(),
 	}
@@ -148,7 +148,7 @@ func (t *Transform) LookAt(x, y, z float32) {
 	t.matrix = mgl32.LookAtV(
 		t.position,
 		target,
-		t.up,
+		t.Up,
 	)
 }
 

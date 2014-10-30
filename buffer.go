@@ -44,5 +44,5 @@ func (b *Buffer) bind(enum gl.GLenum) {
 }
 
 func (b *Buffer) unbind(enum gl.GLenum) {
-	b.glBuffer.Bind(enum)
+	b.glBuffer.Unbind(enum)
 }
