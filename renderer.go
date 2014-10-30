@@ -108,11 +108,20 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 			}
 		}
 
-		gl.DrawArrays(gl.TRIANGLES, 0, len(element.geometry.Vertices()))
+		// Bind element array buffer
+		if element.index == nil {
+			element.index = generateIndex(element)
+		}
+		element.index.enable()
+
+		gl.DrawElements(gl.TRIANGLE_STRIP, len(element.index.buffer.data), gl.UNSIGNED_SHORT, nil)
+		// gl.DrawArrays(gl.TRIANGLES, 0, len(element.geometry.Vertices()))
 
 		for _, location := range toDisable {
 			location.DisableArray()
 		}
+
+		element.index.disable()
 	}
 
 	r.window.SwapBuffers()
@@ -122,6 +131,18 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 // ShouldClose indicates if the window should be closed.
 func (r *Renderer) ShouldClose() bool {
 	return r.window.ShouldClose()
+}
+
+func generateIndex(mesh *Mesh) *Index {
+	data := []interface{}{}
+
+	for _, f := range mesh.geometry.Faces() {
+		data = append(data, f.A(), f.B(), f.C())
+	}
+
+	buffer := NewBuffer(data, gl.ELEMENT_ARRAY_BUFFER, 2)
+	index := NewIndex(&buffer)
+	return index
 }
 
 func createProgram(mesh *Mesh) *Program {
@@ -157,29 +178,29 @@ func createProgram(mesh *Mesh) *Program {
 }
 
 func newVertexBuffer(geometry Shape) *Buffer {
-	result := []float32{}
+	result := []interface{}{}
 
 	for _, vertex := range geometry.Vertices() {
 		result = append(result, vertex.X(), vertex.Y(), vertex.Z())
 	}
 
-	b := NewBuffer(result)
+	b := NewBuffer(result, gl.ARRAY_BUFFER, 3*4)
 	return &b
 }
 
 func newUvBuffer(geometry Shape) *Buffer {
-	result := []float32{}
+	result := []interface{}{}
 
 	for _, uv := range geometry.UVs() {
-		result = append(result, uv.X(), uv.Y())
+		result = append(result, uv.X(), 1.0-uv.Y())
 	}
 
 	// Invert V because we're using a compressed texture
-	for i := 1; i < len(result); i += 2 {
-		result[i] = 1.0 - result[i]
-	}
+	// for i := 1; i < len(result); i += 2 {
+	// 	result[i] = 1.0 - result[i]
+	// }
 
-	b := NewBuffer(result)
+	b := NewBuffer(result, gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT)))
 	return &b
 }
 

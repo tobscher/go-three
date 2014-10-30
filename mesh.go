@@ -4,6 +4,7 @@ package three
 // of a geometry and a material. Meshes can be transformed
 // in 3D space.
 type Mesh struct {
+	index    *Index
 	geometry Shape
 	material Appearance
 

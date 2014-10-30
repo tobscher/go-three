@@ -23,63 +23,43 @@ func NewBox(width, height, depth float32) *Box {
 		depth:  depth,
 	}
 
-	var vertices []mgl32.Vec3
 	uvs := boxUvs()
 
 	halfWidth := width / 2.0
 	halfHeight := height / 2.0
 	halfDepth := depth / 2.0
 
-	// Bottom plane
-	vertices = append(vertices, buildPlane(
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
-	)...)
+	vertices := []mgl32.Vec3{
+		// Bottom vertices
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth}, // 1
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth}, // 2
+		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth}, // 3
+		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth}, // 4
 
+		// Top vertices
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth}, // 5
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth}, // 6
+		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth}, // 7
+		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth}, // 8
+	}
+
+	var faces []*three.Face
+	// Bottom
+	faces = append(faces, buildFace(0, 1, 2, 3)...)
 	// Side 1
-	vertices = append(vertices, buildPlane(
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
-	)...)
-
+	faces = append(faces, buildFace(2, 3, 7, 6)...)
 	// Side 2
-	vertices = append(vertices, buildPlane(
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
-	)...)
-
-	// // Side 3
-	vertices = append(vertices, buildPlane(
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
-	)...)
-
-	// // Side 4
-	vertices = append(vertices, buildPlane(
-		mgl32.Vec3{0 - halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 - halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
-	)...)
-
-	// Top plane
-	vertices = append(vertices, buildPlane(
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 + halfDepth},
-		mgl32.Vec3{0 - halfWidth, 0 + halfHeight, 0 - halfDepth},
-		mgl32.Vec3{0 + halfWidth, 0 + halfHeight, 0 - halfDepth},
-	)...)
+	faces = append(faces, buildFace(3, 1, 6, 4)...)
+	// Side 3
+	faces = append(faces, buildFace(0, 2, 5, 7)...)
+	// Side 4
+	faces = append(faces, buildFace(1, 0, 4, 5)...)
+	// Top
+	faces = append(faces, buildFace(4, 5, 6, 7)...)
 
 	box.geometry.SetVertices(vertices)
 	box.geometry.SetUVs(uvs)
+	box.geometry.SetFaces(faces)
 
 	return &box
 }
@@ -95,19 +75,20 @@ func (b *Box) Vertices() []mgl32.Vec3 {
 	return b.geometry.Vertices()
 }
 
+// Faces returns the list of used faces to display a box geometry.
+func (b *Box) Faces() []*three.Face {
+	return b.geometry.Faces()
+}
+
 // VertexUvs returns the uv mapping for each vertex.
 func (b *Box) UVs() []mgl32.Vec2 {
 	return b.geometry.UVs()
 }
 
-func buildPlane(v1, v2, v3, v4 mgl32.Vec3) []mgl32.Vec3 {
-	return []mgl32.Vec3{
-		v1,
-		v4,
-		v3,
-		v1,
-		v2,
-		v4,
+func buildFace(v1, v2, v3, v4 uint16) []*three.Face {
+	return []*three.Face{
+		three.NewFace(v1, v4, v3),
+		three.NewFace(v1, v2, v4),
 	}
 }
 

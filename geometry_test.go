@@ -17,6 +17,12 @@ func (m *MockGeometry) Vertices() []mgl32.Vec3 {
 	}
 }
 
+func (m *MockGeometry) Faces() []*Face {
+	return []*Face{
+		NewFace(1, 2, 3),
+	}
+}
+
 func (m *MockGeometry) UVs() []mgl32.Vec2 {
 	return []mgl32.Vec2{
 		mgl32.Vec2{0, 0},

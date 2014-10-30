@@ -6,12 +6,14 @@ import "github.com/go-gl/mathgl/mgl32"
 // 3D object.
 type Shape interface {
 	Vertices() []mgl32.Vec3
+	Faces() []*Face
 	UVs() []mgl32.Vec2
 }
 
 // Geometry is a base struct with fields for Vertices and UVs.
 type Geometry struct {
 	vertices []mgl32.Vec3
+	faces    []*Face
 	uvs      []mgl32.Vec2
 }
 
@@ -23,6 +25,16 @@ func (g *Geometry) SetVertices(vertices []mgl32.Vec3) {
 // Vertices returns the vertices for the geometry.
 func (g *Geometry) Vertices() []mgl32.Vec3 {
 	return g.vertices
+}
+
+// SetFaces stores the given faces in an internal field.
+func (g *Geometry) SetFaces(faces []*Face) {
+	g.faces = faces
+}
+
+// Faces returns the triangle faces for the geometry.
+func (g *Geometry) Faces() []*Face {
+	return g.faces
 }
 
 // SetUVs stores the given uv mappings in an internal field.
