@@ -56,10 +56,12 @@ func (p *Program) unload() {
 	p.glProgram.Delete()
 }
 
+// Use makes this program current.
 func (p Program) Use() {
 	p.glProgram.Use()
 }
 
+// Unuse disables the current program.
 func (p Program) Unuse() {
 	p.glProgram.Unuse()
 }

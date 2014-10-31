@@ -5,11 +5,13 @@ import (
 	glh "github.com/tobscher/glh"
 )
 
+// Index stores information about element indices
 type Index struct {
 	glBuffer gl.Buffer
 	count    int
 }
 
+// NewIndex creates a new element index
 func NewIndex(data []uint16) *Index {
 	glBuffer := gl.GenBuffer()
 	glBuffer.Bind(gl.ELEMENT_ARRAY_BUFFER)

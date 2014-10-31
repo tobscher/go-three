@@ -19,10 +19,12 @@ func NewTexture(path string) (*Texture, error) {
 	return &Texture{glTexture: t}, nil
 }
 
+// Bind binds this texture.
 func (t *Texture) Bind() {
 	t.glTexture.Bind(gl.TEXTURE_2D)
 }
 
+// Unbind unbinds this texture.
 func (t *Texture) Unbind() {
 	t.glTexture.Unbind(gl.TEXTURE_2D)
 }
