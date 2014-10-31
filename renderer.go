@@ -81,8 +81,8 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 			program = createProgram(element)
 			element.material.SetProgram(program)
 		}
-		program.use()
-		defer program.unuse()
+		program.Use()
+		defer program.Unuse()
 
 		// Is already inverted by multiplier
 		view := camera.Transform.modelMatrix()
@@ -95,6 +95,16 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		if c, ok := element.material.(Colored); ok {
 			if c.Color() != nil {
 				program.uniforms["diffuse"].apply(c.Color())
+			}
+		}
+
+		if t, ok := element.material.(Textured); ok {
+			texture := t.Texture()
+			if texture != nil {
+				gl.ActiveTexture(gl.TEXTURE0)
+				texture.Bind()
+				defer texture.Unbind()
+				program.uniforms["texture"].apply(t.Texture())
 			}
 		}
 
@@ -141,11 +151,8 @@ func (r *Renderer) ShouldClose() bool {
 func createProgram(mesh *Mesh) *Program {
 	program := NewProgram()
 	material := mesh.material
-	geometry := mesh.geometry
 
 	// Attributes
-	// program.attributes["vertex"] = NewAttribute(0, 3, newVertexBuffer(geometry))
-
 	var feature ProgramFeature
 	if c, cOk := material.(Colored); cOk {
 		if c.Color() != nil {
@@ -156,7 +163,7 @@ func createProgram(mesh *Mesh) *Program {
 	// Let geometry return UVs
 	if t, tOk := material.(Textured); tOk {
 		if t.Texture() != nil {
-			program.attributes["texture"] = NewAttribute(1, 2, newUvBuffer(geometry))
+			program.attributes["texture"] = NewAttribute(1, 2, mesh.uvBuffer)
 			feature = TEXTURE
 		}
 	}
@@ -167,23 +174,13 @@ func createProgram(mesh *Mesh) *Program {
 	program.uniforms["MVP"] = NewUniform(program, "MVP")
 	program.uniforms["diffuse"] = NewUniform(program, "diffuse")
 
-	return program
-}
-
-func newUvBuffer(geometry Shape) *Buffer {
-	result := []interface{}{}
-
-	for _, uv := range geometry.UVs() {
-		result = append(result, uv.X(), 1.0-uv.Y())
+	if t, tOk := material.(Textured); tOk {
+		if t.Texture() != nil {
+			program.uniforms["texture"] = NewUniform(program, "textureSampler")
+		}
 	}
 
-	// Invert V because we're using a compressed texture
-	// for i := 1; i < len(result); i += 2 {
-	// 	result[i] = 1.0 - result[i]
-	// }
-
-	b := NewBuffer(result, gl.ARRAY_BUFFER, int(glh.Sizeof(gl.FLOAT)))
-	return &b
+	return program
 }
 
 // Unload deallocates the given scene and all its shader programs.

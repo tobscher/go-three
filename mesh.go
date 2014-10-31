@@ -10,6 +10,7 @@ import (
 // in 3D space.
 type Mesh struct {
 	vertexBuffer gl.Buffer
+	uvBuffer     gl.Buffer
 	index        *Index
 	geometry     Shape
 	material     Appearance
@@ -26,9 +27,29 @@ func NewMesh(geometry Shape, material Appearance) Mesh {
 	}
 
 	m.vertexBuffer = newVertexBuffer(geometry)
+	m.uvBuffer = newUvBuffer(geometry)
 	m.index = generateIndex(geometry)
 
 	return m
+}
+
+func newUvBuffer(geometry Shape) gl.Buffer {
+	result := []float32{}
+
+	for _, uv := range geometry.UVs() {
+		result = append(result, uv.X(), uv.Y())
+	}
+
+	// Invert V because we're using a compressed texture
+	for i := 1; i < len(result); i += 2 {
+		result[i] = 1.0 - result[i]
+	}
+
+	glBuffer := gl.GenBuffer()
+	glBuffer.Bind(gl.ARRAY_BUFFER)
+	gl.BufferData(gl.ARRAY_BUFFER, len(result)*2*4, result, gl.STATIC_DRAW)
+
+	return glBuffer
 }
 
 func newVertexBuffer(geometry Shape) gl.Buffer {
@@ -41,8 +62,6 @@ func newVertexBuffer(geometry Shape) gl.Buffer {
 	glBuffer := gl.GenBuffer()
 	glBuffer.Bind(gl.ARRAY_BUFFER)
 	gl.BufferData(gl.ARRAY_BUFFER, len(result)*3*4, result, gl.STATIC_DRAW)
-
-	log.Println("Vertices: ", result)
 
 	return glBuffer
 }

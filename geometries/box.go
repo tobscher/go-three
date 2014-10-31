@@ -64,10 +64,10 @@ func NewBox(width, height, depth float32) *Box {
 
 	for i := 0; i < 6; i++ {
 		uvs = append(uvs,
-			mgl32.Vec2{0.0, 0.0},
-			mgl32.Vec2{1.0, 0.0},
 			mgl32.Vec2{1.0, 1.0},
 			mgl32.Vec2{0.0, 1.0},
+			mgl32.Vec2{0.0, 0.0},
+			mgl32.Vec2{1.0, 0.0},
 		)
 	}
 

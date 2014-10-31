@@ -9,12 +9,12 @@ import (
 type Attribute struct {
 	index    int
 	size     uint
-	buffer   *Buffer
+	buffer   gl.Buffer
 	location gl.AttribLocation
 }
 
 // NewAttribute creates a new attribute for a shader program.
-func NewAttribute(index int, size uint, buffer *Buffer) Attribute {
+func NewAttribute(index int, size uint, buffer gl.Buffer) Attribute {
 	return Attribute{index: index, size: size, buffer: buffer}
 }
 
@@ -30,11 +30,11 @@ func (a *Attribute) pointer() {
 }
 
 func (a *Attribute) bindBuffer() {
-	a.buffer.bind(gl.ARRAY_BUFFER)
+	a.buffer.Bind(gl.ARRAY_BUFFER)
 }
 
 func (a *Attribute) unbindBuffer() {
-	a.buffer.unbind(gl.ARRAY_BUFFER)
+	a.buffer.Unbind(gl.ARRAY_BUFFER)
 }
 
 func (a *Attribute) disable() {

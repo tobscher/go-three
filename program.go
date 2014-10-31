@@ -51,16 +51,16 @@ func (p *Program) Load(program gl.Program) {
 
 func (p *Program) unload() {
 	for _, attribute := range p.attributes {
-		attribute.buffer.unload()
+		attribute.buffer.Delete()
 	}
 	p.glProgram.Delete()
 }
 
-func (p Program) use() {
+func (p Program) Use() {
 	p.glProgram.Use()
 }
 
-func (p Program) unuse() {
+func (p Program) Unuse() {
 	p.glProgram.Unuse()
 }
 

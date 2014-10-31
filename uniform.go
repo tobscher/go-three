@@ -3,6 +3,7 @@ package three
 import (
 	"github.com/go-gl/gl"
 	"github.com/go-gl/mathgl/mgl32"
+	"log"
 )
 
 // Uniform describes a uniform value which is passed
@@ -14,6 +15,7 @@ type Uniform struct {
 // NewUniform creates a new uniform using the given identifier to lookup
 // the uniform position in the shader program.
 func NewUniform(program *Program, identifier string) *Uniform {
+	log.Println("Find new uniform: ", identifier)
 	uniform := Uniform{
 		program.glProgram.GetUniformLocation(identifier),
 	}
@@ -26,5 +28,7 @@ func (u *Uniform) apply(value interface{}) {
 		u.location.UniformMatrix4fv(false, t)
 	case *Color:
 		u.location.Uniform3fv(1, t.Float())
+	case *Texture:
+		u.location.Uniform1i(0)
 	}
 }

@@ -19,6 +19,14 @@ func NewTexture(path string) (*Texture, error) {
 	return &Texture{glTexture: t}, nil
 }
 
+func (t *Texture) Bind() {
+	t.glTexture.Bind(gl.TEXTURE_2D)
+}
+
+func (t *Texture) Unbind() {
+	t.glTexture.Unbind(gl.TEXTURE_2D)
+}
+
 // Unload deallocates the opengl texture object.
 func (t *Texture) Unload() {
 	t.glTexture.Delete()
