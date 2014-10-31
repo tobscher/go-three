@@ -65,7 +65,12 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	vertexArray := gl.GenVertexArray()
 	vertexArray.Bind()
 
-	renderer := Renderer{vertexArray: vertexArray, window: window, Width: width, Height: height}
+	renderer := Renderer{
+		vertexArray: vertexArray,
+		window:      window,
+		Width:       width,
+		Height:      height,
+	}
 	return &renderer, nil
 }
 
