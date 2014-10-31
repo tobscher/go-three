@@ -28,16 +28,16 @@ func TestNewTransform(t *testing.T) {
 		t.Errorf("Default quaternion was not identity, got: %v", transform.quaternion)
 	}
 
-	if transform.up != defaultUp {
-		t.Errorf("Expected up to be %v got %v", defaultUp, transform.up)
+	if transform.Up != defaultUp {
+		t.Errorf("Expected up to be %v got %v", defaultUp, transform.Up)
 	}
 
-	if transform.right != defaultRight {
-		t.Errorf("Expected right to be %v got %v", defaultRight, transform.right)
+	if transform.Right != defaultRight {
+		t.Errorf("Expected right to be %v got %v", defaultRight, transform.Right)
 	}
 
-	if transform.forward != defaultForward {
-		t.Errorf("Expected forward to be %v got %v", defaultForward, transform.forward)
+	if transform.Forward != defaultForward {
+		t.Errorf("Expected forward to be %v got %v", defaultForward, transform.Forward)
 	}
 
 	if transform.matrix != defaultMatrix {
