@@ -64,7 +64,7 @@ func (t *Transform) SetPosition(x, y, z float32) {
 func (t *Transform) TranslateX(x float32) {
 	t.position[0] += x
 
-	t.matrix[12] = t.position[0]
+	t.matrix[12] = t.position[0] * t.multiplier
 }
 
 // TranslateY moves the object along the y axis by the given units.
@@ -72,7 +72,7 @@ func (t *Transform) TranslateX(x float32) {
 func (t *Transform) TranslateY(y float32) {
 	t.position[1] += y
 
-	t.matrix[13] = t.position[1]
+	t.matrix[13] = t.position[1] * t.multiplier
 }
 
 // TranslateZ moves the object along the z axis by the given units.
@@ -80,7 +80,7 @@ func (t *Transform) TranslateY(y float32) {
 func (t *Transform) TranslateZ(z float32) {
 	t.position[2] += z
 
-	t.matrix[14] = t.position[2]
+	t.matrix[14] = t.position[2] * t.multiplier
 }
 
 // Translate moves the object by the given vector.
@@ -88,9 +88,9 @@ func (t *Transform) TranslateZ(z float32) {
 func (t *Transform) Translate(v mgl32.Vec3) {
 	t.position = t.position.Add(v)
 
-	t.matrix[12] = t.position[0]
-	t.matrix[13] = t.position[1]
-	t.matrix[14] = t.position[2]
+	t.matrix[12] = t.position[0] * t.multiplier
+	t.matrix[13] = t.position[1] * t.multiplier
+	t.matrix[14] = t.position[2] * t.multiplier
 }
 
 // Scale sets the scale factor of the 3D object to the given values
