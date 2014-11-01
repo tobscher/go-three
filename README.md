@@ -37,7 +37,7 @@ const (
 )
 
 func main() {
-	window, err := three.NewWindow(640, 480, "Example")
+	window, err := three.NewWindow(width, height, "Example")
 	if err != nil {
 		log.Fatal(err)
 	}
