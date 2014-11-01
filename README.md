@@ -16,6 +16,62 @@ Once you have installed the prerequisites you can install the package via `go ge
 go get github.com/Tobscher/go-three
 ```
 
+## Usage
+
+```go
+package main
+
+import (
+	"log"
+
+	three "github.com/tobscher/go-three"
+	"github.com/tobscher/go-three/geometries"
+)
+
+const (
+	fov    = 75.0
+	width  = 640
+	height = 480
+	near   = 1
+	far    = 10000
+)
+
+func main() {
+	window, err := three.NewWindow(640, 480, "Example")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	renderer, err := three.NewRenderer(window)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	scene := three.NewScene()
+	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
+	camera.Transform.SetPosition(0, 0, 1000)
+
+	box := geometries.NewCube(200)
+	red := three.NewBasicMaterial()
+	red.SetColor(&three.Color{1.0, 0.0, 0.0})
+
+	mesh := three.NewMesh(box, red)
+
+	scene.Add(&mesh)
+
+	for !window.ShouldClose() {
+		mesh.Transform.RotateX(0.01)
+		mesh.Transform.RotateY(0.02)
+
+		renderer.Render(scene, camera)
+	}
+
+	renderer.Unload(scene)
+
+	renderer.OpenGLSentinel()
+}
+```
+
 ## Documentation
 
 Documentation can be found on [godoc.org](http://godoc.org/github.com/Tobscher/go-three).
