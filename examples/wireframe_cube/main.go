@@ -32,15 +32,13 @@ func main() {
 	camera.Transform.LookAt(0, 0, 0)
 
 	box := geometries.NewCube(1)
-	blue := three.NewBasicMaterial()
-	blue.SetColor(&three.Color{0.0, 0.0, 1.0})
-	blue.SetWireframe(true)
+	red := three.NewBasicMaterial()
+	red.SetColor(&three.Color{1.0, 0.0, 0.0})
+	red.SetWireframe(true)
 
-	mesh := three.NewMesh(box, blue)
+	mesh := three.NewMesh(box, red)
 
 	scene.Add(&mesh)
-
-	blue.SetColor(&three.Color{1.0, 0.0, 0.0})
 
 	for !window.ShouldClose() {
 		mesh.Transform.RotateX(0.01)
