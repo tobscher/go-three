@@ -16,7 +16,12 @@ const (
 )
 
 func main() {
-	renderer, err := three.NewRenderer(width, height, "Wireframe Cube")
+	window, err := three.NewWindow(width, height, "Example - Wireframe Cube")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	renderer, err := three.NewRenderer(window)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -37,7 +42,7 @@ func main() {
 
 	blue.SetColor(&three.Color{1.0, 0.0, 0.0})
 
-	for !renderer.ShouldClose() {
+	for !window.ShouldClose() {
 		mesh.Transform.RotateX(0.01)
 		mesh.Transform.RotateY(0.02)
 

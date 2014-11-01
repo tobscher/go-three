@@ -2,52 +2,20 @@ package three
 
 import (
 	"errors"
-	"fmt"
 	"log"
-	"runtime"
 
 	gl "github.com/go-gl/gl"
-	glfw "github.com/go-gl/glfw3"
 	glh "github.com/tobscher/glh"
 )
 
 // Renderer handles mesh rendering to the window.
 type Renderer struct {
-	Width       int
-	Height      int
+	window      *Window
 	vertexArray gl.VertexArray
-	window      *glfw.Window
 }
 
 // NewRenderer creates a new Renderer with the given window size and title.
-func NewRenderer(width, height int, title string) (*Renderer, error) {
-	runtime.LockOSThread()
-
-	// Error callback
-	glfw.SetErrorCallback(errorCallback)
-
-	// Init glfw
-	if !glfw.Init() {
-		return nil, errors.New("Could not initialise GLFW.")
-	}
-
-	glfw.WindowHint(glfw.Samples, 4)
-	glfw.WindowHint(glfw.ContextVersionMajor, 3)
-	glfw.WindowHint(glfw.ContextVersionMinor, 3)
-	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
-	glfw.WindowHint(glfw.OpenglProfile, glfw.OpenglCoreProfile)
-
-	// Create window
-	window, err := glfw.CreateWindow(width, height, title, nil, nil)
-	if err != nil {
-		return nil, err
-	}
-	window.SetKeyCallback(keyCallback)
-	window.MakeContextCurrent()
-
-	// Use vsync
-	glfw.SwapInterval(1)
-
+func NewRenderer(window *Window) (*Renderer, error) {
 	// Init glew
 	if gl.Init() != 0 {
 		return nil, errors.New("Could not initialise glew.")
@@ -68,16 +36,13 @@ func NewRenderer(width, height int, title string) (*Renderer, error) {
 	renderer := Renderer{
 		vertexArray: vertexArray,
 		window:      window,
-		Width:       width,
-		Height:      height,
 	}
 	return &renderer, nil
 }
 
 // Render renders the given scene with the given camera to the window.
 func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
-	width, height := r.window.GetFramebufferSize()
-	gl.Viewport(0, 0, width, height)
+	gl.Viewport(0, 0, r.window.Width, r.window.Height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
 	for _, element := range scene.objects {
@@ -144,13 +109,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		gl.DrawElements(gl.TRIANGLES, element.index.count, gl.UNSIGNED_SHORT, nil)
 	}
 
-	r.window.SwapBuffers()
-	glfw.PollEvents()
-}
-
-// ShouldClose indicates if the window should be closed.
-func (r *Renderer) ShouldClose() bool {
-	return r.window.ShouldClose()
+	r.window.Swap()
 }
 
 func createProgram(mesh *Mesh) *Program {
@@ -198,20 +157,10 @@ func (r *Renderer) Unload(s *Scene) {
 	}
 
 	r.vertexArray.Delete()
-	glfw.Terminate()
+	r.window.Unload()
 }
 
 // OpenGLSentinel reports any OpenGL related errors.
 func (r *Renderer) OpenGLSentinel() {
 	glh.OpenGLSentinel()
-}
-
-func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
-	if key == glfw.KeyEscape && action == glfw.Press {
-		w.SetShouldClose(true)
-	}
-}
-
-func errorCallback(err glfw.ErrorCode, desc string) {
-	fmt.Printf("%v: %v\n", err, desc)
 }
