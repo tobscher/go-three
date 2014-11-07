@@ -12,8 +12,6 @@ type Transform struct {
 	quaternion mgl32.Quat
 	scale      mgl32.Vec3
 
-	multiplier float32
-
 	Up      mgl32.Vec3
 	Right   mgl32.Vec3
 	Forward mgl32.Vec3
@@ -32,14 +30,12 @@ type Transform struct {
 // Up:       0,1,0
 // Right:    1,0,0
 // Forward:  0,0,-1
-func NewTransform(multiplier float32) Transform {
+func NewTransform() Transform {
 	return Transform{
 		position:   mgl32.Vec3{0, 0, 0},
 		rotation:   mgl32.Vec3{0, 0, 0},
 		quaternion: mgl32.QuatIdent(),
 		scale:      mgl32.Vec3{1, 1, 1},
-
-		multiplier: multiplier,
 
 		Up:      mgl32.Vec3{0, 1, 0},
 		Right:   mgl32.Vec3{1, 0, 0},
@@ -54,9 +50,9 @@ func NewTransform(multiplier float32) Transform {
 func (t *Transform) SetPosition(x, y, z float32) {
 	t.position = mgl32.Vec3{x, y, z}
 
-	t.matrix[12] = x * t.multiplier
-	t.matrix[13] = y * t.multiplier
-	t.matrix[14] = z * t.multiplier
+	t.matrix[12] = x
+	t.matrix[13] = y
+	t.matrix[14] = z
 }
 
 // TranslateX moves the object along the x axis by the given units.
@@ -64,7 +60,7 @@ func (t *Transform) SetPosition(x, y, z float32) {
 func (t *Transform) TranslateX(x float32) {
 	t.position[0] += x
 
-	t.matrix[12] = t.position[0] * t.multiplier
+	t.matrix[12] = t.position[0]
 }
 
 // TranslateY moves the object along the y axis by the given units.
@@ -72,7 +68,7 @@ func (t *Transform) TranslateX(x float32) {
 func (t *Transform) TranslateY(y float32) {
 	t.position[1] += y
 
-	t.matrix[13] = t.position[1] * t.multiplier
+	t.matrix[13] = t.position[1]
 }
 
 // TranslateZ moves the object along the z axis by the given units.
@@ -80,7 +76,7 @@ func (t *Transform) TranslateY(y float32) {
 func (t *Transform) TranslateZ(z float32) {
 	t.position[2] += z
 
-	t.matrix[14] = t.position[2] * t.multiplier
+	t.matrix[14] = t.position[2]
 }
 
 // Translate moves the object by the given vector.
@@ -88,9 +84,9 @@ func (t *Transform) TranslateZ(z float32) {
 func (t *Transform) Translate(v mgl32.Vec3) {
 	t.position = t.position.Add(v)
 
-	t.matrix[12] = t.position[0] * t.multiplier
-	t.matrix[13] = t.position[1] * t.multiplier
-	t.matrix[14] = t.position[2] * t.multiplier
+	t.matrix[12] = t.position[0]
+	t.matrix[13] = t.position[1]
+	t.matrix[14] = t.position[2]
 }
 
 // Scale sets the scale factor of the 3D object to the given values
@@ -98,9 +94,9 @@ func (t *Transform) Translate(v mgl32.Vec3) {
 func (t *Transform) Scale(x, y, z float32) {
 	t.scale = mgl32.Vec3{x, y, z}
 
-	t.matrix[0] = x * t.multiplier
-	t.matrix[5] = y * t.multiplier
-	t.matrix[10] = z * t.multiplier
+	t.matrix[0] = x
+	t.matrix[5] = y
+	t.matrix[10] = z
 }
 
 // RotateX rotates the 3D object by the given angle (in radians) around the x axis.
@@ -131,7 +127,7 @@ func (t *Transform) RotateZ(angle float32) {
 }
 
 func (t *Transform) rotateOnAxis(axis mgl32.Vec3, angle float32) {
-	q1 := mgl32.QuatRotate(angle*t.multiplier, axis)
+	q1 := mgl32.QuatRotate(angle, axis)
 	t.quaternion = t.quaternion.Mul(q1)
 
 	t.matrix = t.matrix.Mul4(q1.Mat4())

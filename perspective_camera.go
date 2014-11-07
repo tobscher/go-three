@@ -1,6 +1,11 @@
 package three
 
-import "github.com/go-gl/mathgl/mgl32"
+import (
+	"log"
+	"math"
+
+	"github.com/go-gl/mathgl/mgl32"
+)
 
 // PerspectiveCamera has information about the transformation of the camera
 // and it's projection matrix.
@@ -20,12 +25,23 @@ type PerspectiveCamera struct {
 //
 // The cameras transform matrix will be inverted.
 func NewPerspectiveCamera(fov, aspect, near, far float32) *PerspectiveCamera {
-	matrix := mgl32.Perspective(fov, aspect, near, far)
+	matrix := makePerspective(fov, aspect, near, far)
 
 	camera := PerspectiveCamera{
 		projectionMatrix: matrix,
-		Transform:        NewTransform(-1),
+		Transform:        NewTransform(),
 	}
 
+	log.Println("Perspective matrix:", matrix)
+
 	return &camera
+}
+
+func makePerspective(fov, aspect, near, far float32) mgl32.Mat4 {
+	ymax := near * float32(math.Tan(float64(mgl32.DegToRad(fov*0.5))))
+	ymin := -ymax
+	xmin := ymin * aspect
+	xmax := ymax * aspect
+
+	return mgl32.Frustum(xmin, xmax, ymin, ymax, near, far)
 }

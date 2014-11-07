@@ -1,8 +1,9 @@
 package three
 
 import (
-	gl "github.com/go-gl/gl"
 	"log"
+
+	gl "github.com/go-gl/gl"
 )
 
 // Mesh is a representation of a 3D object. It consists
@@ -23,7 +24,7 @@ func NewMesh(geometry Shape, material Appearance) Mesh {
 	m := Mesh{
 		geometry:  geometry,
 		material:  material,
-		Transform: NewTransform(1),
+		Transform: NewTransform(),
 	}
 
 	m.vertexBuffer = newVertexBuffer(geometry)
