@@ -1,10 +1,6 @@
 package three
 
-import (
-	"log"
-
-	gl "github.com/go-gl/gl"
-)
+import gl "github.com/go-gl/gl"
 
 // Mesh is a representation of a 3D object. It consists
 // of a geometry and a material. Meshes can be transformed
@@ -73,8 +69,6 @@ func generateIndex(geometry Shape) *Index {
 	for _, f := range geometry.Faces() {
 		data = append(data, f.A(), f.B(), f.C())
 	}
-
-	log.Println("Elements: ", data)
 
 	index := NewIndex(data)
 	return index

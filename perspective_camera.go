@@ -1,7 +1,6 @@
 package three
 
 import (
-	"log"
 	"math"
 
 	"github.com/go-gl/mathgl/mgl32"
@@ -31,8 +30,6 @@ func NewPerspectiveCamera(fov, aspect, near, far float32) *PerspectiveCamera {
 		projectionMatrix: matrix,
 		Transform:        NewTransform(),
 	}
-
-	log.Println("Perspective matrix:", matrix)
 
 	return &camera
 }

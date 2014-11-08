@@ -1,8 +1,6 @@
 package geometries
 
 import (
-	"fmt"
-
 	"github.com/go-gl/mathgl/mgl32"
 	three "github.com/tobscher/go-three"
 )
@@ -61,8 +59,6 @@ func NewBox(width, height, depth float32) *Box {
 		mgl32.Vec3{halfWidth, halfHeight, -halfDepth},
 		mgl32.Vec3{halfWidth, halfHeight, halfDepth},
 	}
-
-	fmt.Println(vertices)
 
 	var uvs []mgl32.Vec2
 
