@@ -42,6 +42,10 @@ func NewRenderer(window *Window) (*Renderer, error) {
 
 // Render renders the given scene with the given camera to the window.
 func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
+	if r.window.CountFrames {
+		r.window.UpdateFrameCounter()
+	}
+
 	gl.Viewport(0, 0, r.window.Width, r.window.Height)
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 

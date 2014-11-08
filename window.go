@@ -3,8 +3,9 @@ package three
 import (
 	"errors"
 	"fmt"
-	glfw "github.com/go-gl/glfw3"
 	"runtime"
+
+	glfw "github.com/go-gl/glfw3"
 )
 
 // Window holds information about the dimensions and title of a window.
@@ -13,6 +14,10 @@ type Window struct {
 	Height int
 	Title  string
 	window *glfw.Window
+
+	CountFrames bool
+	nbFrames    int
+	lastTime    float64
 }
 
 // NewWindow creates a new window for the given dimensions and title.
@@ -46,10 +51,11 @@ func NewWindow(width, height int, title string) (*Window, error) {
 	glfw.SwapInterval(1)
 
 	w := Window{
-		window: window,
-		Width:  width,
-		Height: height,
-		Title:  title,
+		window:      window,
+		Width:       width,
+		Height:      height,
+		Title:       title,
+		CountFrames: false,
 	}
 
 	return &w, nil
@@ -69,6 +75,25 @@ func (w *Window) ShouldClose() bool {
 func (w *Window) Swap() {
 	w.window.SwapBuffers()
 	glfw.PollEvents()
+}
+
+// SetTitle sets the window title
+func (w *Window) SetTitle(title string) {
+	w.window.SetTitle(title)
+}
+
+// UpdateFrameCounter calculcates the time it took for the frame to render.
+// The window title is updated with these values.
+func (w *Window) UpdateFrameCounter() {
+	currTime := glfw.GetTime()
+	w.nbFrames++
+	if currTime-w.lastTime >= 1.0 {
+		newTitle := fmt.Sprintf("%v - %f ms/frame - %v FPS", w.Title, 1000.0/float64(w.nbFrames), w.nbFrames)
+		w.SetTitle(newTitle)
+
+		w.nbFrames = 0
+		w.lastTime += 1.0
+	}
 }
 
 func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
