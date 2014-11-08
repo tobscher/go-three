@@ -145,7 +145,7 @@ func (t *Transform) LookAt(x, y, z float32) {
 		t.position,
 		target,
 		t.Up,
-	)
+	).Inv()
 }
 
 func (t *Transform) modelMatrix() mgl32.Mat4 {
