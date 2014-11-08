@@ -1,13 +1,14 @@
 package three
 
 import (
-	"github.com/go-gl/mathgl/mgl32"
 	"math"
 	"testing"
+
+	"github.com/go-gl/mathgl/mgl32"
 )
 
 func TestNewTransform(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 	defaultPosition := mgl32.Vec3{0, 0, 0}
 	defaultRotation := mgl32.Vec3{0, 0, 0}
 	defaultQuaternion := mgl32.QuatIdent()
@@ -46,7 +47,7 @@ func TestNewTransform(t *testing.T) {
 }
 
 func TestTransformSetPosition(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 
 	expectedPosition := mgl32.Vec3{5, 10, 3.5}
 	transform.SetPosition(expectedPosition.X(), expectedPosition.Y(), expectedPosition.Z())
@@ -63,7 +64,7 @@ func TestTransformSetPosition(t *testing.T) {
 }
 
 func TestTransformTranslateX(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 
 	var translation float32 = 2.5
 	transform.TranslateX(translation)
@@ -78,7 +79,7 @@ func TestTransformTranslateX(t *testing.T) {
 }
 
 func TestTransformTranslateY(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 
 	var translation float32 = 3.75
 	transform.TranslateY(translation)
@@ -93,7 +94,7 @@ func TestTransformTranslateY(t *testing.T) {
 }
 
 func TestTransformTranslateZ(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 
 	var translation float32 = -13.37
 	transform.TranslateZ(translation)
@@ -108,7 +109,7 @@ func TestTransformTranslateZ(t *testing.T) {
 }
 
 func TestTransformTranslate(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 	transform.SetPosition(10, 10, 10)
 
 	vector := mgl32.Vec3{-5, 6, 3}
@@ -127,7 +128,7 @@ func TestTransformTranslate(t *testing.T) {
 }
 
 func TestTransformScale(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 	scale := mgl32.Vec3{2, 2, 2}
 
 	transform.Scale(scale.X(), scale.Y(), scale.Z())
@@ -144,7 +145,7 @@ func TestTransformScale(t *testing.T) {
 }
 
 func TestTransformRotateX(t *testing.T) {
-	transform := NewTransform(1)
+	transform := NewTransform()
 	var rotation float32 = math.Pi / 2
 
 	transform.RotateX(rotation)
