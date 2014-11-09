@@ -1,9 +1,10 @@
 package three
 
 import (
+	"log"
+
 	"github.com/go-gl/gl"
 	"github.com/go-gl/mathgl/mgl32"
-	"log"
 )
 
 // Uniform describes a uniform value which is passed
@@ -30,5 +31,7 @@ func (u *Uniform) apply(value interface{}) {
 		u.location.Uniform3fv(1, t.Float())
 	case *Texture:
 		u.location.Uniform1i(0)
+	case mgl32.Vec2:
+		u.location.Uniform2f(t[0], t[1])
 	}
 }

@@ -77,7 +77,8 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 				gl.ActiveTexture(gl.TEXTURE0)
 				texture.Bind()
 				defer texture.Unbind()
-				program.uniforms["texture"].apply(t.Texture())
+				program.uniforms["texture"].apply(texture)
+				program.uniforms["repeat"].apply(texture.Repeat)
 			}
 		}
 
@@ -142,8 +143,9 @@ func createProgram(mesh *Mesh) *Program {
 	program.uniforms["diffuse"] = NewUniform(program, "diffuse")
 
 	if t, tOk := material.(Textured); tOk {
-		if t.Texture() != nil {
+		if texture := t.Texture(); texture != nil {
 			program.uniforms["texture"] = NewUniform(program, "textureSampler")
+			program.uniforms["repeat"] = NewUniform(program, "repeat")
 		}
 	}
 

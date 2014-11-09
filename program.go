@@ -2,10 +2,11 @@ package three
 
 import (
 	"fmt"
-	"github.com/go-gl/gl"
-	"github.com/go-gl/glh"
 	"log"
 	"strings"
+
+	"github.com/go-gl/gl"
+	"github.com/go-gl/glh"
 )
 
 // Program is a GLSL shader program.
@@ -93,12 +94,13 @@ layout(location = 0) in vec3 vertexPosition_modelspace;
 #endif
 
 uniform mat4 MVP;
+uniform vec2 repeat;
 
 void main() {
   gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
 
 #ifdef USE_TEXTURE
-  UV = vertexUV;
+  UV = vertexUV * repeat;
 #endif
 }`, getShaderDefinitions(features))
 
