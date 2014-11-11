@@ -7,7 +7,7 @@ import (
 
 // Box defines a box geometry consisting of 6 faces
 type Box struct {
-	geometry three.Geometry
+	three.Geometry
 
 	width  float32
 	height float32
@@ -92,9 +92,9 @@ func NewBox(width, height, depth float32) *Box {
 		three.NewFace(22, 23, 20),
 	}
 
-	box.geometry.SetVertices(vertices)
-	box.geometry.SetUVs(uvs)
-	box.geometry.SetFaces(faces)
+	box.SetVertices(vertices)
+	box.SetUVs(uvs)
+	box.SetFaces(faces)
 
 	return &box
 }
@@ -103,19 +103,4 @@ func NewBox(width, height, depth float32) *Box {
 // Vertices and VertexUvs will be created accordingly.
 func NewCube(size float32) *Box {
 	return NewBox(size, size, size)
-}
-
-// Vertices returns the list of used vertices to create a box geometry.
-func (b *Box) Vertices() []mgl32.Vec3 {
-	return b.geometry.Vertices()
-}
-
-// Faces returns the list of used faces to display a box geometry.
-func (b *Box) Faces() []*three.Face {
-	return b.geometry.Faces()
-}
-
-// VertexUvs returns the uv mapping for each vertex.
-func (b *Box) UVs() []mgl32.Vec2 {
-	return b.geometry.UVs()
 }
