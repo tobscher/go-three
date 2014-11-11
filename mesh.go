@@ -24,7 +24,10 @@ func NewMesh(geometry Shape, material Appearance) Mesh {
 	}
 
 	m.vertexBuffer = newVertexBuffer(geometry)
-	m.uvBuffer = newUvBuffer(geometry)
+
+	if len(geometry.UVs()) > 0 {
+		m.uvBuffer = newUvBuffer(geometry)
+	}
 	m.index = generateIndex(geometry)
 
 	return m
