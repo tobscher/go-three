@@ -4,8 +4,11 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"regexp"
+	"strconv"
+	"strings"
 
 	"github.com/go-gl/mathgl/mgl32"
 	"github.com/tobscher/go-three"
@@ -32,6 +35,12 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 
 		// Match header and rest of line
 		result := r.FindStringSubmatch(text)
+
+		if len(result) != 3 {
+			log.Println("Skip line. Wrong format.")
+			continue
+		}
+
 		header := result[1]
 		restOfLine := result[2]
 
@@ -46,13 +55,32 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 			}
 			vertices = append(vertices, vert)
 		case "f":
-			f := make([]uint16, 3)
-			count, _ := fmt.Sscanf(restOfLine, "%d %d %d", &f[0], &f[1], &f[2])
-			if count != 3 {
-				return nil, errors.New("Invalid obj file. Face line should be of format 'a b c'")
+			f := []uint16{}
+
+			faceElements := strings.Split(restOfLine, " ")
+			if len(faceElements) < 3 {
+				return nil, errors.New("Invalid obj file. Face line should be of format 'a b c [d]'")
 			}
 
-			faces = append(faces, three.NewFace(f[0]-1, f[1]-1, f[2]-1))
+			for _, element := range faceElements {
+				elementTypes := strings.Split(element, "/")
+				if len(elementTypes) < 1 {
+					return nil, errors.New("Invalid obj file. Face element has wrong format 'v[[/vn][/vt]]'")
+				}
+
+				i, err := strconv.Atoi(elementTypes[0])
+				if err != nil {
+					return nil, errors.New("Invalid obj file. Face vertex index is not an integer.")
+				}
+
+				f = append(f, uint16(i)-1)
+			}
+			faces = append(faces, three.NewFace(f[0], f[1], f[2]))
+
+			// Index is a quad
+			if len(f) == 4 {
+				faces = append(faces, three.NewFace(f[0], f[2], f[3]))
+			}
 		default:
 			// eat line
 		}

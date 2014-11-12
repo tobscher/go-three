@@ -3,7 +3,7 @@ package loaders
 import "testing"
 
 func TestLoadFromObjVertices(t *testing.T) {
-	geometry, err := LoadFromObj("../test/fixtures/box.obj")
+	geometry, err := LoadFromObj("test/fixtures/box.obj")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17,7 +17,7 @@ func TestLoadFromObjVertices(t *testing.T) {
 }
 
 func TestLoadFromObjFaces(t *testing.T) {
-	geometry, err := LoadFromObj("../test/fixtures/box.obj")
+	geometry, err := LoadFromObj("test/fixtures/box.obj")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -28,4 +28,19 @@ func TestLoadFromObjFaces(t *testing.T) {
 	if actual != expected {
 		t.Errorf("Expected %v faces got %v.", expected, actual)
 	}
+}
+
+func TestLoadFromObjectQuadFaces(t *testing.T) {
+	geometry, err := LoadFromObj("test/fixtures/MaleLow.obj")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := 1496
+	actual := len(geometry.Faces())
+
+	if actual != expected {
+		t.Errorf("Expected %v faces got %v.", expected, actual)
+	}
+
 }
