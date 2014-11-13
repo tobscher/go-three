@@ -36,11 +36,10 @@ func TestLoadFromObjectQuadFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	expected := 1496
+	expected := 1500
 	actual := len(geometry.Faces())
 
 	if actual != expected {
 		t.Errorf("Expected %v faces got %v.", expected, actual)
 	}
-
 }

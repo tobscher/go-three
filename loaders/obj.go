@@ -75,11 +75,9 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 
 				f = append(f, uint16(i)-1)
 			}
-			faces = append(faces, three.NewFace(f[0], f[1], f[2]))
 
-			// Index is a quad
-			if len(f) == 4 {
-				faces = append(faces, three.NewFace(f[0], f[2], f[3]))
+			for i := 1; i < len(f)-1; i++ {
+				faces = append(faces, three.NewFace(f[0], f[i], f[i+1]))
 			}
 		default:
 			// eat line
