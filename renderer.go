@@ -2,7 +2,6 @@ package three
 
 import (
 	"errors"
-	"log"
 
 	gl "github.com/go-gl/gl"
 	glh "github.com/tobscher/glh"
@@ -154,8 +153,6 @@ func createProgram(mesh *Mesh) *Program {
 
 // Unload deallocates the given scene and all its shader programs.
 func (r *Renderer) Unload(s *Scene) {
-	log.Println("Cleaning up...")
-
 	for _, element := range s.objects {
 		program := element.material.Program()
 		program.unload()

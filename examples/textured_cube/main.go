@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"runtime"
 
 	three "github.com/tobscher/go-three"
 	geometries "github.com/tobscher/go-three/geometries"
@@ -16,7 +17,9 @@ const (
 )
 
 func main() {
-	window, err := three.NewWindow(width, height, "Example - Textured Cube")
+	runtime.LockOSThread()
+
+	window, err := three.NewWindow(width, height, "Example - Textured Cube", false)
 	if err != nil {
 		log.Fatal(err)
 	}
