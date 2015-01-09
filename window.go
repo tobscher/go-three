@@ -3,7 +3,6 @@ package three
 import (
 	"errors"
 	"fmt"
-	"runtime"
 
 	glfw "github.com/go-gl/glfw3"
 )
@@ -22,9 +21,7 @@ type Window struct {
 
 // NewWindow creates a new window for the given dimensions and title.
 // The window is created via GLFW.
-func NewWindow(width, height int, title string) (*Window, error) {
-	runtime.LockOSThread()
-
+func NewWindow(width, height int, title string, fullscreen bool) (*Window, error) {
 	// Error callback
 	glfw.SetErrorCallback(errorCallback)
 
@@ -39,13 +36,39 @@ func NewWindow(width, height int, title string) (*Window, error) {
 	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
 	glfw.WindowHint(glfw.OpenglProfile, glfw.OpenglCoreProfile)
 
+	var monitor *glfw.Monitor
+	var err error
+	if fullscreen {
+		logger.Println("Get primary monitor to create fullscreen window.")
+		monitor, err = glfw.GetPrimaryMonitor()
+		if err != nil {
+			return nil, err
+		}
+
+		logger.Println("Checking available video modes:")
+		videoModes, err := monitor.GetVideoModes()
+		if err != nil {
+			return nil, err
+		}
+
+		for _, videoMode := range videoModes {
+			logger.Printf("-- %++v\n", videoMode)
+		}
+
+		idealVideoMode := videoModes[len(videoModes)-1]
+
+		width = idealVideoMode.Width
+		height = idealVideoMode.Height
+	}
+
 	// Create window
-	window, err := glfw.CreateWindow(width, height, title, nil, nil)
+	window, err := glfw.CreateWindow(width, height, title, monitor, nil)
 	if err != nil {
 		return nil, err
 	}
 	window.SetKeyCallback(keyCallback)
 	window.MakeContextCurrent()
+	window.SetInputMode(glfw.StickyKeys, 1)
 
 	// Use vsync
 	glfw.SwapInterval(1)
