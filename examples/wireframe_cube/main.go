@@ -24,6 +24,7 @@ func main() {
 		Height:     height,
 		Title:      "Example - Wireframe Cube",
 		Fullscreen: false,
+		ClearColor: &three.Color{0., 0., 0.4},
 	}
 
 	window, err := three.NewWindow(settings)

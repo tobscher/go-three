@@ -21,7 +21,15 @@ func NewRenderer(window *Window) (*Renderer, error) {
 	}
 	gl.GetError()
 
-	gl.ClearColor(0., 0., 0.4, 0.)
+	if window.settings.ClearColor != nil {
+		color := window.settings.ClearColor
+		gl.ClearColor(
+			gl.GLclampf(color.R()),
+			gl.GLclampf(color.G()),
+			gl.GLclampf(color.B()),
+			0.,
+		)
+	}
 
 	gl.Enable(gl.DEPTH_TEST)
 	gl.DepthFunc(gl.LESS)

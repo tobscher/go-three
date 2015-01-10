@@ -18,6 +18,7 @@ type WindowSettings struct {
 	Height     int
 	Title      string
 	Fullscreen bool
+	ClearColor *Color
 }
 
 // NewWindow creates a new window for the given dimensions and title.
