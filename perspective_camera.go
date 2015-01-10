@@ -15,6 +15,12 @@ type PerspectiveCamera struct {
 	projectionMatrix mgl32.Mat4
 }
 
+type CameraSettings struct {
+	FOV  float32
+	Near float32
+	Far  float32
+}
+
 // NewPerspectiveCamera creates a new perspective camera for the given values.
 //
 // fov: Field of view in degrees

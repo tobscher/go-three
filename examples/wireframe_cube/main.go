@@ -19,7 +19,14 @@ const (
 func main() {
 	runtime.LockOSThread()
 
-	window, err := three.NewWindow(width, height, "Example - Wireframe Cube", false)
+	settings := three.WindowSettings{
+		Width:      width,
+		Height:     height,
+		Title:      "Example - Wireframe Cube",
+		Fullscreen: false,
+	}
+
+	window, err := three.NewWindow(settings)
 	if err != nil {
 		log.Fatal(err)
 	}
