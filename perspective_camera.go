@@ -11,8 +11,15 @@ import (
 //
 // Note: The underlying matrix for the transform structure must be inverted.
 type PerspectiveCamera struct {
-	Transform        Transform
+	Transform        *Transform
 	projectionMatrix mgl32.Mat4
+}
+
+// CameraSettings holds information to construct a new camera object.
+type CameraSettings struct {
+	FOV  float32
+	Near float32
+	Far  float32
 }
 
 // NewPerspectiveCamera creates a new perspective camera for the given values.

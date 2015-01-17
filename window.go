@@ -9,19 +9,22 @@ import (
 
 // Window holds information about the dimensions and title of a window.
 type Window struct {
-	Width  int
-	Height int
-	Title  string
-	window *glfw.Window
+	Settings WindowSettings
+	window   *glfw.Window
+}
 
-	CountFrames bool
-	nbFrames    int
-	lastTime    float64
+// WindowSettings holds information that describe how the window should constructed.
+type WindowSettings struct {
+	Width      int
+	Height     int
+	Title      string
+	Fullscreen bool
+	ClearColor *Color
 }
 
 // NewWindow creates a new window for the given dimensions and title.
 // The window is created via GLFW.
-func NewWindow(width, height int, title string, fullscreen bool) (*Window, error) {
+func NewWindow(settings WindowSettings) (*Window, error) {
 	// Error callback
 	glfw.SetErrorCallback(errorCallback)
 
@@ -35,10 +38,11 @@ func NewWindow(width, height int, title string, fullscreen bool) (*Window, error
 	glfw.WindowHint(glfw.ContextVersionMinor, 3)
 	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
 	glfw.WindowHint(glfw.OpenglProfile, glfw.OpenglCoreProfile)
+	glfw.WindowHint(glfw.OpenglDebugContext, 1)
 
 	var monitor *glfw.Monitor
 	var err error
-	if fullscreen {
+	if settings.Fullscreen {
 		logger.Println("Get primary monitor to create fullscreen window.")
 		monitor, err = glfw.GetPrimaryMonitor()
 		if err != nil {
@@ -52,17 +56,17 @@ func NewWindow(width, height int, title string, fullscreen bool) (*Window, error
 		}
 
 		for _, videoMode := range videoModes {
-			logger.Printf("-- %++v\n", videoMode)
+			logger.Printf("-- %+v\n", videoMode)
 		}
 
 		idealVideoMode := videoModes[len(videoModes)-1]
 
-		width = idealVideoMode.Width
-		height = idealVideoMode.Height
+		settings.Width = idealVideoMode.Width
+		settings.Height = idealVideoMode.Height
 	}
 
 	// Create window
-	window, err := glfw.CreateWindow(width, height, title, monitor, nil)
+	window, err := glfw.CreateWindow(settings.Width, settings.Height, settings.Title, monitor, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -74,11 +78,8 @@ func NewWindow(width, height int, title string, fullscreen bool) (*Window, error
 	glfw.SwapInterval(1)
 
 	w := Window{
-		window:      window,
-		Width:       width,
-		Height:      height,
-		Title:       title,
-		CountFrames: false,
+		window:   window,
+		Settings: settings,
 	}
 
 	return &w, nil
@@ -103,20 +104,6 @@ func (w *Window) Swap() {
 // SetTitle sets the window title
 func (w *Window) SetTitle(title string) {
 	w.window.SetTitle(title)
-}
-
-// UpdateFrameCounter calculcates the time it took for the frame to render.
-// The window title is updated with these values.
-func (w *Window) UpdateFrameCounter() {
-	currTime := glfw.GetTime()
-	w.nbFrames++
-	if currTime-w.lastTime >= 1.0 {
-		newTitle := fmt.Sprintf("%v - %f ms/frame - %v FPS", w.Title, 1000.0/float64(w.nbFrames), w.nbFrames)
-		w.SetTitle(newTitle)
-
-		w.nbFrames = 0
-		w.lastTime += 1.0
-	}
 }
 
 func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {

@@ -19,7 +19,14 @@ const (
 func main() {
 	runtime.LockOSThread()
 
-	window, err := three.NewWindow(width, height, "Example - Textured Cube", false)
+	settings := three.WindowSettings{
+		Width:      width,
+		Height:     height,
+		Title:      "Example - Textured Cube",
+		Fullscreen: false,
+	}
+
+	window, err := three.NewWindow(settings)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,11 +50,12 @@ func main() {
 
 	mesh := three.NewMesh(box, texture)
 
-	scene.Add(&mesh)
+	scene.Add(mesh)
 
+	transform := mesh.Transform()
 	for !window.ShouldClose() {
-		mesh.Transform.RotateX(0.01)
-		mesh.Transform.RotateY(0.02)
+		transform.RotateX(0.01)
+		transform.RotateY(0.02)
 
 		renderer.Render(scene, camera)
 	}

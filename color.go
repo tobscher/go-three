@@ -24,6 +24,8 @@ func (c Color) B() float32 {
 // Float returns the current as array of float32's
 func (c Color) Float() []float32 {
 	return []float32{
-		c[0], c[1], c[2],
+		c[0],
+		c[1],
+		c[2],
 	}
 }

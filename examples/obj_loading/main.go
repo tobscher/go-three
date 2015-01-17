@@ -19,11 +19,18 @@ const (
 func main() {
 	runtime.LockOSThread()
 
-	window, err := three.NewWindow(width, height, "Example - Wireframe Cube", false)
+	settings := three.WindowSettings{
+		Width:      width,
+		Height:     height,
+		Title:      "Example - Obj Loading",
+		Fullscreen: false,
+		// ClearColor: &three.Color{0., 0., 0.4},
+	}
+
+	window, err := three.NewWindow(settings)
 	if err != nil {
 		log.Fatal(err)
 	}
-	window.CountFrames = true
 
 	renderer, err := three.NewRenderer(window)
 	if err != nil {
@@ -42,15 +49,15 @@ func main() {
 
 	grey := three.NewBasicMaterial()
 	grey.SetColor(&three.Color{0.5, 0.5, 0.5})
-	grey.SetWireframe(true)
 
 	mesh := three.NewMesh(box, grey)
 
-	scene.Add(&mesh)
+	scene.Add(mesh)
 
+	transform := mesh.Transform()
 	for !window.ShouldClose() {
-		mesh.Transform.RotateX(0.01)
-		mesh.Transform.RotateY(0.02)
+		transform.RotateX(0.01)
+		transform.RotateY(0.02)
 
 		renderer.Render(scene, camera)
 	}

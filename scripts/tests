@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+die() {
+  echo "Failure: $@"
+  exit 1
+}
+
+go test -v || die "Tests failed."
+./scripts/build-examples || die "Tests failed."
