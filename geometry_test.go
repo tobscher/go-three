@@ -38,3 +38,7 @@ func (m *MockGeometry) Normals() []mgl32.Vec3 {
 		mgl32.Vec3{0, 0, 1},
 	}
 }
+
+func (m *MockGeometry) ArrayCount() int {
+	return 3
+}

@@ -77,9 +77,6 @@ func MakeProgram(features ProgramFeature) gl.Program {
 	vertSource := loadVertexShader(features)
 	fragSource := loadFragmentShader(features)
 
-	log.Println("Vertex shader: ", vertSource)
-	log.Println("Fragment shader: ", fragSource)
-
 	return glh.NewProgram(
 		glh.Shader{Type: gl.VERTEX_SHADER, Program: string(vertSource)},
 		glh.Shader{Type: gl.FRAGMENT_SHADER, Program: string(fragSource)},
