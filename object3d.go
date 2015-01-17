@@ -69,8 +69,22 @@ func newUvBuffer(geometry Shape) gl.Buffer {
 func newVertexBuffer(geometry Shape) gl.Buffer {
 	result := []float32{}
 
-	for _, vertex := range geometry.Vertices() {
-		result = append(result, vertex.X(), vertex.Y(), vertex.Z())
+	faces := geometry.Faces()
+	vertices := geometry.Vertices()
+
+	if len(faces) > 0 {
+		// Handle faces
+		for _, face := range faces {
+			for i := 0; i < 3; i++ {
+				vertex := vertices[face.At(i)]
+				result = append(result, vertex.X(), vertex.Y(), vertex.Z())
+			}
+		}
+	} else {
+		// Handle plain vertices
+		for _, vertex := range geometry.Vertices() {
+			result = append(result, vertex.X(), vertex.Y(), vertex.Z())
+		}
 	}
 
 	glBuffer := gl.GenBuffer()
@@ -83,8 +97,13 @@ func newVertexBuffer(geometry Shape) gl.Buffer {
 func newNormalBuffer(geometry Shape) gl.Buffer {
 	result := []float32{}
 
-	for _, normal := range geometry.Normals() {
-		result = append(result, normal.X(), normal.Y(), normal.Z())
+	normals := geometry.Normals()
+
+	for _, face := range geometry.Faces() {
+		for i := 0; i < 3; i++ {
+			normal := normals[face.NormalAt(i)]
+			result = append(result, normal.X(), normal.Y(), normal.Z())
+		}
 	}
 
 	glBuffer := gl.GenBuffer()
@@ -95,12 +114,13 @@ func newNormalBuffer(geometry Shape) gl.Buffer {
 }
 
 func generateIndex(geometry Shape) *Index {
-	data := []uint16{}
+	// Disabled VBO index for now
+	// data := []uint16{}
 
-	for _, f := range geometry.Faces() {
-		data = append(data, f.A(), f.B(), f.C())
-	}
+	// for _, f := range geometry.Faces() {
+	// 	data = append(data, f.A(), f.B(), f.C())
+	// }
 
-	index := NewIndex(data)
+	index := &Index{count: 0}
 	return index
 }

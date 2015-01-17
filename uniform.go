@@ -33,5 +33,7 @@ func (u *Uniform) apply(value interface{}) {
 		u.location.Uniform1i(0)
 	case mgl32.Vec2:
 		u.location.Uniform2f(t[0], t[1])
+	case mgl32.Vec3:
+		u.location.Uniform3f(t[0], t[1], t[2])
 	}
 }

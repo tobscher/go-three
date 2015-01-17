@@ -3,7 +3,7 @@ package three
 // Face stores indices to vertices.
 type Face struct {
 	vertexIndices [3]uint16
-	NormalIndices [3]uint16
+	normalIndices [3]uint16
 }
 
 // NewFace returns a new triangle face.
@@ -11,6 +11,14 @@ func NewFace(a, b, c uint16) *Face {
 	return &Face{
 		vertexIndices: [3]uint16{a, b, c},
 	}
+}
+
+func (f *Face) At(i int) uint16 {
+	return f.vertexIndices[i]
+}
+
+func (f *Face) NormalAt(i int) uint16 {
+	return f.normalIndices[i]
 }
 
 // A returns the index of the first vertex in the triangle.
@@ -26,4 +34,10 @@ func (f *Face) B() uint16 {
 // C returns the index of the third vertex in the triangle.
 func (f *Face) C() uint16 {
 	return f.vertexIndices[2]
+}
+
+func (f *Face) AddNormal(x, y, z uint16) {
+	f.normalIndices[0] = x
+	f.normalIndices[1] = y
+	f.normalIndices[2] = z
 }

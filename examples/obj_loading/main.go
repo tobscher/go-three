@@ -5,6 +5,7 @@ import (
 	"runtime"
 
 	three "github.com/tobscher/go-three"
+	"github.com/tobscher/go-three/examples/helpers"
 	"github.com/tobscher/go-three/loaders"
 )
 
@@ -39,8 +40,7 @@ func main() {
 
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
-	camera.Transform.SetPosition(4.0, 3.0, 4.0)
-	camera.Transform.LookAt(0, 0, 0)
+	camera.Transform.SetPosition(0, 0, 5.0)
 
 	box, err := loaders.LoadFromObj("obj/suzanne.obj")
 	if err != nil {
@@ -49,6 +49,8 @@ func main() {
 
 	grey := three.NewBasicMaterial()
 	grey.SetColor(&three.Color{0.5, 0.5, 0.5})
+
+	helpers.AddAxes(scene)
 
 	mesh := three.NewMesh(box, grey)
 

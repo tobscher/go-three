@@ -9,6 +9,7 @@ type Shape interface {
 	UVs() []mgl32.Vec2
 	Normals() []mgl32.Vec3
 	Faces() []*Face
+	ArrayCount() int
 }
 
 // Geometry is a base struct with fields for Vertices and UVs.
@@ -57,4 +58,12 @@ func (g *Geometry) SetUVs(uvs []mgl32.Vec2) {
 // UVs returns the uv mappings for the geometry.
 func (g *Geometry) UVs() []mgl32.Vec2 {
 	return g.uvs
+}
+
+func (g *Geometry) ArrayCount() int {
+	if len(g.faces) > 0 {
+		return len(g.faces) * 3
+	}
+
+	return len(g.vertices)
 }

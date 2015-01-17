@@ -25,12 +25,15 @@ const (
 	COLOR ProgramFeature = 1 << iota
 	// TEXTURE feature
 	TEXTURE
+	// Basic shading
+	SHADING_BASIC
 )
 
 var (
 	featureDefinitions = map[ProgramFeature]string{
-		COLOR:   "USE_COLOR",
-		TEXTURE: "USE_TEXTURE",
+		COLOR:         "USE_COLOR",
+		TEXTURE:       "USE_TEXTURE",
+		SHADING_BASIC: "USE_BASIC_SHADING",
 	}
 )
 
@@ -74,6 +77,9 @@ func MakeProgram(features ProgramFeature) gl.Program {
 	vertSource := loadVertexShader(features)
 	fragSource := loadFragmentShader(features)
 
+	log.Println("Vertex shader: ", vertSource)
+	log.Println("Fragment shader: ", fragSource)
+
 	return glh.NewProgram(
 		glh.Shader{Type: gl.VERTEX_SHADER, Program: string(vertSource)},
 		glh.Shader{Type: gl.FRAGMENT_SHADER, Program: string(fragSource)},
@@ -95,11 +101,29 @@ layout(location = 0) in vec3 vertexPosition_modelspace;
 
 layout(location = 2) in vec3 vertexNormal_modelspace;
 
+out vec3 Position_worldspace;
+out vec3 Normal_cameraspace;
+out vec3 EyeDirection_cameraspace;
+out vec3 LightDirection_cameraspace;
+
 uniform mat4 MVP;
+uniform mat4 V;
+uniform mat4 M;
+uniform vec3 LightPosition_worldspace;
 uniform vec2 repeat;
 
 void main() {
   gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
+
+  Position_worldspace = (M * vec4(vertexPosition_modelspace,1)).xyz;
+
+  vec3 vertexPosition_cameraspace = ( V * M * vec4(vertexPosition_modelspace,1)).xyz;
+  EyeDirection_cameraspace = vec3(0,0,0) - vertexPosition_cameraspace;
+
+  vec3 LightPosition_cameraspace = ( V * vec4(LightPosition_worldspace,1)).xyz;
+  LightDirection_cameraspace = LightPosition_cameraspace + EyeDirection_cameraspace;
+
+  Normal_cameraspace = ( V * M * vec4(vertexNormal_modelspace,0)).xyz;
 
 #ifdef USE_TEXTURE
   UV = vertexUV * repeat;
@@ -115,24 +139,58 @@ func loadFragmentShader(features ProgramFeature) string {
 
 %v
 
+in vec3 Position_worldspace;
+in vec3 Normal_cameraspace;
+in vec3 EyeDirection_cameraspace;
+in vec3 LightDirection_cameraspace;
+
 #ifdef USE_COLOR
   uniform vec3 diffuse;
 #endif
-out vec4 color;
+out vec3 color;
 
 #ifdef USE_TEXTURE
   in vec2 UV;
   uniform sampler2D textureSampler;
 #endif
 
+uniform mat4 MV;
+uniform vec3 LightPosition_worldspace;
+
 void main() {
 #ifdef USE_COLOR
-  color = vec4(diffuse, 1.0);
+  vec3 MaterialDiffuseColor = vec3(diffuse);
 #endif
 
 #ifdef USE_TEXTURE
-  color = vec4(texture(textureSampler, UV).rgb, 1.0);
+  vec3 MaterialDiffuseColor = vec3(texture(textureSampler, UV).rgb);
 #endif
+
+vec3 LightColor = vec3(1,1,1);
+float LightPower = 50.0f;
+
+vec3 MaterialAmbientColor = vec3(0.1,0.1,0.1) * MaterialDiffuseColor;
+vec3 MaterialSpecularColor = vec3(0.3,0.3,0.3);
+
+float distance = length( LightPosition_worldspace - Position_worldspace );
+
+vec3 n = normalize( Normal_cameraspace );
+vec3 l = normalize( LightDirection_cameraspace );
+float cosTheta = clamp( dot( n,l ), 0,1 );
+
+vec3 E = normalize(EyeDirection_cameraspace);
+vec3 R = reflect(-l,n);
+
+float cosAlpha = clamp( dot( E,R ), 0,1 );
+
+#ifdef USE_BASIC_SHADING
+  color = MaterialAmbientColor +
+          MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
+          MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
+#else
+  color = MaterialDiffuseColor;
+#endif
+
 }`, getShaderDefinitions(features))
 
 	return formatted
@@ -147,6 +205,10 @@ func getShaderDefinitions(features ProgramFeature) string {
 
 	if hasFeature(features, TEXTURE) {
 		defines = append(defines, fmt.Sprintf("#define %v", featureDefinitions[TEXTURE]))
+	}
+
+	if hasFeature(features, SHADING_BASIC) {
+		defines = append(defines, fmt.Sprintf("#define %v", featureDefinitions[SHADING_BASIC]))
 	}
 
 	return strings.Join(defines, "\n")

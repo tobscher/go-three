@@ -65,6 +65,7 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 			normals = append(normals, normal)
 		case "f":
 			f := []uint16{}
+			n := []uint16{}
 
 			faceElements := strings.Split(restOfLine, " ")
 			if len(faceElements) < 3 {
@@ -81,12 +82,26 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 				if err != nil {
 					return nil, errors.New("Invalid obj file. Face vertex index is not an integer.")
 				}
-
 				f = append(f, uint16(i)-1)
+
+				// Process normal index
+				if len(elementTypes) > 2 {
+					i, err = strconv.Atoi(elementTypes[2])
+					if err != nil {
+						return nil, errors.New("Invalid obj file. Face normal index is not an integer.")
+					}
+					n = append(n, uint16(i)-1)
+				}
 			}
 
 			for i := 1; i < len(f)-1; i++ {
-				faces = append(faces, three.NewFace(f[0], f[i], f[i+1]))
+				face := three.NewFace(f[0], f[i], f[i+1])
+
+				if len(n) > 0 {
+					face.AddNormal(n[0], n[i], n[i+1])
+				}
+
+				faces = append(faces, face)
 			}
 		default:
 			// eat line
@@ -97,6 +112,12 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 	obj.SetVertices(vertices)
 	obj.SetNormals(normals)
 	obj.SetFaces(faces)
+
+	log.Println("Obj loading report:")
+	log.Printf("-- Vertices: %v\n", len(obj.Vertices()))
+	log.Printf("-- UVs: %v\n", len(obj.UVs()))
+	log.Printf("-- Normals: %v\n", len(obj.Normals()))
+	log.Printf("-- Faces: %v\n", len(obj.Faces()))
 
 	return obj, nil
 }

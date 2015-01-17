@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	gl "github.com/go-gl/gl"
+	"github.com/go-gl/mathgl/mgl32"
 	glh "github.com/tobscher/glh"
 )
 
@@ -72,11 +73,18 @@ func handleElement(camera *PerspectiveCamera, element SceneObject) {
 	defer program.Unuse()
 
 	view := camera.Transform.modelMatrix().Inv()
+	model := element.Transform().modelMatrix()
 	projection := camera.projectionMatrix
-	MVP := projection.Mul4(view).Mul4(element.Transform().modelMatrix())
+	MVP := projection.Mul4(view).Mul4(model)
 
 	// Set model view projection matrix
 	program.uniforms["MVP"].apply(MVP)
+	program.uniforms["M"].apply(model)
+	program.uniforms["V"].apply(view)
+
+	// Light position
+	lightPos := mgl32.Vec3{4., 4., 4.}
+	program.uniforms["LightPosition_worldspace"].apply(lightPos)
 
 	if c, ok := material.(Colored); ok {
 		if c.Color() != nil {
@@ -127,7 +135,7 @@ func handleElement(camera *PerspectiveCamera, element SceneObject) {
 
 		gl.DrawElements(gl.TRIANGLES, index.count, gl.UNSIGNED_SHORT, nil)
 	} else {
-		gl.DrawArrays(element.Mode(), 0, len(element.Geometry().Vertices()))
+		gl.DrawArrays(element.Mode(), 0, element.Geometry().ArrayCount())
 	}
 }
 
@@ -154,12 +162,16 @@ func createProgram(sceneObject SceneObject) *Program {
 
 	if len(geometry.Normals()) > 0 {
 		program.attributes["normals"] = NewAttribute(2, 3, sceneObject.NormalBuffer())
+		feature |= SHADING_BASIC
 	}
 
 	program.Load(MakeProgram(feature))
 
 	// Uniforms
 	program.uniforms["MVP"] = NewUniform(program, "MVP")
+	program.uniforms["V"] = NewUniform(program, "V")
+	program.uniforms["M"] = NewUniform(program, "M")
+	program.uniforms["LightPosition_worldspace"] = NewUniform(program, "LightPosition_worldspace")
 	program.uniforms["diffuse"] = NewUniform(program, "diffuse")
 
 	if t, tOk := material.(Textured); tOk {
