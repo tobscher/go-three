@@ -3,6 +3,7 @@ package three
 // Face stores indices to vertices.
 type Face struct {
 	vertexIndices [3]uint16
+	NormalIndices [3]uint16
 }
 
 // NewFace returns a new triangle face.

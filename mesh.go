@@ -7,6 +7,7 @@ import gl "github.com/go-gl/gl"
 // in 3D space.
 type Mesh struct {
 	vertexBuffer gl.Buffer
+	normalBuffer gl.Buffer
 	uvBuffer     gl.Buffer
 	index        *Index
 	geometry     Shape
@@ -27,6 +28,10 @@ func NewMesh(geometry Shape, material Appearance) Mesh {
 
 	if len(geometry.UVs()) > 0 {
 		m.uvBuffer = newUvBuffer(geometry)
+	}
+
+	if len(geometry.Normals()) > 0 {
+		m.normalBuffer = newNormalBuffer(geometry)
 	}
 	m.index = generateIndex(geometry)
 
@@ -57,6 +62,20 @@ func newVertexBuffer(geometry Shape) gl.Buffer {
 
 	for _, vertex := range geometry.Vertices() {
 		result = append(result, vertex.X(), vertex.Y(), vertex.Z())
+	}
+
+	glBuffer := gl.GenBuffer()
+	glBuffer.Bind(gl.ARRAY_BUFFER)
+	gl.BufferData(gl.ARRAY_BUFFER, len(result)*3*4, result, gl.STATIC_DRAW)
+
+	return glBuffer
+}
+
+func newNormalBuffer(geometry Shape) gl.Buffer {
+	result := []float32{}
+
+	for _, normal := range geometry.Normals() {
+		result = append(result, normal.X(), normal.Y(), normal.Z())
 	}
 
 	glBuffer := gl.GenBuffer()

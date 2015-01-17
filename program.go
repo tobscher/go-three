@@ -93,6 +93,8 @@ layout(location = 0) in vec3 vertexPosition_modelspace;
   out vec2 UV;
 #endif
 
+layout(location = 2) in vec3 vertexNormal_modelspace;
+
 uniform mat4 MVP;
 uniform vec2 repeat;
 

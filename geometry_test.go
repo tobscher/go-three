@@ -30,3 +30,11 @@ func (m *MockGeometry) UVs() []mgl32.Vec2 {
 		mgl32.Vec2{0, 1},
 	}
 }
+
+func (m *MockGeometry) Normals() []mgl32.Vec3 {
+	return []mgl32.Vec3{
+		mgl32.Vec3{1, 0, 0},
+		mgl32.Vec3{0, 1, 0},
+		mgl32.Vec3{0, 0, 1},
+	}
+}

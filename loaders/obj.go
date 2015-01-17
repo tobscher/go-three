@@ -27,6 +27,7 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 	r, _ := regexp.Compile("(.*?) (.*)")
 
 	vertices := make([]mgl32.Vec3, 0)
+	normals := make([]mgl32.Vec3, 0)
 	faces := make([]*three.Face, 0)
 
 	// Scan lines
@@ -54,6 +55,14 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 				return nil, errors.New("Invalid obj file. Vertex line should be of format 'x y z'")
 			}
 			vertices = append(vertices, vert)
+		case "vn":
+			// Normal line
+			normal := mgl32.Vec3{}
+			count, _ := fmt.Sscanf(restOfLine, "%f %f %f", &normal[0], &normal[1], &normal[2])
+			if count != 3 {
+				return nil, errors.New("Invalid obj file. Normal line should be of format 'x y z'")
+			}
+			normals = append(normals, normal)
 		case "f":
 			f := []uint16{}
 
@@ -86,6 +95,7 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 
 	obj := &three.Geometry{}
 	obj.SetVertices(vertices)
+	obj.SetNormals(normals)
 	obj.SetFaces(faces)
 
 	return obj, nil

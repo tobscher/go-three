@@ -118,6 +118,7 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 func createProgram(mesh *Mesh) *Program {
 	program := NewProgram()
 	material := mesh.material
+	geometry := mesh.geometry
 
 	// Attributes
 	var feature ProgramFeature
@@ -133,6 +134,10 @@ func createProgram(mesh *Mesh) *Program {
 			program.attributes["texture"] = NewAttribute(1, 2, mesh.uvBuffer)
 			feature = TEXTURE
 		}
+	}
+
+	if len(geometry.Normals()) > 0 {
+		program.attributes["normals"] = NewAttribute(2, 3, mesh.normalBuffer)
 	}
 
 	program.Load(MakeProgram(feature))
