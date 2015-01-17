@@ -4,6 +4,7 @@ import (
 	"log"
 	"runtime"
 
+	"github.com/go-gl/mathgl/mgl32"
 	three "github.com/tobscher/go-three"
 	"github.com/tobscher/go-three/geometries"
 )
@@ -24,7 +25,7 @@ func main() {
 		Height:     height,
 		Title:      "Example - Wireframe Cube",
 		Fullscreen: false,
-		ClearColor: &three.Color{0., 0., 0.4},
+		// ClearColor: &three.Color{0., 0., 0.4},
 	}
 
 	window, err := three.NewWindow(settings)
@@ -39,25 +40,28 @@ func main() {
 
 	scene := three.NewScene()
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
-	camera.Transform.SetPosition(4.0, 3.0, 4.0)
-	camera.Transform.LookAt(0, 0, 0)
 
-	box := geometries.NewCube(1)
 	red := three.NewBasicMaterial()
 	red.SetColor(&three.Color{1.0, 0.0, 0.0})
-	red.SetWireframe(true)
 
-	mesh := three.NewMesh(box, red)
+	green := three.NewBasicMaterial()
+	green.SetColor(&three.Color{0.0, 1.0, 0.0})
 
-	scene.Add(mesh)
+	blue := three.NewBasicMaterial()
+	blue.SetColor(&three.Color{0.0, 0.0, 1.0})
 
-	var rotX float32 = 0.01
-	var rotY float32 = 0.02
-	transform := mesh.Transform()
+	lineX := geometries.NewLine(mgl32.Vec3{0, 0, 0}, mgl32.Vec3{10, 0, 0})
+	lineY := geometries.NewLine(mgl32.Vec3{0, 0, 0}, mgl32.Vec3{0, 10, 0})
+	lineZ := geometries.NewLine(mgl32.Vec3{0, 0, 0}, mgl32.Vec3{0, 0, 10})
+
+	scene.Add(three.NewLine(lineX, red))
+	scene.Add(three.NewLine(lineY, green))
+	scene.Add(three.NewLine(lineZ, blue))
+
+	camera.Transform.SetPosition(20, 20, 20)
+	camera.Transform.LookAt(0, 0, 0)
+
 	for !window.ShouldClose() {
-		transform.RotateX(rotX)
-		transform.RotateY(rotY)
-
 		renderer.Render(scene, camera)
 	}
 

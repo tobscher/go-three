@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/go-gl/gl"
-	"github.com/go-gl/glh"
+	glh "github.com/tobscher/glh"
 )
 
 // Program is a GLSL shader program.

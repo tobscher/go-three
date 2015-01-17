@@ -9,10 +9,11 @@ import (
 
 // Window holds information about the dimensions and title of a window.
 type Window struct {
-	settings WindowSettings
+	Settings WindowSettings
 	window   *glfw.Window
 }
 
+// WindowSettings holds information that describe how the window should constructed.
 type WindowSettings struct {
 	Width      int
 	Height     int
@@ -37,6 +38,7 @@ func NewWindow(settings WindowSettings) (*Window, error) {
 	glfw.WindowHint(glfw.ContextVersionMinor, 3)
 	glfw.WindowHint(glfw.OpenglForwardCompatible, glfw.True)
 	glfw.WindowHint(glfw.OpenglProfile, glfw.OpenglCoreProfile)
+	glfw.WindowHint(glfw.OpenglDebugContext, 1)
 
 	var monitor *glfw.Monitor
 	var err error
@@ -77,7 +79,7 @@ func NewWindow(settings WindowSettings) (*Window, error) {
 
 	w := Window{
 		window:   window,
-		settings: settings,
+		Settings: settings,
 	}
 
 	return &w, nil

@@ -29,3 +29,4 @@ Vagrantfile
 # Examples
 examples/wireframe_cube/wireframe_cube
 examples/textured_cube/textured_cube
+examples/lines/lines

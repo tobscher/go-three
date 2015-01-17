@@ -30,8 +30,8 @@ type Transform struct {
 // Up:       0,1,0
 // Right:    1,0,0
 // Forward:  0,0,-1
-func NewTransform() Transform {
-	return Transform{
+func NewTransform() *Transform {
+	return &Transform{
 		position:   mgl32.Vec3{0, 0, 0},
 		rotation:   mgl32.Vec3{0, 0, 0},
 		quaternion: mgl32.QuatIdent(),
