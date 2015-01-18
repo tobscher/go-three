@@ -30,3 +30,5 @@ Vagrantfile
 examples/wireframe_cube/wireframe_cube
 examples/textured_cube/textured_cube
 examples/lines/lines
+examples/obj_loading/obj_loading
+examples/text/text

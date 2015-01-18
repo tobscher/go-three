@@ -23,7 +23,7 @@ func NewMesh(geometry Shape, material Appearance) *Mesh {
 	m.vertexBuffer = newVertexBuffer(geometry)
 
 	if len(geometry.UVs()) > 0 {
-		m.uvBuffer = newUvBuffer(geometry)
+		m.uvBuffer = newUvBuffer(geometry.UVs(), true)
 	}
 
 	if len(geometry.Normals()) > 0 {

@@ -1,6 +1,9 @@
 package three
 
-import "github.com/go-gl/gl"
+import (
+	"github.com/go-gl/gl"
+	"github.com/go-gl/mathgl/mgl32"
+)
 
 // Object3D described an object in 3D space.
 type Object3D struct {
@@ -47,16 +50,18 @@ func (o *Object3D) NormalBuffer() gl.Buffer {
 	return o.normalBuffer
 }
 
-func newUvBuffer(geometry Shape) gl.Buffer {
+func newUvBuffer(uvs []mgl32.Vec2, compressed bool) gl.Buffer {
 	result := []float32{}
 
-	for _, uv := range geometry.UVs() {
+	for _, uv := range uvs {
 		result = append(result, uv.X(), uv.Y())
 	}
 
-	// Invert V because we're using a compressed texture
-	for i := 1; i < len(result); i += 2 {
-		result[i] = 1.0 - result[i]
+	if compressed {
+		// Invert V because we're using a compressed texture
+		for i := 1; i < len(result); i += 2 {
+			result[i] = 1.0 - result[i]
+		}
 	}
 
 	glBuffer := gl.GenBuffer()

@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-gl/gl"
 	"github.com/go-gl/mathgl/mgl32"
+	"github.com/tobscher/gltext"
 )
 
 // Uniform describes a uniform value which is passed
@@ -35,5 +36,7 @@ func (u *Uniform) apply(value interface{}) {
 		u.location.Uniform2f(t[0], t[1])
 	case mgl32.Vec3:
 		u.location.Uniform3f(t[0], t[1], t[2])
+	case gltext.Glyph:
+		u.location.Uniform4f(float32(t.X), float32(t.Y), float32(t.Width), float32(t.Height))
 	}
 }

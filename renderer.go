@@ -58,7 +58,68 @@ func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
 		handleElement(camera, element)
 	}
 
+	for _, text := range scene.texts {
+		handleText(camera, text)
+	}
+
 	r.window.Swap()
+}
+
+func handleText(camera *PerspectiveCamera, text *Text) {
+	// Material
+	material := text.Material()
+	program := material.Program()
+	if program == nil {
+		program = createTextProgram(text)
+		material.SetProgram(program)
+	}
+	program.Use()
+	defer program.Unuse()
+
+	if c, ok := material.(Colored); ok {
+		if c.Color() != nil {
+			program.uniforms["diffuse"].apply(c.Color())
+		}
+	}
+
+	if t, ok := material.(Textured); ok {
+		texture := t.Texture()
+		if texture != nil {
+			gl.ActiveTexture(gl.TEXTURE0)
+			texture.Bind()
+			defer texture.Unbind()
+			program.uniforms["texture"].apply(texture)
+		}
+	}
+
+	for _, attribute := range program.attributes {
+		attribute.enable()
+		defer attribute.disable()
+		attribute.bindBuffer()
+		defer attribute.unbindBuffer()
+		attribute.pointer()
+		attribute.bindBuffer()
+	}
+
+	vertexAttrib := gl.AttribLocation(0)
+	vertexAttrib.EnableArray()
+	defer vertexAttrib.DisableArray()
+	text.vertexBuffer.Bind(gl.ARRAY_BUFFER)
+	defer text.vertexBuffer.Unbind(gl.ARRAY_BUFFER)
+	vertexAttrib.AttribPointer(2, gl.FLOAT, false, 0, nil)
+
+	if t, ok := material.(Wireframed); ok {
+		if t.Wireframe() {
+			gl.PolygonMode(gl.FRONT_AND_BACK, gl.LINE)
+		} else {
+			gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
+		}
+	}
+
+	gl.Enable(gl.BLEND)
+	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+
+	gl.DrawArrays(gl.TRIANGLES, 0, len(text.Geometry().Vertices))
 }
 
 func handleElement(camera *PerspectiveCamera, element SceneObject) {
@@ -180,6 +241,20 @@ func createProgram(sceneObject SceneObject) *Program {
 			program.uniforms["repeat"] = NewUniform(program, "repeat")
 		}
 	}
+
+	return program
+}
+
+func createTextProgram(text *Text) *Program {
+	program := NewProgram()
+	// uvs
+	program.attributes["texture"] = NewAttribute(1, 2, text.uvBuffer)
+
+	program.Load(MakeTextShader())
+
+	// Uniforms
+	program.uniforms["texture"] = NewUniform(program, "textureSampler")
+	program.uniforms["diffuse"] = NewUniform(program, "diffuse")
 
 	return program
 }

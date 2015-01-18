@@ -20,10 +20,16 @@ type Colored interface {
 // Textured is an interface that indicates that a material can have a texture.
 type Textured interface {
 	Texture() *Texture
+	SetTexture(*Texture)
 }
 
 // Wireframed is an interface that indicates that a material can be rendered
 // as wireframes only.
 type Wireframed interface {
 	Wireframe() bool
+}
+
+type Texter interface {
+	Appearance
+	Textured
 }

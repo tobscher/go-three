@@ -110,7 +110,6 @@ uniform vec3 LightPosition_worldspace;
 uniform vec2 repeat;
 
 void main() {
-  gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
 
   Position_worldspace = (M * vec4(vertexPosition_modelspace,1)).xyz;
 
@@ -125,6 +124,9 @@ void main() {
 #ifdef USE_TEXTURE
   UV = vertexUV * repeat;
 #endif
+
+  gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
+
 }`, getShaderDefinitions(features))
 
 	return formatted

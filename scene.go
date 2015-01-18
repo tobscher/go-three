@@ -19,6 +19,7 @@ type SceneObject interface {
 // Scene represents a tree-like structure (graph) of 3D objects.
 type Scene struct {
 	objects []SceneObject
+	texts   []*Text
 }
 
 // NewScene returns a new Scene.
@@ -29,4 +30,8 @@ func NewScene() *Scene {
 // Add adds the given scene object to the scene tree.
 func (s *Scene) Add(object SceneObject) {
 	s.objects = append(s.objects, object)
+}
+
+func (s *Scene) AddText(text *Text) {
+	s.texts = append(s.texts, text)
 }
