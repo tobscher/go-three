@@ -57,7 +57,7 @@ func main() {
 
 	mesh := three.NewMesh(box, red)
 
-	scene.Add(&mesh)
+	scene.Add(mesh)
 
 	for !window.ShouldClose() {
 		mesh.Transform.RotateX(0.01)
