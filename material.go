@@ -29,6 +29,7 @@ type Wireframed interface {
 	Wireframe() bool
 }
 
+// Texter is an interface composition of Appaerance and Textured.
 type Texter interface {
 	Appearance
 	Textured

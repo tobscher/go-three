@@ -1,7 +1,6 @@
 package three
 
-// BasicMaterial describes a material with basic shading. No lights or shadows
-// are considered.
+// TextMaterial describes a material for 2D text.
 type TextMaterial struct {
 	program *Program
 
@@ -10,7 +9,7 @@ type TextMaterial struct {
 	wireframe bool
 }
 
-// NewBasicMaterial creates a new Basic material.
+// NewTextMaterial creates a new Basic material.
 func NewTextMaterial() *TextMaterial {
 	material := TextMaterial{}
 	return &material

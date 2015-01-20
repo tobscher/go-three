@@ -2,6 +2,7 @@ package three
 
 import "github.com/go-gl/gl"
 
+// Text defines a 2D text geometry and its appearance.
 type Text struct {
 	vertexBuffer gl.Buffer
 	uvBuffer     gl.Buffer
@@ -10,6 +11,11 @@ type Text struct {
 	geometry *TextGeometry
 }
 
+// NewText creates a new 2D text object that can be added to
+// the scene.
+//
+// NOTE: This method overrides the texture for the given texture
+// to the texture from the font.
 func NewText(geometry *TextGeometry, material Texter) *Text {
 	material.SetTexture(geometry.Font.texture)
 
@@ -22,6 +28,29 @@ func NewText(geometry *TextGeometry, material Texter) *Text {
 	t.uvBuffer = newUvBuffer(t.geometry.UVs, true)
 
 	return &t
+}
+
+// Geometry returns the geometry object for this
+// text object.
+func (t *Text) Geometry() *TextGeometry {
+	return t.geometry
+}
+
+// Material returns the appearance defintion for this
+// text object.
+func (t *Text) Material() Texter {
+	return t.material
+}
+
+func (t *Text) SetText(text string) {
+	t.geometry.Text = text
+	t.geometry.UpdateVertices(text)
+
+	t.vertexBuffer.Delete()
+	t.uvBuffer.Delete()
+
+	t.vertexBuffer = newTextVertexBuffer(t.geometry)
+	t.uvBuffer = newUvBuffer(t.geometry.UVs, true)
 }
 
 func newTextVertexBuffer(geometry *TextGeometry) gl.Buffer {
@@ -38,12 +67,4 @@ func newTextVertexBuffer(geometry *TextGeometry) gl.Buffer {
 	gl.BufferData(gl.ARRAY_BUFFER, len(result)*2*4, result, gl.STATIC_DRAW)
 
 	return glBuffer
-}
-
-func (t *Text) Geometry() *TextGeometry {
-	return t.geometry
-}
-
-func (t *Text) Material() Texter {
-	return t.material
 }

@@ -7,11 +7,15 @@ import (
 	"github.com/tobscher/gltext"
 )
 
+// Font defines a font with its texture
 type Font struct {
 	texture *Texture
 	font    *gltext.Font
 }
 
+// NewFont loads a font file from path at a given scale.
+// The font will be rendered to a texture which is later used
+// for drawing.
 func NewFont(path string, scale int32) (*Font, error) {
 	fd, err := os.Open(path)
 	if err != nil {

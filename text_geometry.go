@@ -1,39 +1,58 @@
 package three
 
-import (
-	"log"
+import "github.com/go-gl/mathgl/mgl32"
 
-	"github.com/go-gl/mathgl/mgl32"
-)
-
+// TextGeometry defines the geometry of 2D text.
 type TextGeometry struct {
 	Vertices []mgl32.Vec2
 	UVs      []mgl32.Vec2
 
 	Text     string
 	Position mgl32.Vec2
+	Size     float32
 	Font     *Font
 }
 
+// NewTextGeometry creates a new 2D text geometry for the given text.
+//
+// NOTE: Y-Axis for position is inverted!
 func NewTextGeometry(text string, position mgl32.Vec2, size float32, font *Font) *TextGeometry {
-	vertices := []mgl32.Vec2{}
-	uvs := []mgl32.Vec2{}
+	vertices, uvs := createTextVertices(text, position, size, font)
 
+	geometry := TextGeometry{
+		Vertices: vertices,
+		UVs:      uvs,
+
+		Text:     text,
+		Size:     size,
+		Position: position,
+		Font:     font,
+	}
+
+	return &geometry
+}
+
+func (t *TextGeometry) UpdateVertices(text string) {
+	vertices, uvs := createTextVertices(text, t.Position, t.Size, t.Font)
+
+	t.Vertices = vertices
+	t.UVs = uvs
+}
+
+func createTextVertices(text string, position mgl32.Vec2, size float32, font *Font) (vertices []mgl32.Vec2, uvs []mgl32.Vec2) {
 	x := position.X()
 	y := position.Y()
-
-	log.Println(text)
 
 	for c, char := range text {
 		i := float32(c)
 
-		up_left := mgl32.Vec2{x + i*size, y + size}
-		up_right := mgl32.Vec2{x + i*size + size, y + size}
-		down_right := mgl32.Vec2{x + i*size + size, y}
-		down_left := mgl32.Vec2{x + i*size, y}
+		upLeft := mgl32.Vec2{x + i*size, y + size}
+		upRight := mgl32.Vec2{x + i*size + size, y + size}
+		downRight := mgl32.Vec2{x + i*size + size, y}
+		downLeft := mgl32.Vec2{x + i*size, y}
 
-		vertices = append(vertices, up_left, down_left, up_right)
-		vertices = append(vertices, down_right, up_right, down_left)
+		vertices = append(vertices, upLeft, downLeft, upRight)
+		vertices = append(vertices, downRight, upRight, downLeft)
 
 		glyph := font.font.Glyphs().Find(string(char))
 		fullWidth := float32(font.font.Width)
@@ -43,39 +62,19 @@ func NewTextGeometry(text string, position mgl32.Vec2, size float32, font *Font)
 		x := float32(glyph.X)
 		y := float32(glyph.Y)
 
-		// log.Printf("%+v", glyph)
-		// log.Printf("Full width: %v\n", fullWidth)
-		// log.Printf("Full height: %v\n", fullHeight)
-		// log.Printf("width: %v\n", width)
-		// log.Printf("height: %v\n", height)
-		// log.Printf("x: %v\n", x)
-		// log.Printf("y: %v\n", y)
+		uvX := x / fullWidth
+		uvY := (fullHeight - y) / fullHeight
+		uvWidth := width / fullWidth
+		uvHeight := height / fullHeight
 
-		var uv_x float32 = x / fullWidth
-		var uv_y float32 = (fullHeight - y) / fullHeight
-		var uv_width float32 = width / fullWidth
-		var uv_height float32 = height / fullHeight
+		uvUpLeft := mgl32.Vec2{uvX, uvY}
+		uvUpRight := mgl32.Vec2{uvX + uvWidth, uvY}
+		uvDownRight := mgl32.Vec2{uvX + uvWidth, uvY - uvHeight}
+		uvDownLeft := mgl32.Vec2{uvX, uvY - uvHeight}
 
-		uv_up_left := mgl32.Vec2{uv_x, uv_y}
-		uv_up_right := mgl32.Vec2{uv_x + uv_width, uv_y}
-		uv_down_right := mgl32.Vec2{uv_x + uv_width, uv_y - uv_height}
-		uv_down_left := mgl32.Vec2{uv_x, uv_y - uv_height}
-
-		uvs = append(uvs, uv_up_left, uv_down_left, uv_up_right)
-		uvs = append(uvs, uv_down_right, uv_up_right, uv_down_left)
+		uvs = append(uvs, uvUpLeft, uvDownLeft, uvUpRight)
+		uvs = append(uvs, uvDownRight, uvUpRight, uvDownLeft)
 	}
 
-	// log.Printf("Vertices: %+v", vertices)
-	// log.Printf("UVs: %+v", uvs)
-
-	geometry := TextGeometry{
-		Vertices: vertices,
-		UVs:      uvs,
-
-		Text:     text,
-		Position: position,
-		Font:     font,
-	}
-
-	return &geometry
+	return
 }

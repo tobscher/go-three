@@ -5,6 +5,8 @@ import (
 	"github.com/go-gl/glh"
 )
 
+// MakeTextShader creates a new shader program
+// for text rendering purposes.
 func MakeTextShader() gl.Program {
 	vertSource := loadTextVertexShader()
 	fragSource := loadTextFragmentShader()

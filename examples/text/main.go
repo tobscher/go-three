@@ -47,7 +47,7 @@ func main() {
 		white := three.NewBasicMaterial()
 		white.SetColor(&three.Color{1.0, 1.0, 1.0})
 
-		regular, err := three.NewFont("./fonts/Inconsolata-Regular.ttf", int32(15+i))
+		regular, err := three.NewFont("../_fonts/Inconsolata-Regular.ttf", int32(15+i))
 		if err != nil {
 			log.Fatal(err)
 		}
