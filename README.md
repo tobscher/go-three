@@ -53,7 +53,7 @@ func main() {
 
 	box := geometries.NewCube(200)
 	red := three.NewBasicMaterial()
-	red.SetColor(&three.Color{1.0, 0.0, 0.0})
+	red.SetColor(three.NewColor(1.0, 0.0, 0.0))
 
 	mesh := three.NewMesh(box, red)
 
