@@ -3,6 +3,11 @@ package three
 // Color stores color information for the red, green and blue channel.
 type Color [3]float32
 
+// NewColor returns a new rgb color.
+func NewColor(r, g, b float32) *Color {
+	return &Color{r, g, b}
+}
+
 // R returns the value for the red channel.
 // Value can be between 0 and 1
 func (c Color) R() float32 {

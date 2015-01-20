@@ -60,6 +60,8 @@ func (g *Geometry) UVs() []mgl32.Vec2 {
 	return g.uvs
 }
 
+// ArrayCount returns the number of elements to draw in the draw call.
+// Faces * 3 if faces are used or number of vertices.
 func (g *Geometry) ArrayCount() int {
 	if len(g.faces) > 0 {
 		return len(g.faces) * 3

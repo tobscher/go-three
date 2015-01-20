@@ -53,11 +53,11 @@ func main() {
 
 	box := geometries.NewCube(200)
 	red := three.NewBasicMaterial()
-	red.SetColor(&three.Color{1.0, 0.0, 0.0})
+	red.SetColor(three.NewColor(1.0, 0.0, 0.0))
 
 	mesh := three.NewMesh(box, red)
 
-	scene.Add(&mesh)
+	scene.Add(mesh)
 
 	for !window.ShouldClose() {
 		mesh.Transform.RotateX(0.01)

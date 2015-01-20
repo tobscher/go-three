@@ -25,7 +25,7 @@ const (
 	COLOR ProgramFeature = 1 << iota
 	// TEXTURE feature
 	TEXTURE
-	// Basic shading
+	// SHADING_BASIC feature
 	SHADING_BASIC
 )
 
