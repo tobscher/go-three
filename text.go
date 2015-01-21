@@ -42,6 +42,9 @@ func (t *Text) Material() Texter {
 	return t.material
 }
 
+// SetText updates the text that is drawn.
+// This will update the underlying vertex and uv buffer.
+// BUG(tobscher) Vertex and UV buffers are deleted and re-created; not updated.
 func (t *Text) SetText(text string) {
 	t.geometry.Text = text
 	t.geometry.UpdateVertices(text)
