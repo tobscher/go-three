@@ -14,8 +14,6 @@ type TextGeometry struct {
 }
 
 // NewTextGeometry creates a new 2D text geometry for the given text.
-//
-// NOTE: Y-Axis for position is inverted!
 func NewTextGeometry(text string, position mgl32.Vec2, size float32, font *Font) *TextGeometry {
 	vertices, uvs := createTextVertices(text, position, size, font)
 
@@ -41,7 +39,7 @@ func (t *TextGeometry) updateVertices(text string) {
 
 func createTextVertices(text string, position mgl32.Vec2, size float32, font *Font) (vertices []mgl32.Vec2, uvs []mgl32.Vec2) {
 	x := position.X()
-	y := position.Y()
+	y := float32(currentWindow.Height()) - position.Y()
 
 	for c, char := range text {
 		i := float32(c)

@@ -64,7 +64,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fpsGeometry := three.NewTextGeometry(" ", mgl32.Vec2{600, 550}, 25, regular)
+	fpsGeometry := three.NewTextGeometry(" ", mgl32.Vec2{50, 50}, 25, regular)
 	fps := three.NewText(fpsGeometry, white)
 	scene.AddText(fps)
 

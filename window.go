@@ -110,6 +110,18 @@ func (w *Window) SetTitle(title string) {
 	w.window.SetTitle(title)
 }
 
+// Width returns the width of the window in pixels.
+func (w *Window) Width() int {
+	width, _ := w.window.GetSize()
+	return width
+}
+
+// Height returns the height of the window in pixels.
+func (w *Window) Height() int {
+	_, height := w.window.GetSize()
+	return height
+}
+
 func keyCallback(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
 	if key == glfw.KeyEscape && action == glfw.Press {
 		w.SetShouldClose(true)

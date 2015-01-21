@@ -41,7 +41,7 @@ func main() {
 	camera := three.NewPerspectiveCamera(fov, width/height, near, far)
 
 	var size float32 = 15
-	var offset float32 = 580.0
+	var offset float32 = 50.0
 
 	for i := 0; i < 16; i++ {
 		white := three.NewBasicMaterial()
@@ -52,11 +52,11 @@ func main() {
 			log.Fatal(err)
 		}
 
-		titleGeometry := three.NewTextGeometry("Lorem Ipsum", mgl32.Vec2{10, offset}, size, regular)
+		titleGeometry := three.NewTextGeometry("Grumpy wizards", mgl32.Vec2{10, offset}, size, regular)
 		title := three.NewText(titleGeometry, white)
 		scene.AddText(title)
 
-		offset -= size + 5
+		offset += size + 5
 		size += 2
 	}
 
