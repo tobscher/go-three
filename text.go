@@ -47,7 +47,7 @@ func (t *Text) Material() Texter {
 // BUG(tobscher) Vertex and UV buffers are deleted and re-created; not updated.
 func (t *Text) SetText(text string) {
 	t.geometry.Text = text
-	t.geometry.UpdateVertices(text)
+	t.geometry.updateVertices(text)
 
 	t.vertexBuffer.Delete()
 	t.uvBuffer.Delete()

@@ -7,6 +7,8 @@ import (
 	glfw "github.com/go-gl/glfw3"
 )
 
+var currentWindow *Window
+
 // Window holds information about the dimensions and title of a window.
 type Window struct {
 	Settings WindowSettings
@@ -77,12 +79,14 @@ func NewWindow(settings WindowSettings) (*Window, error) {
 	// Use vsync
 	glfw.SwapInterval(1)
 
-	w := Window{
+	w := &Window{
 		window:   window,
 		Settings: settings,
 	}
 
-	return &w, nil
+	currentWindow = w
+
+	return w, nil
 }
 
 // Unload terminates GLFW and closes the current window.

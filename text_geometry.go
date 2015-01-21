@@ -32,7 +32,7 @@ func NewTextGeometry(text string, position mgl32.Vec2, size float32, font *Font)
 	return &geometry
 }
 
-func (t *TextGeometry) UpdateVertices(text string) {
+func (t *TextGeometry) updateVertices(text string) {
 	vertices, uvs := createTextVertices(text, t.Position, t.Size, t.Font)
 
 	t.Vertices = vertices
