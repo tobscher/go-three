@@ -1,6 +1,7 @@
 package three
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/go-gl/mathgl/mgl32"
@@ -17,6 +18,8 @@ type Font struct {
 // The font will be rendered to a texture which is later used
 // for drawing.
 func NewFont(path string, scale int32) (*Font, error) {
+	logger.Info(fmt.Sprintf("Loading font from: %v", path))
+
 	fd, err := os.Open(path)
 	if err != nil {
 		return nil, err

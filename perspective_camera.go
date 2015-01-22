@@ -1,6 +1,7 @@
 package three
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/go-gl/mathgl/mgl32"
@@ -31,6 +32,12 @@ type CameraSettings struct {
 //
 // The cameras transform matrix will be inverted.
 func NewPerspectiveCamera(fov, aspect, near, far float32) *PerspectiveCamera {
+	logger.Debug("Creating new perspective camera")
+	logger.Trace(fmt.Sprintf("-- FOV: %v", fov))
+	logger.Trace(fmt.Sprintf("-- Aspect: %v", aspect))
+	logger.Trace(fmt.Sprintf("-- Near: %v", near))
+	logger.Trace(fmt.Sprintf("-- Far: %v", far))
+
 	matrix := makePerspective(fov, aspect, near, far)
 
 	camera := PerspectiveCamera{

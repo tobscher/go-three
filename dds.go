@@ -3,8 +3,9 @@ package three
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/go-gl/gl"
 	"os"
+
+	"github.com/go-gl/gl"
 )
 
 type ddsHeader struct {
@@ -32,6 +33,8 @@ const (
 
 // TextureFromDDS creates an OpenGL texture from the given file.
 func TextureFromDDS(fname string) (gl.Texture, error) {
+	logger.Info(fmt.Sprintf("Loading DDS texture from: %v", fname))
+
 	file, err := os.Open(fname)
 	if err != nil {
 		return gl.Texture(0), fmt.Errorf("Cannot open DDS file: %v", err)

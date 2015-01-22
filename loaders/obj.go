@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"log"
 	"os"
 	"regexp"
 	"strconv"
@@ -16,6 +15,8 @@ import (
 
 // LoadFromObj loads an obj file and returns a Geometry.
 func LoadFromObj(path string) (*three.Geometry, error) {
+	logger.Info(fmt.Sprintf("Loading OBJ from: %v", path))
+
 	// Load file
 	file, err := os.Open(path)
 	if err != nil {
@@ -38,7 +39,7 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 		result := r.FindStringSubmatch(text)
 
 		if len(result) != 3 {
-			log.Println("Skip line. Wrong format.")
+			logger.Trace("Skip line. Wrong format.")
 			continue
 		}
 
@@ -113,11 +114,10 @@ func LoadFromObj(path string) (*three.Geometry, error) {
 	obj.SetNormals(normals)
 	obj.SetFaces(faces)
 
-	log.Println("Obj loading report:")
-	log.Printf("-- Vertices: %v\n", len(obj.Vertices()))
-	log.Printf("-- UVs: %v\n", len(obj.UVs()))
-	log.Printf("-- Normals: %v\n", len(obj.Normals()))
-	log.Printf("-- Faces: %v\n", len(obj.Faces()))
+	logger.Trace(fmt.Sprintf("-- Vertices: %v", len(obj.Vertices())))
+	logger.Trace(fmt.Sprintf("-- UVs: %v", len(obj.UVs())))
+	logger.Trace(fmt.Sprintf("-- Normals: %v", len(obj.Normals())))
+	logger.Trace(fmt.Sprintf("-- Faces: %v", len(obj.Faces())))
 
 	return obj, nil
 }

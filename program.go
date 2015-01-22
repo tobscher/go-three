@@ -2,7 +2,6 @@ package three
 
 import (
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/go-gl/gl"
@@ -47,8 +46,6 @@ func NewProgram() *Program {
 
 // Load sets the given OpenGL program.
 func (p *Program) Load(program gl.Program) {
-	log.Println("*** Program loaded ***")
-
 	p.glProgram = program
 	p.Loaded = true
 }
@@ -74,6 +71,8 @@ func (p Program) Unuse() {
 // Features will be activated via pre-processor directives.
 // e.g. #define USE_TEXTURE
 func MakeProgram(features ProgramFeature) gl.Program {
+	logger.Debug("Creating new shader program")
+
 	vertSource := loadVertexShader(features)
 	fragSource := loadFragmentShader(features)
 

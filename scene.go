@@ -24,16 +24,20 @@ type Scene struct {
 
 // NewScene returns a new Scene.
 func NewScene() *Scene {
+	logger.Info("Creating new scene")
 	return &Scene{}
 }
 
 // Add adds the given scene object to the scene tree.
 func (s *Scene) Add(object SceneObject) {
+	logger.Info("New object added to scene")
 	s.objects = append(s.objects, object)
 }
 
 // AddText adds the given text object to the scene tree.
 // Text is always rendered last.
 func (s *Scene) AddText(text *Text) {
+	logger.Info("New text added to scene")
+
 	s.texts = append(s.texts, text)
 }

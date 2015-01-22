@@ -2,9 +2,10 @@ package three
 
 import (
 	glfw "github.com/go-gl/glfw3"
+	"github.com/tobscher/go-three/logging"
 )
 
-var logger = NewLogger("[go.three] ")
+var logger = logging.GetLogger("go-three")
 
 // GetTime returns the number of seconds since the timer was started.
 //

@@ -31,6 +31,7 @@ func NewWindow(settings WindowSettings) (*Window, error) {
 	glfw.SetErrorCallback(errorCallback)
 
 	// Init glfw
+	logger.Debug("Initializing GLFW")
 	if !glfw.Init() {
 		return nil, errors.New("Could not initialise GLFW.")
 	}
@@ -45,20 +46,20 @@ func NewWindow(settings WindowSettings) (*Window, error) {
 	var monitor *glfw.Monitor
 	var err error
 	if settings.Fullscreen {
-		logger.Println("Get primary monitor to create fullscreen window.")
+		logger.Debug("Get primary monitor to create fullscreen window.")
 		monitor, err = glfw.GetPrimaryMonitor()
 		if err != nil {
 			return nil, err
 		}
 
-		logger.Println("Checking available video modes:")
+		logger.Debug("Checking available video modes:")
 		videoModes, err := monitor.GetVideoModes()
 		if err != nil {
 			return nil, err
 		}
 
 		for _, videoMode := range videoModes {
-			logger.Printf("-- %+v\n", videoMode)
+			logger.Debug(fmt.Sprintf("-- %+v", videoMode))
 		}
 
 		idealVideoMode := videoModes[len(videoModes)-1]
@@ -68,6 +69,7 @@ func NewWindow(settings WindowSettings) (*Window, error) {
 	}
 
 	// Create window
+	logger.Info("Creating new window")
 	window, err := glfw.CreateWindow(settings.Width, settings.Height, settings.Title, monitor, nil)
 	if err != nil {
 		return nil, err

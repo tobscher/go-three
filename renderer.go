@@ -16,6 +16,8 @@ type Renderer struct {
 
 // NewRenderer creates a new Renderer with the given window size and title.
 func NewRenderer(window *Window) (*Renderer, error) {
+	logger.Debug("Initializing GLEW")
+
 	// Init glew
 	if gl.Init() != 0 {
 		return nil, errors.New("Could not initialise glew.")
@@ -50,7 +52,7 @@ func NewRenderer(window *Window) (*Renderer, error) {
 
 // Render renders the given scene with the given camera to the window.
 func (r *Renderer) Render(scene *Scene, camera *PerspectiveCamera) {
-	gl.Viewport(0, 0, r.window.Settings.Width, r.window.Settings.Height)
+	gl.Viewport(0, 0, currentWindow.Width(), currentWindow.Height())
 	// Seems to be causing a strange memory leak
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
@@ -261,6 +263,8 @@ func createTextProgram(text *Text) *Program {
 
 // Unload deallocates the given scene and all its shader programs.
 func (r *Renderer) Unload(s *Scene) {
+	logger.Info("Unload scene")
+
 	for _, element := range s.objects {
 		program := element.Material().Program()
 		program.unload()
