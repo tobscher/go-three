@@ -1,3 +1,6 @@
+/*
+Package logging provides basic logging features (modules, log levels).
+*/
 package logging
 
 import (
