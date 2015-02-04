@@ -20,12 +20,31 @@ type SceneObject interface {
 type Scene struct {
 	objects []SceneObject
 	texts   []*Text
+
+	ObjectQueue chan SceneObject
+	TextQueue   chan *Text
 }
 
 // NewScene returns a new Scene.
 func NewScene() *Scene {
 	logger.Info("Creating new scene")
-	return &Scene{}
+	return &Scene{
+		ObjectQueue: make(chan SceneObject),
+		TextQueue:   make(chan *Text),
+	}
+}
+
+// WaitFor waits on a channel two receive scene objects
+// or text objects and will add them to the scene.
+func (s *Scene) WaitFor() {
+	for {
+		select {
+		case sceneObject := <-s.ObjectQueue:
+			s.Add(sceneObject)
+		case textObject := <-s.TextQueue:
+			s.AddText(textObject)
+		}
+	}
 }
 
 // Add adds the given scene object to the scene tree.
