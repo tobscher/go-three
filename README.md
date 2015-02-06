@@ -13,7 +13,7 @@ NOTE: Check out the `scripts` directory on how to install dependencies.
 
 Once you have installed the prerequisites you can install the package via `go get`:
 ```
-go get github.com/Tobscher/go-three
+go get github.com/tobscher/go-three
 ```
 
 ## Usage
@@ -74,7 +74,7 @@ func main() {
 
 ## Documentation
 
-Documentation can be found on [godoc.org](http://godoc.org/github.com/Tobscher/go-three).
+Documentation can be found on [godoc.org](http://godoc.org/github.com/tobscher/go-three).
 
 ## Examples
 
@@ -82,6 +82,6 @@ Examples can be found in the `examples/` subdirectory.
 
 ## Contributing
 
-If you encounter any issues please [file an issue](https://github.com/Tobscher/go-three/issues/new).
+If you encounter any issues please [file an issue](https://github.com/tobscher/go-three/issues/new).
 
 Pull requests are welcome.
