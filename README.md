@@ -1,4 +1,4 @@
-# go-three [![Build Status](https://travis-ci.org/Tobscher/go-three.svg?branch=master)](https://travis-ci.org/Tobscher/go-three) [![GoDoc](https://godoc.org/github.com/Tobscher/go-three?status.svg)](https://godoc.org/github.com/Tobscher/go-three)
+# go-three [![Build Status](https://travis-ci.org/tobscher/go-three.svg?branch=master)](https://travis-ci.org/tobscher/go-three) [![GoDoc](https://godoc.org/github.com/tobscher/go-three?status.svg)](https://godoc.org/github.com/tobscher/go-three)
 
 go-three provides a simple API to create and display animated 3D computer graphics.
 
